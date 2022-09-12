@@ -1,0 +1,4 @@
+<ApproveRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+	<PublicID>{{value}}</PublicID>
+	<IgnoreUserWarnings>{{ignoreWarnings}}</IgnoreUserWarnings>
+</ApproveRequest>

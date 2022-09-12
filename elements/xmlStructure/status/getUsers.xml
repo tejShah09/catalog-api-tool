@@ -1,0 +1,4 @@
+<GetUsersForItemRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+	<PublicID>{{value}}</PublicID>
+	<RequestedPermission>{{permission}}</RequestedPermission>
+</GetUsersForItemRequest>

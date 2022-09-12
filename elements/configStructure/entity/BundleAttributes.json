@@ -1,0 +1,58 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+			
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_State_Code.state}}"
+					],
+					"name": "State",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~TProduct_Group_Branch.productgroup}}"
+					],
+					"name": "Product_Group",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Market_Segment.marketsegment}}"
+					],
+					"name": "Market_Segment",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Distributor.distributor}}"
+					],
+					"name": "Distributor",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Retail_Tariff_Code.retailtariffcode}}"
+					],
+					"name": "Retail_Tariff_Code",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

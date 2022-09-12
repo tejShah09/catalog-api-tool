@@ -1,0 +1,36 @@
+package com.sigma.catalog.api.hubservice.constnats;
+
+public class JOBKeywords {
+
+    // JOB NAMES
+    public static String START= "START";
+    public static String STOP= "STOP";
+    public static String UPLOAD_FILE = "UPLOAD_FILE";
+    public static String FILE_VALIDATION = "FILE_VALIDATION";
+    public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
+    public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";
+    public static String CATALOG_REQUEST_SUBMITION  = "CATALOG_REQUEST_SUBMITION";
+    public static String ENTITY_APPROVE  = "ENTITY_APPROVE";
+    public static String ENTITY_STAGE  = "ENTITY_STAGE";
+    public static String ENTITY_LIVE  = "ENTITY_LIVE";
+    
+    // JOB CATEGORY
+    public static String BUNDLE= "BUNDLE";
+    public static String COMPONENT = "COMPONENT";
+    public static String RATEPLANDETAIL = "RATEPLANDETAIL";
+    public static String RATEPLANRATE = "RATEPLANRATE";
+    
+    
+    // STATUS
+    public static String JOB_FAILED = "JOB_FAILED";
+    public static String TASK_STARTED = "STARTED";
+    public static String TASK_SUCCESS = "SUCCESS";
+    public static String TASK_END = "END";
+    public static String TASK_FAILED = "FAILED";
+    public static String TASK_IN_PROCESS = "IN_PROCESS";
+    public static String JOB_SUCCESS = "JOB_SUCCESS";
+
+    // error
+    public static String JOB_NOT_FOUND = "JOB_NOT_FOUND";
+    public static String SYSTEM_ERROR = "SYSTEM_ERROR";
+}

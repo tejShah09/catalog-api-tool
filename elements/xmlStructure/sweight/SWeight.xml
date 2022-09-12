@@ -1,0 +1,15 @@
+<ItemElement>
+	<Intent>{{intent}}</Intent>
+	<Name>SWeight</Name>
+	<Type>Any</Type>
+	<Values>
+		<ValueDefinition>
+			<Definition>
+				<ClassType>SWeight</ClassType>
+				<Intent>{{intent}}</Intent>
+				<ItemElements>					
+				</ItemElements>
+			</Definition>
+		</ValueDefinition>
+	</Values>
+</ItemElement>

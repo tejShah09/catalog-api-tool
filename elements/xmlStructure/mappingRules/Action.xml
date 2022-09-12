@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{action.getProperites.actionname}}</ClassType>
+		<Intent>{{parent.{{intent}}}}</Intent>
+		<ItemElements>
+			<ItemElement>
+				<Intent>{{parent.{{intent}}}}</Intent>
+				<Name>Name</Name>
+				<Type>Any</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{name}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>
+		</ItemElements>
+	</Definition>
+	<Value>{{actionguid}}</Value>
+</ValueDefinition>

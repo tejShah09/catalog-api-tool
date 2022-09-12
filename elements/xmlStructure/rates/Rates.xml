@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CatalogItem xmlns="http://schema.sigma-systems.com/catalog.api/models">
+  <ClassType>{{parententityclasstype}}</ClassType>
+  <Intent>{{mainAction.Modify}}</Intent>
+  <ItemElements>	
+  </ItemElements>
+ <PublicID>{{mainGuid.{{action.getEntityGuid.parententityguid.parententityname.parententityclasstype}}}}</PublicID>
+</CatalogItem>

@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+     	<ClassType>{{action.getProperites.relationtype}}</ClassType>
+	    <Intent>{{intent}}</Intent>
+     	<ItemElements>
+        </ItemElements>
+	</Definition>
+    <Value>{{associationguid}}</Value>
+</ValueDefinition>

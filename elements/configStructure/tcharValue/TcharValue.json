@@ -1,0 +1,84 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.characteristicclassname.characteristic}}"
+					],
+					"name": "Characteristic"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{uid}}"
+					],
+					"name": "UID"
+				},
+				
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{datatype}}"
+					],
+					"name": "Datatype"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{isuserdefinedvalue}}"
+					],
+					"name": "Is_User_Defined_Value"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{opecfschar}}"
+					],
+					"name": "OPE_CFS_Char"
+				},	
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.SWeight}}"
+					],
+					"name": "NestedTag_SWeight"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Target_System.targetsystem}}"
+					],
+					"name": "Target_System",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.TCharDefinition.definitionid.definitionid.{{nestedTag.TcharValueDefinition}}}}"
+					],
+					"name": "Definition",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdefinition",
+									"value": "true"
+								}
+							]
+						}
+					]
+				}	
+			]
+		}
+	]
+}

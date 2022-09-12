@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>SMapCondition</ClassType>
+		<Intent>{{parent.{{intent}}}}</Intent>
+		<ItemElements>
+			<ItemElement>
+				<Intent>{{parent.{{intent}}}}</Intent>
+				<Name>Name</Name>
+				<Type>Any</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{parent.{{conditionname}}}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>
+		</ItemElements>
+	</Definition>
+	<Value>{{conditionguid}}</Value>
+</ValueDefinition>

@@ -1,0 +1,7 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>SigmaConFacOv</ClassType>
+		<Intent>Delete</Intent>
+	</Definition>
+	<Value>{{overridesguid}}</Value>
+</ValueDefinition>

@@ -1,0 +1,6 @@
+<LifecycleRequest xmlns="http://schema.sigma-systems.com/catalog.api/models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				  xsi:schemaLocation="http://schema.sigma-systems.com/catalog.api/models LifecycleRequest.xsd">
+	<PublicID>{{value}}</PublicID>
+	<Message>{{message}}</Message>
+	<Recipients>{{recipients}}</Recipients>
+</LifecycleRequest>

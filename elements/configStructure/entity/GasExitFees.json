@@ -1,0 +1,33 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{contractyear}}"
+					],
+					"name": "Contract_Year",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{productcode}}"
+					],
+					"name": "Product_Code",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reason_to_waive_Termination_Fees.reasontowaiveterminationfees}}"
+					],
+					"name": "Reason_to_Waive_Termination_Fees",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

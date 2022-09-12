@@ -1,0 +1,34 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+			
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Restriction_Type.restrictiontype}}"
+					],
+					"name": "Restriction_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{restrictiondescription}}"
+					],
+					"name": "Restriction_Description",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{restrictiondetails}}"
+					],
+					"name": "Restriction_Details",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

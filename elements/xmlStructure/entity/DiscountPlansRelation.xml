@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{discountplansrelationattributeclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{discountplansrelationattributeguid}}</Value>
+</ValueDefinition>

@@ -1,0 +1,52 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [				
+				{
+					"intent": "New",
+					"value": [
+						"{{productid}}"
+					],
+					"name": "Product_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.$Vas_ID.vasid}}"
+					],
+					"name": "Vas_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.$Price_ID.priceid}}"
+					],
+					"name": "Price_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{denom}}"
+					],
+					"name": "Denom",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{interval}}"
+					],
+					"name": "Interval",
+					"instances": "single"
+				}
+			]
+		}
+	],
+	"criteria": [
+		"productid"
+	]
+}

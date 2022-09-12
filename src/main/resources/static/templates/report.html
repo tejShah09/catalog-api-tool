@@ -1,0 +1,135 @@
+<div class="app" id="app">
+    <header class="header">
+        <div class="brand">
+            <div class="logo">
+                <span class="l l1"></span>
+                <span class="l l2"></span>
+                <span class="l l3"></span>
+                <span class="l l4"></span>
+                <span class="l l5"></span>
+            </div> Mass Tool
+        </div>
+    </header>
+    <div class="content">
+        <article>
+
+            <section class="sectionDiv">
+                <row>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                    </div>
+                </row>
+            </section>
+
+            <section class="sectionDiv">
+                <row>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header card-header-sm bordered">
+                                <div class="header-block">
+                                    <!-- <i class="fa fa-angle-double-right" ng-if="formModel.operType =='Export'"></i>
+                                    <i class="fa fa-angle-double-left" ng-if="formModel.operType =='Import'"></i> -->
+                                    <h4 class="title">{{formModel.operType}}</h4>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="tab-content">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="inputTypOper" class="control-label col-xs-4">Type Of Operation
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                            <div class="col-xs-6 radioDiv">
+                                                <label class="radio inline">
+                                                    <input type="radio" name="TypOperation" ng-change="RadioChange('Export')" ng-model="formModel.operType" value="Export" />
+                                                    <span> Export </span>
+                                                </label>
+                                                <label class="radio inline">
+                                                    <input type="radio" name="TypOperation" ng-change="RadioChange('Import')" ng-model="formModel.operType" value="Import" />
+                                                    <span>Import </span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputCatOper" class="control-label col-xs-4">Catalog Operation
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                            <div class="col-xs-6">
+                                                <select ng-model="formModel.catalogOper" class="form-control" ng-options="operation as operation for operation in catalogOperations">
+                                                    <option value="">Select Catalog Operation</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputTemplateNm" class="control-label col-xs-4">Template Name
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                            <div class="col-xs-6">
+                                                <!-- <input type="text" class="form-control" id="inputTemplateNm" ng-model="templateName" placeholder="Template Name"> -->
+                                                <select ng-model="formModel.templateName" class="form-control" ng-options="templateNm as templateNm for templateNm in templateNames">
+                                                    <option value="">Select Template Name</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="formModel.operType !='Import'">
+                                            <label for="inputEntityName" class="control-label col-xs-4"> Entity Names</label>
+                                            <div class="col-xs-6">
+                                                <textarea class="form-control" id="textarea1" ng-model="formModel.entityName" ng-model="entityName">Entity Names
+                                            </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="formModel.operType =='Import'">
+                                            <label for="inputFileLoc" class="control-label col-xs-4">File Location
+                                                <span style="color: red;margin-left:2px;">*</span>
+                                            </label>
+                                            <div class="col-xs-6">
+                                                <input type="file" file-model="formModel.locFile" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="formModel.operType =='Import'">
+                                            <label class="control-label col-xs-4"> Product linked to Changeset</label>
+                                            <div class="col-xs-6">
+                                                <input id="style-checkbox-1" ng-model="formModel.isLinked" type="checkbox" ng-change="checkboxChange()">
+                                                <label for="style-checkbox-1"></label>
+                                                <i class="fa fa-info-circle" tooltip-placement="right-top" uib-tooltip="{{info}}"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="formModel.operType =='Import' && formModel.isLinked">
+                                            <label for="inputChangesetName" class="control-label col-xs-4">Changeset Name</label>
+                                            <div class="col-xs-6">
+                                                <input type="text" ng-model="formModel.changesetName" class="form-control" id="inputChangesetName" placeholder="Changeset Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="formModel.operType =='Import' && formModel.isLinked">
+                                            <label for="inputFileLoc" class="control-label col-xs-4">Select File For Changeset</label>
+                                            <div class="col-xs-6">
+                                                <input type="file" file-model="formModel.changesetFile" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-5">
+                                        <button class="btn btn-secondary" ng-click="clearForm()" style="margin-top: 5px;">Clear</button>
+                                        <button class="btn btn-primary" style="margin-top: 5px;" ng-click="run(formModel.operType)" ng-disabled="isDisableRunBtn()">Run</button>
+                                        <button class="btn btn-primary" style="margin-top: 5px;" ng-click="download(formModel.operType)" ng-disabled="downloadBtnFlag">
+                                            <!-- <i class="fa fa-download"></i> -->Download</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </row>
+            </section>
+        </article>
+    </div>
+
+</div>

@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{notificationpercentageattributeclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{notificationpercentageattributeguid}}</Value>
+</ValueDefinition>

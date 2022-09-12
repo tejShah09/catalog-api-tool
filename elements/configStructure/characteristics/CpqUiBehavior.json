@@ -1,0 +1,53 @@
+{
+	"optionalElements": [
+		{
+			"path": "Values/ValueDefinition/Definition/ItemElements",
+			"itemElements": [
+				{
+					"value": [
+						"{{cpquibehaviorconfirmation}}"
+					],
+					"name": "Confirmation"
+				},
+				{
+					"value": [
+						"{{cpquibehaviorishidden}}"
+					],
+					"name": "Is_Hidden"
+				},
+				{
+					"value": [
+						"{{cpquibehaviorpluginid}}"
+					],
+					"name": "Plugin_ID"
+				},
+				{
+					"value": [
+						"{{cpquibehaviorisreadonly}}"
+					],
+					"name": "Is_ReadOnly"
+				},
+				{
+					"value": [
+						"{{cpquibehavioruseasdisplayname}}"
+					],
+					"name": "Use_As_DisplayName"
+				},
+				{
+					"value": [
+						"{{cpquibehaviortooltipid}}"
+					],
+					"name": "Tooltip_ID"
+				}
+			]
+		}
+	],
+	"criteria": [
+		"cpquibehaviorconfirmation",
+		"cpquibehaviorishidden",
+		"cpquibehaviorisreadonly",
+		"cpquibehaviorpluginid",
+		"cpquibehaviortooltipid",
+		"cpquibehavioruseasdisplayname"
+	]
+}

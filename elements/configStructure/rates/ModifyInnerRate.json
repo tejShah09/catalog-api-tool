@@ -1,0 +1,16 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "Modify",
+					"value": [
+						"{{action.getPreviousDay.startdate}}"
+					],
+					"name": "End_Date"
+				}
+			]
+		}
+	]
+}

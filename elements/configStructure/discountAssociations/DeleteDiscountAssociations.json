@@ -1,0 +1,22 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.DeleteDiscountAssociations}}"
+					],
+					"name": "Discount_Plans",
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"				
+						}
+					]
+				}
+			]
+		}
+	]
+}

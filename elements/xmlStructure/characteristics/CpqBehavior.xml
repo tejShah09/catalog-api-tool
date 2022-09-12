@@ -1,0 +1,16 @@
+<ItemElement>
+	<Intent>{{intent}}</Intent>
+	<Name>CPQ_Behavior</Name>
+	<Type>Any</Type>
+	<Values>
+		<ValueDefinition>
+			<Definition>
+				<ClassType>SBehavior</ClassType>
+				<Intent>{{intent}}</Intent>
+				<ItemElements>
+				</ItemElements>
+			</Definition>
+			<Value>{{action.newguid}}</Value>
+		</ValueDefinition>
+	</Values>
+</ItemElement>

@@ -1,0 +1,8 @@
+
+<ValueDefinition>
+	<Definition>
+		<ClassType>$MappingRules</ClassType>
+		<Intent>Delete</Intent>
+	</Definition>
+	<Value>{{mappingruleguid}}</Value>
+</ValueDefinition>

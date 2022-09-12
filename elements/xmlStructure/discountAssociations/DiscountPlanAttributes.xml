@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+     	<ClassType>Product_Relation</ClassType>
+	    <Intent>{{intent}}</Intent>
+     	<ItemElements>
+        	<ItemElement>
+				 <Intent>{{intent}}</Intent>
+                 <Name>Product</Name>
+                 <Type>Any</Type>
+                 <Values>
+                 	<ValueDefinition>
+                    	<Value>{{relatedentityguid}}</Value>
+                    </ValueDefinition>
+                 </Values>
+            </ItemElement>
+        </ItemElements>
+	</Definition>
+    <Value>{{discountplanguid}}</Value>
+</ValueDefinition>	

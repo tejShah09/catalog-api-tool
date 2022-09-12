@@ -1,0 +1,43 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "Delete",
+					"value": [
+						"{{nestedTag.ValueDefinition}}"
+					],
+					"name": "{{characteristicxsdname}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"groupKey": "entityname"
+}

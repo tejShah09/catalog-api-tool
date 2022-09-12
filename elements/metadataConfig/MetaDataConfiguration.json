@@ -1,0 +1,1006 @@
+{
+	"elementConfiguration": [
+		{
+			"name": "Entity",
+			"sheetName": "Entity",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "false",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/entity/Entity.xml",
+					"jsonPath": "/elements/configStructure/entity/Entity.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/entity/Entity.xml",
+					"jsonPath": "/elements/configStructure/entity/Entity.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"xmlPath": "/elements/xmlStructure/entity/Entity.xml",
+					"guid": "parentguid",
+					"changeStatus": "no",
+					"jsonPath": "/elements/configStructure/entity/Entity.json",
+					"api": "/api/Entity/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		},
+		{
+			"name": "Change Status",
+			"sheetName": "Change Status",
+			"properties": [
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/entity/Entity.xml",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Associations",
+			"sheetName": "Associations",
+			"groupKey":"parententityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/associations/Association.xml",
+					"jsonPath": "/elements/configStructure/associations/Association.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/associations/Association.xml",
+					"jsonPath": "/elements/configStructure/associations/AssociationModifyAndDelete.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/associations/Association.xml",
+					"jsonPath": "/elements/configStructure/associations/AssociationModifyAndDelete.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+				{
+			"name": "DiscountAssociations",
+			"sheetName": "DiscountRelations",
+			"groupKey":"parententityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/discountAssociations/DiscountAssociations.xml",
+					"jsonPath": "/elements/configStructure/discountAssociations/DiscountAssociations.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/discountAssociations/DiscountAssociations.xml",
+					"jsonPath": "/elements/configStructure/discountAssociations/DiscountAssociations.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/discountAssociations/DiscountAssociations.xml",
+					"jsonPath": "/elements/configStructure/discountAssociations/DiscountAssociations.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Rates",
+			"sheetName": "Rates",
+			"groupKey":"parententityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/rates/Rates.xml",
+					"jsonPath": "/elements/configStructure/rates/Rates.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Append",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/rates/Rates.xml",
+					"jsonPath": "/elements/configStructure/rates/Rates.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/rates/Rates.xml",
+					"jsonPath": "/elements/configStructure/rates/Rates.json",					
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/rates/Rates.xml",
+					"jsonPath": "/elements/configStructure/rates/Rates.json",	
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Characteristics",
+			"sheetName": "Characteristics",
+			"groupKey": "entityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/characteristics/Characteristics.xml",
+					"jsonPath": "/elements/configStructure/characteristics/Characteristics.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"isComparisonRequired":"true",
+					"xmlPath": "/elements/xmlStructure/characteristics/Characteristics.xml",
+					"jsonPath": "/elements/configStructure/characteristics/Characteristics.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "no",
+					"xmlPath": "/elements/xmlStructure/characteristics/Characteristics.xml",
+					"jsonPath": "/elements/configStructure/characteristics/Characteristics.delete.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Characteristic Overrides",
+			"sheetName": "Characteristic Overrides",
+			"groupKey": "overriddenentityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/characteristicOverrides/CharacteristicsOverrides.xml",
+					"jsonPath": "/elements/configStructure/characteristicOverrides/CharacteristicsOverrides.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/characteristicOverrides/CharacteristicsOverrides.xml",
+					"jsonPath": "/elements/configStructure/characteristicOverrides/CharacteristicsOverrides.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/characteristicOverrides/CharacteristicsOverrides.xml",
+					"jsonPath": "/elements/configStructure/characteristicOverrides/CharacteristicsOverrides.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				  }
+				]
+		},
+		{
+			"name": "Mapping Rules",
+			"sheetName": "Mapping Rules",
+			"groupKey": "entityname",
+			"actions": [
+				{
+					"actionName": "New",
+					"subActions": [
+						"New"
+					]
+				},
+				{
+					"actionName": "Modify",
+					"subActions": [
+						"Modify"
+					]
+				},
+				{
+					"actionName": "Delete",
+					"subActions": [
+						"Delete"
+					]
+				}
+			],
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"isChunkingRequired":"True",
+					"xmlPath": "/elements/xmlStructure/mappingRules/MappingRules.xml",
+					"jsonPath": "/elements/configStructure/mappingRules/MappingRules.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/mappingRules/MappingRules.xml",
+					"jsonPath": "/elements/configStructure/mappingRules/MappingRules.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/mappingRules/MappingRules.Delete.xml",
+					"jsonPath": "/elements/configStructure/mappingRules/MappingRules.Delete.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Cardinality Overrides",
+			"sheetName": "Cardinality Overrides",
+			"actions": [
+				{
+					"actionName": "New",
+					"subActions": [
+						"New"
+					]
+				},
+				{
+					"actionName": "Modify",
+					"subActions": [
+						"Delete",
+						"New"
+					]
+				},
+				{
+					"actionName": "Delete",
+					"subActions": [
+						"Delete"
+					]
+				}
+			],
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/cardinalityOverrides/CardinalityOverrides.xml",
+					"jsonPath": "/elements/configStructure/cardinalityOverrides/CardinalityOverrides.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/cardinalityOverrides/CardinalityOverrides.xml",
+					"jsonPath": "/elements/configStructure/cardinalityOverrides/CardinalityOverrides.json",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/cardinalityOverrides/CardinalityOverrides.Delete.xml",
+					"api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "Lookup",
+			"sheetName": "Lookup",
+			"properties": [
+				{
+					"action": "New",
+					"xmlPath": "/elements/xmlStructure/lookup/Lookup.xml",
+					"jsonPath": "/elements/configStructure/lookup/Lookup.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"xmlPath": "/elements/xmlStructure/lookup/Lookup.xml",
+					"jsonPath": "/elements/configStructure/lookup/Lookup.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"xmlPath": "/elements/xmlStructure/lookup/Lookup.xml",
+					"jsonPath": "/elements/configStructure/lookup/Lookup.json",
+					"api": "/api/Fact/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		},
+		{
+			"name": "Tchar",
+			"sheetName": "Tchar",
+			"properties": [
+				{
+					"action": "New",
+					"xmlPath": "/elements/xmlStructure/tchar/Tchar.xml",
+					"jsonPath": "/elements/configStructure/tchar/Tchar.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"xmlPath": "/elements/xmlStructure/tchar/Tchar.xml",
+					"jsonPath": "/elements/configStructure/tchar/Tchar.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"xmlPath": "/elements/xmlStructure/tchar/Tchar.xml",
+					"jsonPath": "/elements/configStructure/tchar/Tchar.json",
+					"api": "/api/Fact/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		},
+		{
+			"name": "TCharValue",
+			"sheetName": "TCharValue",
+			"properties": [
+				{
+					"action": "New",
+					"xmlPath": "/elements/xmlStructure/tcharValue/TcharValue.xml",
+					"jsonPath": "/elements/configStructure/tcharValue/TcharValue.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"xmlPath": "/elements/xmlStructure/tcharValue/TcharValue.xml",
+					"jsonPath": "/elements/configStructure/tcharValue/TcharValue.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"xmlPath": "/elements/xmlStructure/tcharValue/TcharValue.xml",
+					"jsonPath": "/elements/configStructure/tcharValue/TcharValue.json",
+					"api": "/api/Fact/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		},
+		{
+			"name": "Compatibility Rule",
+			"sheetName": "Compatibility Rule",
+			"groupKey": "entityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductCompatibilityRule.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductCompatibilityRule.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				},{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductCompatibilityRule.Delete.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "InCompatibility Rule",
+			"sheetName": "InCompatibility Rule",
+			"groupKey": "entityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductInCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductInCompatibilityRule.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductInCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductInCompatibilityRule.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				},{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/productRules/ProductInCompatibilityRule.xml",
+					"jsonPath": "/elements/configStructure/productRules/ProductInCompatibilityRule.Delete.json",
+				     "api": "/api/Entity",
+					"httpMethod": "POST"
+				}
+			]
+		},{
+			"name": "Eligibility",
+			"sheetName": "Eligibility",
+			"groupKey": "entityname",
+			"properties": [
+				{
+					"action": "New",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/eligibility/Eligibility.xml",
+					"jsonPath": "/elements/configStructure/eligibility/Eligibility.json",
+				     "api": "/api/Entity/",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/Eligibility/Eligibility.xml",
+					"jsonPath": "/elements/configStructure/eligibility/Eligibility.json",
+				     "api": "/api/Entity/",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"editable": "true",
+					"changeStatus": "approve",
+					"xmlPath": "/elements/xmlStructure/Eligibility/Eligibility.xml",
+					"jsonPath": "/elements/configStructure/eligibility/Eligibility.json",
+				     "api": "/api/Entity/",
+					"httpMethod": "POST"
+				}
+			]
+		},
+		{
+			"name": "TTreeBranch",
+			"sheetName": "TTreeBranch",
+			"properties": [
+				{
+					"action": "New",
+					"xmlPath": "/elements/xmlStructure/TTreeBranch/TTreeBranch.xml",
+					"jsonPath": "/elements/configStructure/TTreeBranch/TTreeBranch.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"xmlPath": "/elements/xmlStructure/TTreeBranch/TTreeBranch.xml",
+					"jsonPath": "/elements/configStructure/TTreeBranch/TTreeBranch.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"xmlPath": "/elements/xmlStructure/TTreeBranch/TTreeBranch.xml",
+					"jsonPath": "/elements/configStructure/TTreeBranch/TTreeBranch.json",
+					"api": "/api/Fact/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		},{
+			"name": "TTreeLeaf",
+			"sheetName": "TTreeLeaf",
+			"properties": [
+				{
+					"action": "New",
+					"xmlPath": "/elements/xmlStructure/ttreeleaf/TTreeLeaf.xml",
+					"jsonPath": "/elements/configStructure/ttreeleaf/TTreeLeaf.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Modify",
+					"xmlPath": "/elements/xmlStructure/ttreeleaf/TTreeLeaf.xml",
+					"jsonPath": "/elements/configStructure/ttreeleaf/TTreeLeaf.json",
+					"api": "/api/Fact",
+					"httpMethod": "POST"
+				},
+				{
+					"action": "Delete",
+					"xmlPath": "/elements/xmlStructure/ttreeleaf/TTreeLeaf.xml",
+					"jsonPath": "/elements/configStructure/ttreeleaf/TTreeLeaf.json",
+					"api": "/api/Fact/{{guid}}",
+					"httpMethod": "DELETE"
+				}
+			]
+		}
+	],
+
+"templateSheets": {
+              "sheetName": [
+                     "Entity",
+                     "Associations",
+                     "DiscountRelations",
+                     "Rates",
+                     "Characteristics",
+                     "Mapping Rules",
+                     "Cardinality Overrides",
+                     "Override Characteristics",            
+                     "Change_Status",
+                     "Compatibility Rule",
+                     "InCompatibility Rule",
+                     "Characteristic Overrides",
+		     		"Eligibility"
+              ],
+              "sheetGroups": [
+                     {
+                           "groupKey": "entities",
+                           "groupElements": [
+                                  "Entity",
+                                  "Associations"
+                          	]
+                     },
+                     {
+                           "groupKey": "charRate",
+                           "groupElements": [
+                                  "Rates",
+                                  "Cardinality Overrides",
+                                  "Override Characteristics"
+                           ]
+                     },
+                     {
+                           "groupKey": "mappingRules",
+                           "groupElements": [
+                                  "Mapping Rules"
+                           ]
+                     }
+              ]
+       },
+	"factSheets": [
+		"Lookup",
+		"Tchar",
+		"TCharValue"
+	],
+	"elementsTag": [
+		"ClassType",
+		"Intent",
+		"Name",
+		"Type",
+		"Value",
+		"PublicID",
+		"ChargePath",
+		"RatePublicID",
+		"RateValue",
+		"StartDate"
+	],
+	"configPath": [
+		{
+			"key": "SWeight",
+			"xmlPath": "/elements/xmlStructure/sweight/SWeight.xml",
+			"jsonPath": "/elements/configStructure/sweight/SWeight.json"
+		},
+		{
+			"key": "Marketing",
+			"xmlPath": "/elements/xmlStructure/entity/Marketing.xml",
+			"jsonPath": "/elements/configStructure/entity/Marketing.json"
+		},
+		{
+			"key": "TimeBandMapping",
+			"xmlPath": "/elements/xmlStructure/entity/TimeBandMapping.xml",
+			"jsonPath": "/elements/configStructure/entity/TimeBandMapping.json"
+		},
+		{
+			"key": "ConsumptionUnits",
+			"xmlPath": "/elements/xmlStructure/entity/ConsumptionUnits.xml",
+			"jsonPath": "/elements/configStructure/entity/ConsumptionUnits.json"
+		},
+		{
+			"key": "InclusiveLossFactors",
+			"xmlPath": "/elements/xmlStructure/entity/InclusiveLossFactors.xml",
+			"jsonPath": "/elements/configStructure/entity/InclusiveLossFactors.json"
+		},
+		{
+			"key": "UseDaylightSavingTime",
+			"xmlPath": "/elements/xmlStructure/entity/UseDaylightSavingTime.xml",
+			"jsonPath": "/elements/configStructure/entity/UseDaylightSavingTime.json"
+		},
+		{
+			"key": "Vintage",
+			"xmlPath": "/elements/xmlStructure/entity/Vintage.xml",
+			"jsonPath": "/elements/configStructure/entity/Vintage.json"
+		},
+		{
+			"key": "ProductDocument",
+			"xmlPath": "/elements/xmlStructure/entity/ProductDocument.xml",
+			"jsonPath": "/elements/configStructure/entity/ProductDocument.json"
+		},
+		{
+			"key": "WarrantyTerm",
+			"xmlPath": "/elements/xmlStructure/entity/WarrantyTerm.xml",
+			"jsonPath": "/elements/configStructure/entity/WarrantyTerm.json"
+		},
+		{
+			"key": "Marketing",
+			"xmlPath": "/elements/xmlStructure/entity/MarketingOffer.xml",
+			"jsonPath": "/elements/configStructure/entity/MarketingOffer.json"
+		},
+		{
+			"key": "DefaultRenewalOffer",
+			"xmlPath": "/elements/xmlStructure/entity/DefaultRenewalOffer.xml",
+			"jsonPath": "/elements/configStructure/entity/DefaultRenewalOffer.json"
+		},
+		{
+			"key": "MarketStatus",
+			"xmlPath": "/elements/xmlStructure/entity/MarketStatusOffer.xml",
+			"jsonPath": "/elements/configStructure/entity/MarketStatusOffer.json"
+		},
+		{
+			"key": "Documents",
+			"xmlPath": "/elements/xmlStructure/entity/Documents.xml",
+			"jsonPath": "/elements/configStructure/entity/Documents.json"
+		},
+		{
+			"key": "Rewards",
+			"xmlPath": "/elements/xmlStructure/entity/Rewards.xml",
+			"jsonPath": "/elements/configStructure/entity/Rewards.json"
+		},
+			{
+			"key": "BundleAttributes",
+			"xmlPath": "/elements/xmlStructure/entity/BundleAttributes.xml",
+			"jsonPath": "/elements/configStructure/entity/BundleAttributes.json"
+		},
+		{
+			"key": "DiscountPlansRelation",
+			"xmlPath": "/elements/xmlStructure/entity/DiscountPlansRelation.xml",
+			"jsonPath": "/elements/configStructure/entity/DiscountPlansRelation.json"
+		},
+			{
+			"key": "Reference",
+			"xmlPath": "/elements/xmlStructure/entity/Reference.xml",
+			"jsonPath": "/elements/configStructure/entity/Reference.json"
+		},
+			{
+			"key": "ElectricityExitFees",
+			"xmlPath": "/elements/xmlStructure/entity/ElectricityExitFees.xml",
+			"jsonPath": "/elements/configStructure/entity/ElectricityExitFees.json"
+		},
+		{
+			"key": "GasExitFees",
+			"xmlPath": "/elements/xmlStructure/entity/GasExitFees.xml",
+			"jsonPath": "/elements/configStructure/entity/GasExitFees.json"
+		},
+		{
+			"key": "DiscountPlans",
+			"xmlPath": "/elements/xmlStructure/associations/DiscountPlans.xml",
+			"jsonPath": "/elements/configStructure/associations/DiscountPlans.json"
+		},
+		{
+			"key": "EntityMultipleAssociationsAttributes",
+			"xmlPath": "/elements/xmlStructure/discountAssociations/EntityMultipleAssociationsAttributes.xml",
+			"jsonPath": "/elements/configStructure/discountAssociations/EntityMultipleAssociationsAttributes.json"
+		},
+		{
+			"key": "DiscountPlanAttributes",
+			"xmlPath": "/elements/xmlStructure/discountAssociations/DiscountPlanAttributes.xml",
+			"jsonPath": "/elements/configStructure/discountAssociations/DiscountPlanAttributes.json"
+		},
+		{
+			"key": "SalesChannelToOfferMapping",
+			"xmlPath": "/elements/xmlStructure/entity/SalesChannelToOfferMapping.xml",
+			"jsonPath": "/elements/configStructure/entity/SalesChannelToOfferMapping.json"
+		},
+		{
+			"key": "NTCtoRTCMapping",
+			"xmlPath": "/elements/xmlStructure/entity/NtcToRtcMapping.xml",
+			"jsonPath": "/elements/configStructure/entity/NtcToRtcMapping.json"
+		},
+		{
+			"key": "SolarFIT",
+			"xmlPath": "/elements/xmlStructure/entity/SolarFIT.xml",
+			"jsonPath": "/elements/configStructure/entity/SolarFIT.json"
+		},
+		{
+			"key": "RuleEvaluationMethod",
+			"xmlPath": "/elements/xmlStructure/entity/RuleEvaluationMethod.xml",
+			"jsonPath": "/elements/configStructure/entity/RuleEvaluationMethod.json"
+		},
+		{
+			"key": "OffsetFields",
+			"xmlPath": "/elements/xmlStructure/entity/OffsetFields.xml",
+			"jsonPath": "/elements/configStructure/entity/OffsetFields.json"
+		},
+		{
+			"key": "ElectricityOfferEligibility",
+			"xmlPath": "/elements/xmlStructure/entity/ElectricityOfferEligibility.xml",
+			"jsonPath": "/elements/configStructure/entity/ElectricityOfferEligibility.json"
+		},
+		{
+			"key": "GasOfferEligibility",
+			"xmlPath": "/elements/xmlStructure/entity/GasOfferEligibility.xml",
+			"jsonPath": "/elements/configStructure/entity/GasOfferEligibility.json"
+		},
+		{
+			"key": "ElectricityOtherFees",
+			"xmlPath": "/elements/xmlStructure/entity/ElectricityOtherFees.xml",
+			"jsonPath": "/elements/configStructure/entity/ElectricityOtherFees.json"
+		},
+		{
+			"key": "GasOtherFees",
+			"xmlPath": "/elements/xmlStructure/entity/GasOtherFees.xml",
+			"jsonPath": "/elements/configStructure/entity/GasOtherFees.json"
+		},
+		{
+			"key": "DemandUnits",
+			"xmlPath": "/elements/xmlStructure/entity/DemandUnits.xml",
+			"jsonPath": "/elements/configStructure/entity/DemandUnits.json"
+		},
+		{
+			"key": "DemandSourceOfAgreedCapacity",
+			"xmlPath": "/elements/xmlStructure/entity/DemandSourceOfAgreedCapacity.xml",
+			"jsonPath": "/elements/configStructure/entity/DemandSourceOfAgreedCapacity.json"
+		},
+		{
+			"key": "DiscountPlanType",
+			"xmlPath": "/elements/xmlStructure/entity/DiscountPlanType.xml",
+			"jsonPath": "/elements/configStructure/entity/DiscountPlanType.json"
+		},
+		
+		{
+			"key": "ConsumptionValue",
+			"xmlPath": "/elements/xmlStructure/entity/ConsumptionValue.xml",
+			"jsonPath": "/elements/configStructure/entity/ConsumptionValue.json"
+		},
+		{
+			"key": "CapAmount",
+			"xmlPath": "/elements/xmlStructure/entity/CapAmount.xml",
+			"jsonPath": "/elements/configStructure/entity/CapAmount.json"
+		},
+		{
+			"key": "BaseAmount",
+			"xmlPath": "/elements/xmlStructure/entity/BaseAmount.xml",
+			"jsonPath": "/elements/configStructure/entity/BaseAmount.json"
+		},
+		{
+			"key": "NotificationPercentage",
+			"xmlPath": "/elements/xmlStructure/entity/NotificationPercentage.xml",
+			"jsonPath": "/elements/configStructure/entity/NotificationPercentage.json"
+		},
+		{
+			"key": "CharacteristicsOverrideAttributes",
+			"xmlPath": "/elements/xmlStructure/characteristicOverrides/CharacteristicsOverrideAttributes.xml",
+			"jsonPath": "/elements/configStructure/characteristicOverrides/CharacteristicsOverrideAttributes.json"
+		},
+		{
+			"key": "CharacteristicsOverridesDelete",
+			"xmlPath": "/elements/xmlStructure/characteristicOverrides/CharacteristicsOverridesDelete.xml",
+			"jsonPath": "/elements/configStructure/characteristicOverrides/CharacteristicsOverridesDelete.json"
+		},
+		{
+			"key": "AssociationsAttributes",
+			"xmlPath": "/elements/xmlStructure/associations/AssociationsAttributes.xml",
+			"jsonPath": "/elements/configStructure/associations/AssociationsAttributes.json"
+		},
+		{
+			"key": "AssociationAtributeDelete",
+			"xmlPath": "/elements/xmlStructure/associations/AssociationAtributeDelete.xml",	
+			"jsonPath": "/elements/configStructure/associations/AssociationsAttributes.json"
+		},
+		{
+			"key": "EntityMultipleRates",
+			"xmlPath": "/elements/xmlStructure/rates/EntityMultipleRates.xml",
+			"jsonPath": "/elements/configStructure/rates/EntityMultipleRates.json"
+		},
+		{
+			"key": "DeleteRate",
+			"xmlPath": "/elements/xmlStructure/rates/DeleteRate.xml"
+		},
+		{
+			"key": "RateAttributes",
+			"xmlPath": "/elements/xmlStructure/rates/RateAttributes.xml",
+			"jsonPath": "/elements/configStructure/rates/RateAttributes.json"
+		},
+		{
+			"key": "InnerRateAttributes",
+			"xmlPath": "/elements/xmlStructure/rates/InnerRateAttributes.xml",
+			"jsonPath": "/elements/configStructure/rates/InnerRateAttributes.json"
+		},
+		{
+			"key": "DiscountPeriod",
+			"xmlPath": "/elements/xmlStructure/rates/DiscountPeriod.xml",
+			"jsonPath": "/elements/configStructure/rates/DiscountPeriod.json"
+		},
+		{
+			"key": "ProductLine",
+			"xmlPath": "/elements/xmlStructure/rates/ProductLine.xml",
+			"jsonPath": "/elements/configStructure/rates/ProductLine.json"
+		},
+		{
+			"key": "ChargeExGST",
+			"xmlPath": "/elements/xmlStructure/rates/ChargeExGST.xml",
+			"jsonPath": "/elements/configStructure/rates/ChargeExGST.json"
+		},
+		{
+			"key": "MappingRuleCounter",
+			"xmlPath": "/elements/xmlStructure/mappingRules/MappingRuleCounter.xml",
+			"jsonPath": "/elements/configStructure/mappingRules/MappingRuleCounter.json"
+		},
+		{
+			"key": "InnerRate",
+			"xmlPath": "/elements/xmlStructure/rates/InnerRate.xml",
+			"jsonPath": "/elements/configStructure/rates/InnerRate.json"
+		},
+		{
+			"key": "RatesInnerClass",
+			"xmlPath": "/elements/xmlStructure/rates/RatesInnerClass.xml",
+			"jsonPath": "/elements/configStructure/rates/RatesInnerClass.json"
+		},
+		{
+			"key": "TargetSystemTranslation",
+			"xmlPath": "/elements/xmlStructure/lookup/TargetSystemTranslation.xml",
+			"jsonPath": "/elements/configStructure/lookup/TargetSystemTranslation.json"
+		},
+		{
+			"key": "TcharValueDefinition",
+			"xmlPath": "/elements/xmlStructure/tcharValue/TcharValueDefinition.xml",
+			"jsonPath": "/elements/configStructure/tcharValue/TcharValueDefinition.json"
+		},
+		{
+			"key": "ValueDefinition",
+			"xmlPath": "/elements/xmlStructure/characteristics/ValueDefinition.xml"
+		},
+		{
+			"key": "CpqBehavior",
+			"xmlPath": "/elements/xmlStructure/characteristics/CpqBehavior.xml",
+			"jsonPath": "/elements/configStructure/characteristics/CpqBehavior.json"
+		},
+		{
+			"key": "CpqUiBehavior",
+			"xmlPath": "/elements/xmlStructure/characteristics/CpqUiBehavior.xml",
+			"jsonPath": "/elements/configStructure/characteristics/CpqUiBehavior.json"
+		},
+		{
+			"key": "Conditions",
+			"xmlPath": "/elements/xmlStructure/mappingRules/Conditions.xml",
+			"jsonPath": "/elements/configStructure/mappingRules/Conditions.json"
+		},
+		{
+			"key": "ConditionElement",
+			"xmlPath": "/elements/xmlStructure/mappingRules/ConditionElement.xml",
+			"jsonPath": "/elements/configStructure/mappingRules/ConditionElement.json"
+		},
+		{
+			"key": "ProductConditionElement",
+			"xmlPath": "/elements/xmlStructure/productRules/ConditionElement.xml",
+			"jsonPath": "/elements/configStructure/productRules/ConditionElement.json"
+		},
+		{
+			"key": "Action",
+			"xmlPath": "/elements/xmlStructure/mappingRules/Action.xml",
+			"jsonPath": "/elements/configStructure/mappingRules/Action.json"
+		},
+		{
+			"key": "TargetValueDefinition",
+			"xmlPath": "/elements/xmlStructure/mappingRules/TargetValueDefinition.xml",
+			"jsonPath": "/elements/configStructure/mappingRules/TargetValueDefinition.json"
+		},
+		{
+			"key": "RuleValueDefinition",
+			"xmlPath": "/elements/xmlStructure/mappingRules/RuleValueDefinition.xml"
+		},
+		{
+			"key": "ProductRuleValueDefinition",
+			"xmlPath": "/elements/xmlStructure/productRules/RuleValueDefinition.xml"
+		},
+		{
+			"key": "InCompatibilityRuleValueDefinition",
+			"xmlPath": "/elements/xmlStructure/productRules/InCompatibilityRuleValueDefinition.xml"
+		},
+		{
+			"key": "DeleteRuleValueDefinition",
+			"xmlPath": "/elements/xmlStructure/mappingRules/DeleteRuleValueDefinition.xml"
+		},
+		{
+			"key": "DeleteRuleValueDefinitionForCompatiblity",
+			"xmlPath": "/elements/xmlStructure/productRules/DeleteRuleValueDefinitionForCompatiblity.xml"
+		},
+		{
+			"key": "DeleteRuleValueDefinitionForInCompatiblity",
+			"xmlPath": "/elements/xmlStructure/productRules/DeleteRuleValueDefinitionForInCompatiblity.xml"
+		},
+		{
+			"key": "approve",
+			"xmlPath": "/elements/xmlStructure/status/approve.xml"
+		},
+		{
+			"key": "decorator",
+			"xmlPath": "/elements/xmlStructure/status/decorator.xml"
+		},
+		{
+			"key": "getUsers",
+			"xmlPath": "/elements/xmlStructure/status/getUsers.xml"
+		},
+		{
+			"key": "decorator",
+			"xmlPath": "/elements/xmlStructure/status/decorator.xml"
+		},
+		{
+			"key": "launch",
+			"xmlPath": "/elements/xmlStructure/status/launch.xml"
+		},
+		{
+			"key": "rejectRequest",
+			"xmlPath": "/elements/xmlStructure/status/rejectRequest.xml"
+		},
+		{
+			"key": "stage",
+			"xmlPath": "/elements/xmlStructure/status/stage.xml"
+		},
+		{
+			"key": "submit",
+			"xmlPath": "/elements/xmlStructure/status/submit.xml"
+		},
+		{
+			"key": "entitySummaryRequestWithClassType",
+			"xmlPath": "/elements/xmlStructure/entitySummary/entitySummaryRequestWithClassType.xml"
+		},
+		{
+			"key": "entitySummaryRequest",
+			"xmlPath": "/elements/xmlStructure/entitySummary/entitySummaryRequest.xml"
+		}
+	]
+}

@@ -1,0 +1,51 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements/ItemElement/Values/ValueDefinition/Definition/ItemElements",
+			"itemElements": [
+				{
+					
+					"value": [
+						"{{minchildren}}"
+					],
+					"name": "Min_Children"
+				},
+				{
+				
+					"value": [
+						"{{maxchildren}}"
+					],
+					"name": "Max_Children"
+				},
+				{
+			
+					"value": [
+						"{{path}}"
+					],
+					"name": "Path"
+				},
+				{
+				
+					"value": [
+						"{{maxcardinality}}"
+					],
+					"name": "Max_Cardinality"
+				},
+				{
+			
+					"value": [
+						"{{defaultcardinality}}"
+					],
+					"name": "Default_Cardinality"
+				},
+				{
+				
+					"value": [
+						"{{mincardinality}}"
+					],
+					"name": "Min_Cardinality"
+				}
+			]
+		}
+	]
+}

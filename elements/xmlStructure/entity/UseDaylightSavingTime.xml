@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{usedaylightsavingtimeattributeclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{usedaylightsavingtimeattributeguid}}</Value>
+</ValueDefinition>

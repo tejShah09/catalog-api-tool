@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{gasotherfeesattributeclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{gasotherfeesattributeguid}}</Value>
+</ValueDefinition>

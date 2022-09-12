@@ -1,0 +1,150 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"value": [
+						"{{nestedTag.RuleValueDefinition}}"
+					],
+					"intent": "{{intent}}",
+					"name": "MappingRules",
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"
+						}
+					]		
+				}
+			]
+		},
+		{
+			"path": "ItemElements/ItemElement/Values/ValueDefinition[Value='{{mappingruleguid}}']/Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{evaluationpriority}}"
+					],
+					"name": "Evaluation_Priority"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "StartDate"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{endconsumedate}}"
+					],
+					"name": "End_Consume_Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{effectiveenddate}}"
+					],
+					"name": "Effective End Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Target_System.system}}"
+					],
+					"name": "System"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{isdefault}}"
+					],
+					"name": "isDefault"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "EndDate"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Provisioning_System.provisioningsystem}}"
+					],
+					"name": "Provisioning_System"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.$TriggerEvents.triggerevents}}"
+					],
+					"name": "TriggerEvents"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Mapping Rules Conditions.entityname::mappingruleid.entityname::mappingruleid.{{nestedTag.Conditions}}}}"
+					],
+					"name": "Conditions",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasconditions",
+									"value": "true"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Mapping Rules Actions Met.entityname::mappingruleid.entityname::mappingruleid.{{nestedTag.Action}}}}"
+					],
+					
+					"name": "Actions",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasactionsmet",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Mapping Rules Actions Not Met.entityname::mappingruleid.entityname::mappingruleid.{{nestedTag.Action}}}}"
+					],
+					"name": "FalseActions",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasactionsnotmet",
+									"value": "true"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

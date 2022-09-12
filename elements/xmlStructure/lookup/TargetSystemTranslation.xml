@@ -1,0 +1,9 @@
+<ValueDefinition>
+			<Definition>
+				<ClassType>Reference_Translation</ClassType>
+				<Intent>New</Intent>
+				<ItemElements>
+				</ItemElements>
+			</Definition>
+			<Value>{{action.newguid}}</Value>
+</ValueDefinition>

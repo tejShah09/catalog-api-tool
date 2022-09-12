@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CatalogItem xmlns="http://schema.sigma-systems.com/catalog.api/models">
+	<ClassType>{{characteristicvalueclassname}}</ClassType>
+	<Intent>{{mainAction.{{intent}}}}</Intent>
+	<ItemElements>
+		<ItemElement>
+			<Intent>{{intent}}</Intent>
+			<Name>Value</Name>
+			<Type>Any</Type>
+			<Values>
+				<ValueDefinition>
+					<Value>{{value}}</Value>
+				</ValueDefinition>
+			</Values>
+		</ItemElement>
+	</ItemElements>
+	<PublicID>{{mainGuid.{{action.getFactGuidbyName.characteristicvalueid.value.characteristicvalueclassname}}}}</PublicID>
+</CatalogItem>

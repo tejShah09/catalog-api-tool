@@ -1,0 +1,9 @@
+<ValueDefinition>
+   <Definition>
+      <ClassType>Offset_Fields</ClassType>
+      <Intent>{{intent}}</Intent>
+      <ItemElements>
+      </ItemElements>
+   </Definition>
+   <Value>{{offsetfieldsguid}}</Value>
+</ValueDefinition>

@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{chargeexgstclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{chargeexgstguid}}</Value>
+</ValueDefinition>

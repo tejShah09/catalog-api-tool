@@ -1,0 +1,27 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{action.getIntent.intent}}",
+					"value": [
+						"{{nestedTag.EntityMultipleRates}}"
+					],
+					"name": "{{action.getAdjustmentRelation.rateclass}}",
+					"groups":[
+						{
+							"groupKey": "Values/ValueDefinition/Value",
+							"groupPath": "../Definition/ItemElements/ItemElement[Name='Rate']/Values/ValueDefinition"						
+						},
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"					
+						}
+					]
+				}
+			]
+		}
+	]
+	
+}

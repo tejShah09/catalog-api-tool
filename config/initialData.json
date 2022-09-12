@@ -1,0 +1,866 @@
+[
+	{
+		"CategoryID": [
+			{
+				"State": "New South Wales",
+				"Utility_Type": "Electricity",
+				"CategoryID": 29
+			},
+			{
+				"State": "New South Wales",
+				"Utility_Type": "Gas",
+				"CategoryID": 113
+			},
+			{
+				"State": "New South Wales",
+				"Utility_Type": "Physical",
+				"CategoryID": 115
+			},
+			{
+				"State": "Queensland",
+				"Utility_Type": "Electricity",
+				"CategoryID": 117
+			},
+			{
+				"State": "Queensland",
+				"Utility_Type": "Gas",
+				"CategoryID": 118
+			},
+			{
+				"State": "Queensland",
+				"Utility_Type": "Physical",
+				"CategoryID": 122
+			},
+			{
+				"State": "South Australia",
+				"Utility_Type": "Electricity",
+				"CategoryID": 116
+			},
+			{
+				"State": "South Australia",
+				"Utility_Type": "Gas",
+				"CategoryID": 119
+			},
+			{
+				"State": "South Australia",
+				"Utility_Type": "Physical",
+				"CategoryID": 123
+			},
+			{
+				"State": "Victoria",
+				"Utility_Type": "Electricity",
+				"CategoryID": 124
+			},
+			{
+				"State": "Victoria",
+				"Utility_Type": "Gas",
+				"CategoryID": 125
+			},
+			{
+				"State": "Victoria",
+				"Utility_Type": "Physical",
+				"CategoryID": 127
+			},
+			{
+				"State": "Western Australia",
+				"Utility_Type": "Electricity",
+				"CategoryID": 128
+			},
+			{
+				"State": "Western Australia",
+				"Utility_Type": "Gas",
+				"CategoryID": 129
+			},
+			{
+				"State": "Western Australia",
+				"Utility_Type": "Physical",
+				"CategoryID": 131
+			},
+			{
+				"State": "Australian Capital Territory",
+				"Utility_Type": "Electricity",
+				"CategoryID": 132
+			},
+			{
+				"State": "Australian Capital Territory",
+				"Utility_Type": "Gas",
+				"CategoryID": 133
+			},
+			{
+				"State": "Australian Capital Territory",
+				"Utility_Type": "Physical",
+				"CategoryID": 135
+			},
+			{
+				"State": "Tasmania",
+				"Utility_Type": "Electricity",
+				"CategoryID": 136
+			},
+			{
+				"State": "Tasmania",
+				"Utility_Type": "Gas",
+				"CategoryID": 137
+			},
+			{
+				"State": "Tasmania",
+				"Utility_Type": "Physical",
+				"CategoryID": 139
+			}
+		],
+		"Distributor": [
+			{
+				"thirdPartyId": "1",
+				"description": "Australian Gas Networks Ltd",
+				"marketCode": "ENVESTRA"
+			},
+			{
+				"thirdPartyId": "2",
+				"description": "Ausnet Services",
+				"marketCode": "TXUN"
+			},
+			{
+				"thirdPartyId": "3",
+				"description": "Multinet",
+				"marketCode": "MULTINET"
+			},
+			{
+				"thirdPartyId": "106",
+				"description": "PowerCor",
+				"marketCode": "POWCP"
+			},
+			{
+				"thirdPartyId": "141",
+				"description": "CitiPower",
+				"marketCode": "CITIPP"
+			},
+			{
+				"thirdPartyId": "142",
+				"description": "TXU",
+				"marketCode": "EASTERN"
+			},
+			{
+				"thirdPartyId": "166",
+				"description": "Advance",
+				"marketCode": "ADVANCEP"
+			},
+			{
+				"thirdPartyId": "144",
+				"description": "SOLARISP - Jemena Electricity Networks (Vic) Ltd",
+				"marketCode": "SOLARISP"
+			},
+			{
+				"thirdPartyId": "145",
+				"description": "United Energy Distribution Pty Ltd",
+				"marketCode": "UNITED"
+			},
+			{
+				"thirdPartyId": "168",
+				"description": "Australian Inland",
+				"marketCode": "AUSTINLP"
+			},
+			{
+				"thirdPartyId": "172",
+				"description": "Essential Energy",
+				"marketCode": "CNRGYP"
+			},
+			{
+				"thirdPartyId": "173",
+				"description": "Energex",
+				"marketCode": "ENERGEXP"
+			},
+			{
+				"thirdPartyId": "174",
+				"description": "Ausgrid",
+				"marketCode": "ENERGYAP"
+			},
+			{
+				"thirdPartyId": "175",
+				"description": "Ergon",
+				"marketCode": "ERGONETP"
+			},
+			{
+				"thirdPartyId": "176",
+				"description": "Endeavour Energy",
+				"marketCode": "INTEGP"
+			},
+			{
+				"thirdPartyId": "185",
+				"description": "Embedded Network LNSP",
+				"marketCode": "NRNSP"
+			},
+			{
+				"thirdPartyId": "189",
+				"description": "Evoenergy",
+				"marketCode": "ACTEWP"
+			},
+			{
+				"thirdPartyId": "463",
+				"description": "ETSA Utilities",
+				"marketCode": "UMPLP"
+			},
+			{
+				"thirdPartyId": "525",
+				"description": "AGN",
+				"marketCode": "ENVSA"
+			},
+			{
+				"thirdPartyId": "9166",
+				"description": "Role LNSP - Party NRNSP",
+				"marketCode": "NRNSP"
+			},
+			{
+				"thirdPartyId": "10979",
+				"description": "Jemena Gas Networks Limited",
+				"marketCode": "AGLGNNWO"
+			},
+			{
+				"thirdPartyId": "10980",
+				"description": "ACTEWAGL Distribution",
+				"marketCode": "ACTEWNWO"
+			},
+			{
+				"thirdPartyId": "10981",
+				"description": "Australian Gas Networks (NSW) Pty Ltd",
+				"marketCode": "COUNTRYNWO"
+			},
+			{
+				"thirdPartyId": "10982",
+				"description": "Central Ranges Pipeline PTY LTD",
+				"marketCode": "CRPNWO"
+			},
+			{
+				"thirdPartyId": "13866",
+				"description": "Role LNSP - Party INTELENM",
+				"marketCode": "INTELENM"
+			},
+			{
+				"thirdPartyId": "14466",
+				"description": "Role LNSP - Party MYENM",
+				"marketCode": "MYENM"
+			},
+			{
+				"thirdPartyId": "14566",
+				"description": "Role LNSP - Party EPMENM",
+				"marketCode": "EPMENM"
+			},
+			{
+				"thirdPartyId": "14666",
+				"description": "Role LNSP - Party ACTIVENM",
+				"marketCode": "ACTIVENM"
+			},
+			{
+				"thirdPartyId": "14766",
+				"description": "Role LNSP - Party MOMENM",
+				"marketCode": "MOMENM"
+			},
+			{
+				"thirdPartyId": "15276",
+				"description": "ATCO",
+				"marketCode": "ALN"
+			},
+			{
+				"thirdPartyId": "15466",
+				"description": "Role LNSP - Party ENMENM",
+				"marketCode": "ENMENM"
+			},
+			{
+				"thirdPartyId": "16266",
+				"description": "Role LNSP - Party WINENM",
+				"marketCode": "WINENM"
+			}
+		],
+		"EntityQueries": [
+			{
+				"id": "RatePlanDetail",
+				"query": "select row_to_json(t) as Entity , t.id from ( \nSELECT \\\"Intent\\\", \\\"Name\\\", \\\"PublicID\\\", \\\"Rating_Plan_ID\\\", \\\"Class_Type\\\", \\\"Effective_Start_Date\\\", \\\"Available_Start_Date\\\", \\\"Effective_End_Date\\\", \\\"Available_End_Date\\\", \\\"Category_ID\\\", \\\"Currency_Code\\\", \\\"Rating_Method\\\", \\\"Supply_Point_Type\\\", psid, \\\"psKey\\\", \\\"Season\\\", \\\"Ratcheting_Method\\\", \\\"Minimum_Demand\\\", \\\"Use_Settlement_Period\\\", \\\"Additional_Demand_Time_Band\\\", \\\"Additional_Minimum_Demand\\\", \\\"Quantity_Source\\\", \\\"Meter_Type\\\", \\\"Uplift_over_Spot_Price\\\", \\\"Flat_Charge\\\", demandunitsxsdname, \\\"has_Demand_Units_Attribute\\\", \\\"Demand_Units_Id\\\", demandsourceofagreedcapacityxsdname, \\\"has_Demand_Source_Of_Agreed_Capacity_Attribute\\\", \\\"Demand_Source_Of_Agreed_Capacity_Id\\\", consumptionvaluexsdname, \\\"has_Consumption_Value_Attribute\\\", \\\"Consumption_Value_Id\\\", consumptionunitsxsdname, \\\"has_Consumption_Units_Attribute\\\", \\\"Consumption_Units_Id\\\", inclusivelossfactorsxsdname, \\\"has_Inclusive_Loss_Factors_Attribute\\\", \\\"Inclusive_Loss_Factors_Id\\\", usedaylightsavingtimexsdname, \\\"has_Use_Daylight_Saving_Time_Attribute\\\", \\\"Use_Daylight_Saving_Time_Id\\\", \\\"Parent_RPlan_ID\\\", \\\"Change_ID\\\", \\\"CompleteFlag\\\", \\\"Time_Set\\\", \\\"Season_Set\\\", \\\"Apply_Loss_Factor\\\", timebandmappingxsdname, \\\"has_Time_Band_Mapping_Attribute\\\", \\\"Time_Band_ID\\\", \\\"Bill_As_At_Date\\\", id, status_reason, status, payloads\n,(select json_agg(tb) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Time_Band_Mapping\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Time_Band_Mapping\\\".\\\"Time_Band_ID\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Time_Band_ID\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Time_Band_Mapping\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) tb)\tas \\\"Time Band Mapping\\\"\n,(select json_agg(cu) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Consumption_Units\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Consumption_Units\\\".\\\"Consumption_Units_Id\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Consumption_Units_Id\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Consumption_Units\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) cu) as \\\"Consumption Units\\\"\n,(select json_agg(ilf) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Inclusive_Loss_Factors\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Inclusive_Loss_Factors\\\".\\\"Inclusive_Loss_Factors_Id\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Inclusive_Loss_Factors_Id\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Inclusive_Loss_Factors\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) ilf) as \\\"Inclusive Loss Factors\\\"\n,(select json_agg(uds) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Use_Daylight_Saving_Time\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Use_Daylight_Saving_Time\\\".\\\"Use_Daylight_Saving_Time_Id\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Use_Daylight_Saving_Time_Id\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Use_Daylight_Saving_Time\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) uds) as \\\"Use Daylight Saving Time\\\"\n,(select json_agg(ucv) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Use_Consumption_Value\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Use_Consumption_Value\\\".\\\"Consumption_Value_Id\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Consumption_Value_Id\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Use_Consumption_Value\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) ucv) as \\\"Use Consumption Value\\\"\n,(select json_agg(du) from(select * from \\\"\"+context.JobId+\"_RatePlanDetail_Demand_Units\\\" where \\\"\"+context.JobId+\"_RatePlanDetail_Demand_Units\\\".\\\"Demand_Units_Id\\\" = \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Demand_Units_Id\\\" and \\\"\"+context.JobId+\"_RatePlanDetail_Demand_Units\\\".\\\"Rating_Plan_ID\\\" =\\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\".\\\"Rating_Plan_ID\\\" ) du) as \\\"Demand Units\\\"\nFROM \\\"\"+context.JobId+\"_RatePlanDetail_Entity\\\") t",
+				"sheetNames": "Time Band Mapping::Consumption Units::Inclusive Loss Factors::Use Daylight Saving Time::Consumption Value::Demand Units"
+			}
+		],
+		"SheetRelation": [
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Time_Band_Mapping",
+				"sheetName": "Time Band Mapping",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 2,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Consumption_Units",
+				"sheetName": "Consumption Units",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 3,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Inclusive_Loss_Factors",
+				"sheetName": "Inclusive Loss Factors",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 4,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Use_Daylight_Saving_Time",
+				"sheetName": "Use Daylight Saving Time",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 5,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Use_Consumption_Value",
+				"sheetName": "Consumption Value",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 6,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Demand_Units",
+				"sheetName": "Demand Units",
+				"coloums": "*",
+				"group": "RatePlanDetail",
+				"id": 7,
+				"mainSheet": "{{JobId}}_RatePlanDetail_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanDetail_Entity",
+				"sheetName": "Entity",
+				"coloums": "Intent, Name, PublicID, Rating_Plan_ID, Class_Type, Effective_Start_Date, Available_Start_Date, Effective_End_Date, Available_End_Date, Category_ID, Currency_Code, Rating_Method, Supply_Point_Type, psid, psKey, Season, Ratcheting_Method, Minimum_Demand, Use_Settlement_Period, Additional_Demand_Time_Band, Additional_Minimum_Demand, Quantity_Source, Meter_Type, Uplift_over_Spot_Price, Flat_Charge, demandunitsxsdname, has_Demand_Units_Attribute, Demand_Units_Id, demandsourceofagreedcapacityxsdname, has_Demand_Source_Of_Agreed_Capacity_Attribute, Demand_Source_Of_Agreed_Capacity_Id, consumptionvaluexsdname, has_Consumption_Value_Attribute, Consumption_Value_Id, consumptionunitsxsdname, has_Consumption_Units_Attribute, Consumption_Units_Id, inclusivelossfactorsxsdname, has_Inclusive_Loss_Factors_Attribute, Inclusive_Loss_Factors_Id, usedaylightsavingtimexsdname, has_Use_Daylight_Saving_Time_Attribute, Use_Daylight_Saving_Time_Id, Parent_RPlan_ID, Change_ID, CompleteFlag, Time_Set, Season_Set, Apply_Loss_Factor, timebandmappingxsdname, has_Time_Band_Mapping_Attribute, Time_Band_ID, Bill_As_At_Date, id, status_reason, status, payloads",
+				"group": "RatePlanDetail",
+				"id": 1,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Bundle_Vintage",
+				"sheetName": "Vintage",
+				"coloums": "*",
+				"group": "Bundle",
+				"id": 9,
+				"mainSheet": "{{JobId}}_Bundle_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Bundle_Reference",
+				"sheetName": "Reference",
+				"coloums": "*",
+				"group": "Bundle",
+				"id": 10,
+				"mainSheet": "{{JobId}}_Bundle_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Bundle_Entity",
+				"sheetName": "Entity",
+				"coloums": "Intent, Class_Type, Name, PublicID, Effective_Start_Date, Available_Start_Date, Effective_End_Date, Available_End_Date, Description, Category_ID, psid, psKey, Complete_Flag, Product_ID, invPSDirtyFlg, Product_Class_and_Product_Subclass, PowerQuote_Product_ID, GL_Charge_Type_and_Item, GL_Product_Code, Intrastat_Code, Tangible_Indicator, Product_Charge_and_Inventory_Type, Utility_Type, Rule_Evaluation_Method, GL_Account_Revenue_Code, Document_Name, GL_Account_Discount_Code, Concession_Type_for_Admin_Fee, Energy_Charge_Flag_for_Reward_Plans, Conditional_Product_Rule, Pro_Rata_Indicator, Dependent_Indicator, Energy_Related_Indicator, Report_Key, Contract_Term, State_Product_Group_and_Feed_In_Type, External_Tariff_Code, Distributor, Bundle_Expansion_Invoice_Indicator, Market_Segment, Component_Fuel, Utility_Type_and_Retailer, Retail_Tariff_Code, Product_Category, Tariff_Zone_for_Post_Code, Customer_Group, Rate_Type, Retail_Charge_Method, Tariff_Class, Network_Tariff_Zone, Quote_Type, Package, System_Size_kW, Pricing_Condition_Category_and_Pricing_Condition, Quantity, Product_Line, Tax_Code, State, vintagexsdname, has_Vintage_Attribute, Vintage_Id, productDocumentxsdname, has_Product_Document_Attribute, Product_Document_Id, warrantyTermxsdname, has_Warranty_Term_Attribute, Warranty_Term_Id, Change_ID, Reference_Id, has_Reference, referencexsdname, id, status, status_reason, payloads",
+				"group": "Bundle",
+				"id": 8,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanRate_Rate_Attributes",
+				"sheetName": "Rate Attributes",
+				"coloums": "*",
+				"group": "RatePlanRate",
+				"id": 12,
+				"mainSheet": "{{JobId}}_RatePlanRate_Rates",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_RatePlanRate_Rates",
+				"sheetName": "Entity",
+				"coloums": "Intent,Parent_Entity_ClassType,Parent_Entity_Name,Parent_Entity_GUID, Charge_Entity_Name,Charge_Entity_GUID,Rate_Class,Rate_Path,Rate_Row_GUID,Start_Date,End_Date,PerUnit,Time_Band,Period,Submit_Date,Price_Key_2,Price_Key_1,Description,Daily_Data_Area_ID,has_Rate_Attributes,ratingplanID,changeid,Rate_ID,isOverriding,id",
+				"group": "RatePlanRate",
+				"id": 11,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_ProductComponent_Rates",
+				"sheetName": "Entity",
+				"coloums": "Intent,Parent_Entity_ClassType,Parent_Entity_Name,Parent_Entity_GUID,Charge_Entity_Name,Charge_Entity_GUID,Rate_Class,Rate_Path,Rate_Row_GUID,Start_Date,End_Date,Description,ActStart,ActEnd,Rating_Period,Rate,isOverriding",
+				"group": "ProductComponent",
+				"id": 13,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Entity",
+				"sheetName": "Entity",
+				"coloums": "Intent,Class_Type,Name,PublicID,Effective_Start_Date,Available_Start_Date,Effective_End_Date,Available_End_Date,Description,Category_ID,Utility_Type,State,Customer_Group,Market_Segment,marketingxsdname,has_Marketing_Attribute,marketingid,defaultRenewalOfferxsdname,has_Default_Renewal_Offer_Attribute,defaultRenewalOffergid,marketStatusxsdname,has_Market_Status_Attribute,marketstatusid,Feed_In_Pricing_Type,Offer_Sub_Type,Contract_Type,Offer_Purpose,Offer_Code,Offer_Status,Default_Renewal_Offer,Advance_Expiry_Notification_Period,Electricity_Offer_Number,Max_Electricity_Cost_to_Acquire,Green_Power_Percentage,Gas_Offer_Number,Max_Gas_Cost_to_Acquire,Sales,Exit_Churn_Rate,Affiliation_Team_List,Offers_Held_to_Maturity,Campaign,Offer_Id,Grace_Period_Fee_Waiver_Reason,Electricity_Exit_Fee_before_Contract_Start,Termination_Fee_before_Contract_Start_Fee_Waiver_Reason,Additional_Electricity_Contract_Details,Electricity_Eligibility_Criteria_for_Welcome_Pack,Gas_Exit_Fee_before_Contract_Start,Gas_Eligibility_Criteria_for_Welcome_Pack,Meter_Types,Contract_Duration,Third_Party_Code,Reason_to_Waive_Termination_Fees,Termination_Fees,Termination_Fee_Grace_Period,Rewards_Id,has_Rewards_Attribute,rewardsxsdname,Electricity_Exit_Fees_Id,has_Electricity_Exit_Fees_Attribute,electricityExitFeesxsdname,Gas_Exit_Fees_Id,has_Gas_Exit_Fees_Attribute,gasExitFeesxsdname,documentsxsdname,has_Documents_Attribute,documentsid,General_Availability,Include_in_Best_Offer,New_Customer_Offer,Available_via_Third_Party_Only,Electricity_Payment_Options,Gas_Payment_Options,Product_Sell_Scope,Meter_Type,Electricity_Terms_and_Conditions,Electricity_Price_is_Fixed,Electricity_Price_Variation_Description,Controlled_Load_Details,Electricity_Additional_Fee_Terms,Electricity_Expiry_Details,Gas_Terms_and_Conditions,Gas_Price_is_Fixed,Gas_Price_Variation_Description,Gas_Additional_Fee_Terms,Gas_Expiry_Details,Solar_Fit_Xsd_Name,Has_Solar_Fit,Solar_Fit_Id,Electricity_Other_Fees_Xsd_Name,Has_Electricity_Other_Fees,Electricity_Other_Fees_Id,Gas_Other_Fees_Xsd_Name,Has_Gas_Other_Fees,Gas_Other_Fees_Id,Electricity_Offer_Eligibility_Xsd_Name,Has_Electricity_Offer_Eligibility,Electricity_Offer_Eligibility_Id,Gas_Offer_Eligibility_Xsd_Name,Has_Gas_Offer_Eligibility,Gas_Offer_Eligibility_Id,Alliance_Partner_or_Reward,Terms_and_Conditions,Product_Information,Additional_Offer_Scripting, id, status, status_reason, payloads",
+				"group": "Offer",
+				"id": 14,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Marketing",
+				"sheetName": "Marketing",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 15,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Market_Status",
+				"sheetName": "Market_Status",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 16,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_is_a_Default_Renewal_Offer",
+				"sheetName": "is_a_Default_Renewal_Offer",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 17,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Rewards",
+				"sheetName": "Rewards",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 18,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Documents",
+				"sheetName": "Documents",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 19,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_electricityExitFees",
+				"sheetName": "electricityExitFees",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 20,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_gasExitFees",
+				"sheetName": "gasExitFees",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 21,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Solar_FIT",
+				"sheetName": "Solar_FIT",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 22,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Electricity_Other_Fees",
+				"sheetName": "Electricity_Other_Fees",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 23,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Gas_Other_Fees",
+				"sheetName": "Gas_Other_Fees",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 24,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Electricity_Offer_Eligibility",
+				"sheetName": "Electricity_Offer_Eligibility",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 25,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_Offer_Gas_Offer_Eligibility",
+				"sheetName": "Gas_Offer_Eligibility",
+				"coloums": "*",
+				"group": "Offer",
+				"id": 26,
+				"mainSheet": "{{JobId}}_Offer_Entity",
+				"updateExclustion":null
+			},			
+			{
+				"sheetTable": "{{JobId}}_HUBRatePlanRate_Rates",
+				"sheetName": "Entity",
+				"coloums": "Intent,Parent_Entity_ClassType,Parent_Entity_Name,Parent_Entity_GUID,Charge_Entity_Name,Charge_Entity_GUID,Rate_Class,Rate_Path,Rate_Row_GUID,Start_Date,End_Date,PerUnit,Time_Band,changeid,etime_Charge_ID,has_Rate_Attributes,Rate_ID,Rating_Period,ratingplanID,Season_Set,Submit_Date,Compare,isOverriding,id",
+				"group": "HUBRatePlanRate",
+				"id": 27,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_HUBRatePlanRate_Rate_Attributes",
+				"sheetName": "Rate Attributes",
+				"coloums": "*",
+				"group": "HUBRatePlanRate",
+				"id": 28,
+				"mainSheet": "{{JobId}}_HUBRatePlanRate_Rates",
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_OfferSalesChannel_Entity",
+				"sheetName": "Entity",
+				"coloums": "Intent,Class_Type,Name,Description,PublicID,Sales_Channel_To_Offer_Id,has_Sales_Channel_To_Offer_Attribute,salesChannelToOfferxsdname,id,status",
+				"group": "OfferSalesChannel",
+				"id": 29,
+				"mainSheet": null,
+				"updateExclustion":null
+			},
+			{
+				"sheetTable": "{{JobId}}_OfferSalesChannel_SalesChannel",
+				"sheetName": "Sales_Channel_To_Offer_Mapping",
+				"coloums": "*",
+				"group": "OfferSalesChannel",
+				"id": 30,
+				"mainSheet": "{{JobId}}_OfferSalesChannel_Entity",
+				"updateExclustion":"Start_Date,Sales_Channel,Offer_Entity_Reference,Partner_Portal_Sales_Partner"
+			}
+		],
+		"SheetRelationColumn": [
+			{
+				"id": 1,
+				"sheetColumn": "Rating_Plan_ID",
+				"parentSheetColumn": "Rating_Plan_ID"
+			},
+			{
+				"id": 2,
+				"sheetColumn": "Time_Band_ID",
+				"parentSheetColumn": "Time_Band_ID"
+			},
+			{
+				"id": 3,
+				"sheetColumn": "Consumption_Units_Id",
+				"parentSheetColumn": "Consumption_Units_Id"
+			},
+			{
+				"id": 4,
+				"sheetColumn": "Inclusive_Loss_Factors_Id",
+				"parentSheetColumn": "Inclusive_Loss_Factors_Id"
+			},
+			{
+				"id": 5,
+				"sheetColumn": "Use_Daylight_Saving_Time_Id",
+				"parentSheetColumn": "Use_Daylight_Saving_Time_Id"
+			},
+			{
+				"id": 6,
+				"sheetColumn": "Consumption_Value_Id",
+				"parentSheetColumn": "Consumption_Value_Id"
+			},
+			{
+				"id": 7,
+				"sheetColumn": "Demand_Units_Id",
+				"parentSheetColumn": "Demand_Units_Id"
+			},
+			{
+				"id": 8,
+				"sheetColumn": "Product_ID",
+				"parentSheetColumn": "Product_ID"
+			},
+			{
+				"id": 9,
+				"sheetColumn": "Vintage_Id",
+				"parentSheetColumn": "Vintage_Id"
+			},
+			{
+				"id": 10,
+				"sheetColumn": "Reference_Id",
+				"parentSheetColumn": "Reference_Id"
+			},
+			{
+				"id": 11,
+				"sheetColumn": "ratingplanID",
+				"parentSheetColumn": "ratingplanID"
+			},
+			{
+				"id": 12,
+				"sheetColumn": "Rate_ID",
+				"parentSheetColumn": "Rate_ID"
+			},
+			{
+				"id": 13,
+				"sheetColumn": "Offer_Id",
+				"parentSheetColumn": "Offer_Id"
+			},
+			{
+				"id": 14,
+				"sheetColumn": "marketingid",
+				"parentSheetColumn": "marketingid"
+			},
+			{
+				"id": 15,
+				"sheetColumn": "marketstatusid",
+				"parentSheetColumn": "marketstatusid"
+			},
+			{
+				"id": 16,
+				"sheetColumn": "defaultRenewalOffergid",
+				"parentSheetColumn": "defaultRenewalOffergid"
+			},
+			{
+				"id": 17,
+				"sheetColumn": "Rewards_Id",
+				"parentSheetColumn": "Rewards_Id"
+			},
+			{
+				"id": 18,
+				"sheetColumn": "documentsid",
+				"parentSheetColumn": "documentsid"
+			},
+			{
+				"id": 19,
+				"sheetColumn": "Electricity_Exit_Fees_Id",
+				"parentSheetColumn": "Electricity_Exit_Fees_Id"
+			},
+			{
+				"id": 20,
+				"sheetColumn": "Gas_Exit_Fees_Id",
+				"parentSheetColumn": "Gas_Exit_Fees_Id"
+			},
+			{
+				"id": 21,
+				"sheetColumn": "Solar_Fit_Id",
+				"parentSheetColumn": "Solar_Fit_Id"
+			},
+			{
+				"id": 22,
+				"sheetColumn": "Electricity_Other_Fees_Id",
+				"parentSheetColumn": "Electricity_Other_Fees_Id"
+			},
+			{
+				"id": 23,
+				"sheetColumn": "Gas_Other_Fees_Id",
+				"parentSheetColumn": "Gas_Other_Fees_Id"
+			},
+			{
+				"id": 24,
+				"sheetColumn": "Electricity_Offer_Eligibility_Id",
+				"parentSheetColumn": "Electricity_Offer_Eligibility_Id"
+			},
+			{
+				"id": 25,
+				"sheetColumn": "Gas_Offer_Eligibility_Id",
+				"parentSheetColumn": "Gas_Offer_Eligibility_Id"
+			},
+			{
+				"id": 26,
+				"sheetColumn": "Sales_Channel_To_Offer_Id",
+				"parentSheetColumn": "Sales_Channel_To_Offer_Id"
+			}
+		],
+		"SheetRelationColumLink": [
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 2
+			},
+			{
+				"sheetColoumID": 2,
+				"sheetRelationID": 2
+			},
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 3
+			},
+			{
+				"sheetColoumID": 3,
+				"sheetRelationID": 3
+			},
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 4
+			},
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 5
+			},
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 6
+			},
+			{
+				"sheetColoumID": 1,
+				"sheetRelationID": 7
+			},
+			{
+				"sheetColoumID": 4,
+				"sheetRelationID": 4
+			},
+			{
+				"sheetColoumID": 5,
+				"sheetRelationID": 5
+			},
+			{
+				"sheetColoumID": 6,
+				"sheetRelationID": 6
+			},
+			{
+				"sheetColoumID": 7,
+				"sheetRelationID": 7
+			},
+			{
+				"sheetColoumID": 8,
+				"sheetRelationID": 9
+			},
+			{
+				"sheetColoumID": 8,
+				"sheetRelationID": 10
+			},
+			{
+				"sheetColoumID": 10,
+				"sheetRelationID": 10
+			},
+			{
+				"sheetColoumID": 9,
+				"sheetRelationID": 9
+			},
+			{
+				"sheetColoumID": 11,
+				"sheetRelationID": 12
+			},
+			{
+				"sheetColoumID": 12,
+				"sheetRelationID": 12
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 15
+			},
+			{
+				"sheetColoumID": 14,
+				"sheetRelationID": 15
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 16
+			},
+			{
+				"sheetColoumID": 15,
+				"sheetRelationID": 16
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 17
+			},
+			{
+				"sheetColoumID": 16,
+				"sheetRelationID": 17
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 18
+			},
+			{
+				"sheetColoumID": 17,
+				"sheetRelationID": 18
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 19
+			},
+			{
+				"sheetColoumID": 18,
+				"sheetRelationID": 19
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 20
+			},
+			{
+				"sheetColoumID": 19,
+				"sheetRelationID": 20
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 21
+			},
+			{
+				"sheetColoumID": 20,
+				"sheetRelationID": 21
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 22
+			},
+			{
+				"sheetColoumID": 21,
+				"sheetRelationID": 22
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 23
+			},
+			{
+				"sheetColoumID": 22,
+				"sheetRelationID": 23
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 24
+			},
+			{
+				"sheetColoumID": 23,
+				"sheetRelationID": 24
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 25
+			},
+			{
+				"sheetColoumID": 24,
+				"sheetRelationID": 25
+			},
+			{
+				"sheetColoumID": 13,
+				"sheetRelationID": 26
+			},
+			{
+				"sheetColoumID": 25,
+				"sheetRelationID": 26
+			},
+			{
+				"sheetColoumID": 11,
+				"sheetRelationID": 28
+			},
+			{
+				"sheetColoumID": 12,
+				"sheetRelationID": 28
+			},
+			{
+				"sheetColoumID": 26,
+				"sheetRelationID": 30
+			}
+		]
+	}
+]

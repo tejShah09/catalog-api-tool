@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CatalogItem xmlns="http://schema.sigma-systems.com/catalog.api/models">
+  <ClassType>{{classtype}}</ClassType>
+  <Intent>{{mainAction.Modify}}</Intent>
+  <ItemElements>
+    <ItemElement>
+      <Intent>New</Intent>
+      <Name>{{action.getOverridesClassType.overridesclasstype}}</Name>
+      <Type>Any</Type>
+      <Values>
+        <ValueDefinition>
+        	<Definition>
+        		<ClassType>{{overridesclasstype}}</ClassType>
+ 			    <Intent>New</Intent>
+        		 <ItemElements>
+        		 </ItemElements>
+        	</Definition>
+        	<Value>{{overridesguid}}</Value>
+        </ValueDefinition>		 
+      </Values>
+     </ItemElement>   		 
+  </ItemElements>
+  <PublicID>{{mainGuid.{{action.getEntityGuid.parententityguid.parententityname.classtype}}}}</PublicID>
+</CatalogItem>

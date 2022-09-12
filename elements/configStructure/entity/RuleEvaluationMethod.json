@@ -1,0 +1,25 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				 {
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getCustomMultipleFactGuidByParent.~Lookup_Rule_Evaluation_Method.overriderem}}"
+					],
+					"name": "Override_REM",
+					"instances": "single"
+				}, 
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getBusienssIDUsingGuid.classtype.targetelement}}"
+					],
+					"name": "Target_Element",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

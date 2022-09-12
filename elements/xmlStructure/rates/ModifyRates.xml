@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<UpdateRateRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+    <RatePublicID>{{raterowguid}}</RatePublicID>
+	<RateValue>{{rate}}</RateValue>
+	<StartDate>{{startdate}}</StartDate>
+</UpdateRateRequest>

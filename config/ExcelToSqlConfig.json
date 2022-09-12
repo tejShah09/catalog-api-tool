@@ -1,0 +1,18 @@
+{
+"Sheet_Selection": [
+        {
+            "Workbook":"Offer_Entity",
+            "Sheets": ["Instructions","Entity", "Marketing", "Market_Status", "is_a_Default_Renewal_Offer",
+                            "Rewards", "Documents", "electricityExitFees", "gasExitFees", "Solar_FIT", "Electricity_Other_Fees",
+                            "Gas_Other_Fees", "Electricity_Offer_Eligibility", "Gas_Offer_Eligibility"]                        
+        }
+    ],
+    "Sheet_Order": [
+        {
+            "Workbook":"Offer_Entity",
+            "Sheets": ["Instructions","Entity", "Marketing", "Market_Status", "is_a_Default_Renewal_Offer",
+                            "Rewards", "Documents", "electricityExitFees", "gasExitFees", "Solar_FIT", "Electricity_Other_Fees",
+                            "Gas_Other_Fees", "Electricity_Offer_Eligibility", "Gas_Offer_Eligibility"]                        
+        }
+    ]
+}

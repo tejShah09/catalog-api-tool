@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{ruletype}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+			<ItemElement>
+				<Intent>{{intent}}</Intent>
+				<Name>Name</Name>
+				<Type>String</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{name}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>
+		</ItemElements>
+	</Definition>
+	<Value>{{incompatibilityruleguid}}</Value>
+</ValueDefinition>

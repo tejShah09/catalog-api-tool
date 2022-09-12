@@ -1,0 +1,9 @@
+<ValueDefinition>
+			<Definition>
+				<ClassType>MKIOS_Attributes</ClassType>
+				<Intent>New</Intent>
+				<ItemElements>
+				</ItemElements>
+			</Definition>
+			<Value>{{action.newguid}}</Value>
+</ValueDefinition>

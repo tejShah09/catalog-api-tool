@@ -1,0 +1,7 @@
+[DATABASE_CONFIG]
+db_config_path = D:\\git\\catalog-api-tool\\config\\db.properties
+[EXCEL_DIR]
+export_directory = D:\\git\\catalog-api-tool\\exportedFiles
+import_directory = D:\\git\\catalog-api-tool\\toImportFiles
+[EXCEL_TO_SQL]
+excel_to_sql = D:\\git\\catalog-api-tool\\config\\ExcelToSqlConfig.json

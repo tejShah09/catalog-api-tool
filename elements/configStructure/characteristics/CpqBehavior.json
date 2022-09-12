@@ -1,0 +1,39 @@
+{
+	"optionalElements": [
+		{
+			"path": "Values/ValueDefinition/Definition/ItemElements",
+			"itemElements": [
+				{
+					"value": [
+						"{{cpqbehavioriscalculated}}"
+					],
+					"name": "Is_Calculated"
+				},
+				{
+					"value": [
+						"{{cpqbehaviorisdefaulted}}"
+					],
+					"name": "Is_Defaulted"
+				},
+				{
+					"value": [
+						"{{cpqbehaviorpluginid}}"
+					],
+					"name": "Plugin_ID"
+				},
+				{
+					"value": [
+						"{{cpqbehaviorexternalcapturegrp}}"
+					],
+					"name": "External_Capture_Grp"
+				}
+			]
+		}
+	],
+	"criteria": [
+		"cpqbehavioriscalculated",
+		"cpqbehaviorisdefaulted",
+		"cpqbehaviorpluginid",
+		"cpqbehaviorexternalcapturegrp"
+	]
+}

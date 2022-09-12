@@ -1,0 +1,22 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "Delete",
+					"value": [
+						"{{nestedTag.DeleteRuleValueDefinitionForInCompatiblity}}"
+					],
+					"name": "{{rulename}}",
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"
+						}
+					]	
+				}
+			]
+		}
+	]
+}

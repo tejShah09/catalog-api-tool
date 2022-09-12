@@ -1,0 +1,9 @@
+<ValueDefinition>
+   <Definition>
+      <ClassType>{{discountplanclasstype}}</ClassType>
+      <Intent>{{intent}}</Intent>
+      <ItemElements>
+      </ItemElements>
+   </Definition>
+   <Value>{{discountguid}}</Value>
+</ValueDefinition>

@@ -1,0 +1,112 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{marketingprice}}"
+					],
+					"name": "Marketing_Price",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{marketingrecurringprice}}"
+					],
+					"name": "Marketing_Recurring_Price",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{quotemessage}}"
+					],
+					"name": "Quote_Message",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getUnEscapedStringRule.electricityofferdescription}}"
+					],
+					"name": "Electricity_Offer_Description",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{greenpercentageterms}}"
+					],
+					"name": "Green_Percentage_Terms",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getUnEscapedStringRule.gasofferdescription}}"
+					],
+					"name": "Gas_Offer_Description",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricitycoolingoffperiod}}"
+					],
+					"name": "Electricity_Cooling_Off_Period",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gascoolingoffperiod}}"
+					],
+					"name": "Gas_Cooling_Off_Period",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getUnEscapedStringRule.offersummary}}"
+					],
+					"name": "Offer_Summary",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getUnEscapedStringRule.contractdurationterms}}"
+					],
+					"name": "Contract_Duration_Terms",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{image}}"
+					],
+					"name": "Image",
+					"instances": "single"
+				},
+				  {
+                    "intent": "{{intent}}",
+                    "value": [
+                        "{{action.getUnEscapedStringRule.gasoffersummary}}"
+                    ],
+                    "name": "Gas_Offer_Summary",
+                    "instances": "single"
+                },  {
+                    "intent": "{{intent}}",
+                    "value": [
+                        "{{action.getUnEscapedStringRule.electricityoffersummary}}"
+                    ],
+                    "name": "Electricity_Offer_Summary",
+                    "instances": "single"
+                }
+			]
+		}
+	]
+}

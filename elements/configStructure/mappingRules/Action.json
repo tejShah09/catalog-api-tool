@@ -1,0 +1,83 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sequence}}"
+					],
+					"name": "Sequence",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{literal}}"
+					],
+					"name": "Literal",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{primary}}"
+					],
+					"name": "Primary",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{replace}}"
+					],
+					"name": "Replace",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{skipifvaluesexist}}"
+					],
+					"name": "SkipIfValuesExist",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{skipifentityexists}}"
+					],
+					"name": "SkipIfEntityExists",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getTargetState.actionname.target}}"
+					],
+					"name": "Target",
+					"instances": "single"
+					
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getFactGuid.$TargetState.targetstate}}"
+					],
+					"name": "TargetState",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{nestedTag.TargetValueDefinition}}"
+					],
+					"name": "Target",
+					"instances": "single"
+					
+				}
+			]
+		}
+	]
+}

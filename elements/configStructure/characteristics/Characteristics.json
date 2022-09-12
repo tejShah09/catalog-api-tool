@@ -1,0 +1,312 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.ValueDefinition}}"
+					],
+					"name": "{{characteristicxsdname}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					],
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Characteristic_Value.entityname::characteristicclass::characteristicname.entityname::characteristicclass::characteristicname.{{action.getFactGuid.characteristicname.characteristicvalue}}}}"
+					],
+					"name": "{{parent.{{characteristicxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "lookup"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"path": "ItemElements/ItemElement/Values/ValueDefinition[Value='{{characteristicsmappingguid}}']/Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{udcname}}"
+					],
+					"name": "Name",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.$Eligible_Evaluation_Type.eligibleevaluationtype}}"
+					],
+					"name": "Eligible_Evaluation_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+								
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "Start_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{maxoccurs}}"
+					],
+					"name": "Max_Occurs"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{minoccurs}}"
+					],
+					"name": "Min_Occurs"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{displayname}}"
+					],
+					"name": "Display_Name"
+				},
+				
+				
+				
+				
+				
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.characteristicvalueclass.characteristicname}}"
+					],
+					"name": "Characteristic",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Characteristic_Value.entityname::characteristicclass::characteristicname.entityname::characteristicclass::characteristicname.{{action.getFactGuid.characteristicname.characteristicvalue}}}}"
+					],
+					"name": "Values",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Characteristic_Value.entityname::characteristicclass::characteristicname.entityname::characteristicclass::characteristicname.{{action.getCatServiceGuid.characteristicname.characteristicvalue.characteristicclass}}}}"
+					],
+					"name": "Characteristic_CharValue",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.CpqBehavior}}"
+					],
+					"name": "NestedTag_CpqBehavior",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.CpqUiBehavior}}"
+					],
+					"name": "NestedTag_CpqUiBehavior",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.SWeight}}"
+					],
+					"name": "NestedTag_SWeight",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tcharuse"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tdefinable"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "characteristicbaseclass",
+									"value": "tconfigurable"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

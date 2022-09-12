@@ -1,0 +1,8 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{rateclass}}</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements/>
+	</Definition>
+	<Value>{{action.getRateRowGuid.intent.raterowguid}}</Value>
+</ValueDefinition>

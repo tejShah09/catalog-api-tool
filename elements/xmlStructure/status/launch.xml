@@ -1,0 +1,3 @@
+<LaunchRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+	<PublicID>{{value}}</PublicID>
+</LaunchRequest>

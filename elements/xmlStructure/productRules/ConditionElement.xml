@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+        <ClassType>SigmaRuleEntity</ClassType>                                             
+        <Intent>{{parent.{{intent}}}}</Intent>
+        <ItemElements>
+        </ItemElements>                                     
+    </Definition>
+    <Value>{{conditionguid}}</Value>
+</ValueDefinition>

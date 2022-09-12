@@ -1,0 +1,16 @@
+<ItemElement>
+	<Intent>{{parent.{{intent}}}}</Intent>
+	<Name>{{conditiontype}}</Name>
+	<Type>Any</Type>
+	<Values>
+		<ValueDefinition>
+			<Definition>
+				<ClassType>{{action.getProperites.conditiontype}}</ClassType>
+				<Intent>{{parent.{{intent}}}}</Intent>
+				<ItemElements>				
+				</ItemElements>
+			</Definition>
+			<Value>{{entityvalueguid}}</Value>
+		</ValueDefinition>
+	</Values>
+</ItemElement>

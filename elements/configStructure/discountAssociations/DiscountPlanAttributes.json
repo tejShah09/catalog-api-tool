@@ -1,0 +1,81 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [				
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{associationstartdate}}"
+					],
+					"name": "Association_Start_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{associationenddate}}"
+					],
+					"name": "Association_End_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{maxoccurs}}"
+					],
+					"name": "Max_Occurs",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{minoccurs}}"
+					],
+					"name": "Min_Occurs",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{defaultcardinality}}"
+					],
+					"name": "Default_Cardinality",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{product}}"
+					],
+					"name": "Product",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.SWeight}}"
+					],
+					"name": "NestedTag_SWeight",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuidSupplyPointType.~CommPhase.commphases}}"
+					],
+					"name": "CommPhases",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuidSupplyPointType.~TechOrderPhase.techphases}}"
+					],
+					"name": "TechPhases",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

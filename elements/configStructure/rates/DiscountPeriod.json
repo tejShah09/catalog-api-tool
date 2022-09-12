@@ -1,0 +1,41 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "Start_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Discount_Period_Dates.value}}"
+					],
+					"name": "Value",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~SDiscChgAdjType.type}}"
+					],
+					"name": "Type",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

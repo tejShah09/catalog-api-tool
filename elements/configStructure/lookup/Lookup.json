@@ -1,0 +1,133 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{refid}}"
+					],
+					"name": "Reference_ID"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sequence}}"
+					],
+					"name": "Sequence"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Target_System.targetsystem}}"
+					],
+					"name": "Target_System"
+				},
+				
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{bonusid}}"
+					],
+					"name": "BonusID"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{isdefault}}"
+					],
+					"name": "Is_Default"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Charge_Pwd.pricepassword}}"
+					],
+					"name": "Price_Password",
+					"instances": "single"
+				},
+
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Charge_Pwd_Postpaid.pricepasswordpostpaid}}"
+					],
+					"name": "Price_Password",
+					"instances": "single"
+				},
+					{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Time_Band.timeband}}"
+					],
+					"name": "Time_Band",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.discountgroups}}"
+					],
+					"name": "Discount_Groups",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.rewardplans}}"
+					],
+					"name": "Reward_Plans",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Pricing_Condition_Category.pricingconditioncategory}}"
+					],
+					"name": "Pricing_Condition_Category",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.SWeight}}"
+					],
+					"name": "NestedTag_SWeight"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{sheet.Target System Translation.targetid.targetid.{{nestedTag.TargetSystemTranslation}}}}"
+					],
+					"name": "Target_System_Translation",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "targetsystemtranslation",
+									"value": "true"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

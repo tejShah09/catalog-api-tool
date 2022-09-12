@@ -1,0 +1,58 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+			
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Third_Party.partnerportalsalespartner}}"
+					],
+					"name": "Partner_Portal_Sales_Partner",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~TSales_Channel.saleschannel}}"
+					],
+					"name": "Sales_Channel",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "Start_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{donotsell}}"
+					],
+					"name": "Do_Not_Sell",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+				"{{action.getEntityGuidbyNameAndReference.offerentityreference.classtype}}"
+					],
+					"name": "Offer_Entity_Reference",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

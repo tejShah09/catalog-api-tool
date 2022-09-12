@@ -1,0 +1,25 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountpercentage}}"
+					],
+					"name": "Discount_Percentage",
+					"instances": "single"
+				},	
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Product_Line.productline}}"
+					],
+					"name": "Product_Line",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

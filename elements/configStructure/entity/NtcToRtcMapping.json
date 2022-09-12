@@ -1,0 +1,66 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+			
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Retail_Tariff_Code.rtc}}"
+					],
+					"name": "RTC",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+					"{{action.getFactGuid.~Lookup_Distributor.distributor}}"
+					],
+					"name": "Distributor",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "Start_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{ntc}}"
+					],
+					"name": "NTC",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{feedintype}}"
+					],
+					"name": "Feed_In_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+					"{{action.getFactGuid.~Lookup_YESNO.rtcpriority}}"
+					],
+					"name": "RTC_Priority",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

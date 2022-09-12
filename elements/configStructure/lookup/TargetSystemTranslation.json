@@ -1,0 +1,33 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "New",
+					"value": [
+						"{{targetsystemname}}"
+					],
+					"name": "Target_System_Name",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{targetsystemdescription}}"
+					],
+					"name": "Target_System_Description",
+					"instances": "single"
+				},
+				{
+					"intent": "New",
+					"value": [
+						"{{action.getFactGuid.$Target_System.targetsystem}}"
+					],
+					"name": "Target_System",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

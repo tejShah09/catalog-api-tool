@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{rateclass}}</ClassType>
+		<Intent>Modify</Intent>
+		<ItemElements>	
+		</ItemElements>
+	</Definition>
+	<Value>{{raterowguid}}</Value>
+</ValueDefinition>

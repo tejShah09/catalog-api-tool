@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{rateclass}}</ClassType>
+		<Intent>{{action.getInnerRateClassIntent.intent}}</Intent>
+		<ItemElements>
+			<ItemElement>
+				<Intent>{{action.getInnerRateClassIntent.intent}}</Intent>
+				<Name>Start_Date</Name>
+				<Type>Date</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{startdate}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>		
+		</ItemElements>
+	</Definition>
+	<Value>{{action.getRateRowGuid.intent.raterowguid}}</Value>
+</ValueDefinition>

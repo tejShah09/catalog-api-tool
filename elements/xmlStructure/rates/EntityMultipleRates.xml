@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{action.getDecoratorClassType.rateclass}}</ClassType>                           
+		<Intent>{{action.checkIfRateExists.intent.ratepath.isoverriding}}</Intent>		
+		<ItemElements>		                     
+		</ItemElements>                        
+	</Definition>
+	<Value>{{action.getDecoratorGuid.intent.ratepath}}</Value>
+</ValueDefinition>

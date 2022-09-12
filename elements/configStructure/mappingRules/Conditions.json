@@ -1,0 +1,30 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getFactGuid.$Scope.{{parent.{{conditionscope}}}}}}"
+					],
+					"name": "Scope",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{nestedTag.ConditionElement}}"
+					],
+					"name": "ConditionElement",
+					"groups":[
+						{
+					"groupKey": "Name",
+					"groupPath": "../Values/ValueDefinition"
+						}
+					]	
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,7 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>{{ruletype}}</ClassType>
+		<Intent>Delete</Intent>
+	</Definition>
+	<Value>{{compatibilityruleguid}}</Value>
+</ValueDefinition>

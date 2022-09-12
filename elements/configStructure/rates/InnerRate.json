@@ -1,0 +1,269 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{actstart}}"
+					],
+					"name": "ActStart",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{rate}}"
+					],
+					"name": "Rate",
+					"instances": "single"
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{actend}}"
+					],
+					"name": "ActEnd",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{threshold}}"
+					],
+					"name": "Threshold",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{discount}}"
+					],
+					"name": "Discount",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{orderofexecution}}"
+					],
+					"name": "OrdOfExec",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{isexclusive}}"
+					],
+					"name": "IsExclusive",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Product_Line.productline}}"
+					],
+					"name": "productLine",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{sheet.Discount Period.discountplanid::discountperiodid.discountplanid::discountperiodid.{{nestedTag.DiscountPeriod}}}}"
+					],
+					"name": "Discount_Period",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdiscountperiodid",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{sheet.Product Line.discountplanid::productlineid.discountplanid::productlineid.{{nestedTag.ProductLine}}}}"
+					],
+					"name": "Product_Line",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasproductline",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{sheet.Charge Ex GST.discountplanid::chargeexgstid.discountplanid::chargeexgstid.{{nestedTag.ChargeExGST}}}}"
+					],
+					"name": "Charge_Ex._GST",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "haschargeexgst",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{perunit}}"
+					],
+					"name": "PerUnit",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{changeid}}"
+					],
+					"name": "Change_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{glacctcode}}"
+					],
+					"name": "glacctcode",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{floorrate}}"
+					],
+					"name": "Floor_Rate",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{submitdate}}"
+					],
+					"name": "Submit_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Meter_Install_Code.pricekey1}}"
+					],
+					"name": "Price_Key_1",
+					"instances": "single"
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Meter_Provider_Elec_Registered.pricekey2}}"
+					],
+					"name": "Price_Key_2",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{dailydataareaid}}"
+					],
+					"name": "Daily_Data_Area_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Time_Band.timeband}}"
+					],
+					"name": "Time_Band",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~TLookup_Periodicity.period}}"
+					],
+					"name": "Rating_Period",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~TLookup_Periodicity.ratingperiod}}"
+					],
+					"name": "Rating_Period",
+					"instances": "single"
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Channel_Type.channeltype}}"
+					],
+					"name": "Channel_Type",
+					"instances": "single"
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Bandwidth.bandwidth}}"
+					],
+					"name": "Bandwidth",
+					"instances": "single"
+				},
+					{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{action.getFactGuid.~Type_Of_Service.servicetype}}"
+					],
+					"name": "Service_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{action.getInnerRateClassIntent.intent}}",
+					"value": [
+						"{{sheet.Rate Attributes.ratingplanid::rateid.ratingplanid::rateid.{{nestedTag.InnerRateAttributes}}}}"
+					],
+					"name": "Rate",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasrateattributes",
+									"value": "true"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,9 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>SigmaLocalScopeValue</ClassType>
+		<Intent>{{parent.{{intent}}}}</Intent>
+		<ItemElements>
+		</ItemElements>
+	</Definition>
+	<Value>{{targetvaluesguid}}</Value>
+</ValueDefinition>

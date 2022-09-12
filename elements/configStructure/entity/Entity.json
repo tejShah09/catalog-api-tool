@@ -1,0 +1,2293 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{availablestartdate}}"
+					],
+					"name": "Available_Start_Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{businessname}}"
+					],
+					"name": "Business_Name"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getUnEscapedStringRule.description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{effectivestartdate}}"
+					],
+					"name": "Effective_Start_Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{categoryid}}"
+					],
+					"name": "Category_ID"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{effectiveenddate}}"
+					],
+					"name": "Effective_End_Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{availableenddate}}"
+					],
+					"name": "Available_End_Date"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{maxcustportfolioinstances}}"
+					],
+					"name": "Max_Cust_Portfolio_Instances"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{mincustportfolioinstances}}"
+					],
+					"name": "Min_Cust_Portfolio_Instances"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{cpqdisconnectioncharge}}"
+					],
+					"name": "CPQ_Disconnection_Charge"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountinformationforratesheet}}"
+					],
+					"name": "Discount_Information_for_Rate_Sheet"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuidSupplyPointType.~Lookup_Meter_Type.supplypointtype}}"
+					],
+					"name": "Supply_Point_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuidSupplyPointType.~Lookup_Excess_Energy_Concession_Plans.eecplan}}"
+					],
+					"name": "EEC_Plan",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{psid}}"
+					],
+					"name": "psid",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{excludeddiscountplanlist}}"
+					],
+					"name": "Excluded_Discount_Plan_List",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{pskey}}"
+					],
+					"name": "psKey",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{changeid}}"
+					],
+					"name": "Change_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Currency_Name.currency}}"
+					],
+					"name": "Currency",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Life_Support_Consumption_Period.lsratingperiod}}"
+					],
+					"name": "LS_Rating_Period",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Life_Support_Rating_Plan.lsratingplan}}"
+					],
+					"name": "Life_Support_Rating_Plan",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Season_Set.seasonset}}"
+					],
+					"name": "Season_Set",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Life_Support_Consumption_Limit.consumptionforlsconcessioninkwh}}"
+					],
+					"name": "Consumption_for_LS_Concession_in_kWh",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Time_Set.timeset}}"
+					],
+					"name": "Time_Set",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Season.season}}"
+					],
+					"name": "Season",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Ratcheting_Method.ratchetingmethod}}"
+					],
+					"name": "Ratcheting_Method",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{minimumdemand}}"
+					],
+					"name": "Minimum_Demand",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Demand_Period.demandperiod}}"
+					],
+					"name": "Demand_Period",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Additional_Demand_TimeBand.additionaldemandtimeband}}"
+					],
+					"name": "Additional_Demand_Time_Band",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{additionalminimumdemand}}"
+					],
+					"name": "Additional_Minimum_Demand",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Quantity_Source.quantitysource}}"
+					],
+					"name": "Quantity_Source",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_STRRTP.metertype}}"
+					],
+					"name": "Meter_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{upliftoverspotprice}}"
+					],
+					"name": "Uplift_over_Spot_Price",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{flatcharge}}"
+					],
+					"name": "Flat_Charge",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Apply_Loss_Factor.applylossfactor}}"
+					],
+					"name": "Apply_Loss_Factor",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Rating_Method.ratingmethod}}"
+					],
+					"name": "Rating_Method",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.adjaccumflg}}"
+					],
+					"name": "adjAccumFlg",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{savedata}}"
+					],
+					"name": "Save_Data",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{duration}}"
+					],
+					"name": "Duration",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.separateinvoicelineitemindicator}}"
+					],
+					"name": "Separate_Invoice_Line_Item_Indicator",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Tier_Type.tiertype}}"
+					],
+					"name": "Tier_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Discount_Location.discountlocation}}"
+					],
+					"name": "Discount_Location",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.creatediscountnode}}"
+					],
+					"name": "Create_Discount_Node",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.invoicedisplay}}"
+					],
+					"name": "Invoice_Display",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_GL_Account_Code.glaccountdiscountcode}}"
+					],
+					"name": "GL_Account_Discount_Code",
+					"instances": "single"
+				},
+								{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Customer_Type.customertype}}"
+					],
+					"name": "Customer_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Discount_Plan_Parameters.discountplanparameter}}"
+					],
+					"name": "Discount_Plan_Parameter",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.displayifzero}}"
+					],
+					"name": "Display_if_Zero",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_pensiontype.pensiontype}}"
+					],
+					"name": "Pension_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Concession_Type_for_Admin_Fee.concessiontypeforadminfee}}"
+					],
+					"name": "Concession_Type_for_Admin_Fee",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sequencenumber}}"
+					],
+					"name": "Sequence_Number",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getCustomMultipleFactGuidByParent.~Lookup_Utility_type_unit.utilitytypeunit}}"
+					],
+					"name": "Utility_Type_Unit",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Discount_Plan_RATE_REDUCTION"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Utility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Discount_Plan_Variable_Usage"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_CTIBAND.applicabletimebands}}"
+					],
+					"name": "Applicable_TimeBands",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_CTIBAND.excludedtimebands}}"
+					],
+					"name": "Excluded_TimeBands",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Tax_Code.taxcode}}"
+					],
+					"name": "Tax_Code",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Discount_Plan_Eligibility_Rule.discountplaneligibilityrule}}"
+					],
+					"name": "Eligibility_Rule",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Discount_Plan_Scheduling_Rule.discountplanschedulingrule}}"
+					],
+					"name": "Scheduling_Rule",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Eligibility_Type.eligibilitytype}}"
+					],
+					"name": "Eligibility_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountamount}}"
+					],
+					"name": "Discount_Amount",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{billasatdate}}"
+					],
+					"name": "Bill_As_At_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountpercentage}}"
+					],
+					"name": "Discount_Percentage",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Loyalty_Discount_Products.linkedproduct}}"
+					],
+					"name": "Linked_Product",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{control}}"
+					],
+					"name": "Control",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountplanfieldlevelcontrol}}"
+					],
+					"name": "Discount_Plan_Field_Level_Control",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_discountMethodCat.discountmethodcategory}}"
+					],
+					"name": "Discount_Method_Category",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{lookupid}}"
+					],
+					"name": "Lookup_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountplanid}}"
+					],
+					"name": "Discount_Plan_ID",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{ratingplanid}}"
+					],
+					"name": "Rating_Plan_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{parentrplanid}}"
+					],
+					"name": "Parent_RPlan_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{completeflag}}"
+					],
+					"name": "Complete_Flag",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{accumulatorid}}"
+					],
+					"name": "Accumulator_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_RPUSAGE.rebatefrequency}}"
+					],
+					"name": "Rebate_Frequency",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.prorateconcession}}"
+					],
+					"name": "Prorate_Concession",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{anniversarybasedate}}"
+					],
+					"name": "Anniversary_Base_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{powerquoteproductid}}"
+					],
+					"name": "PowerQuote_Product_ID",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{intrastatcode}}"
+					],
+					"name": "Intrastat_Code",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{documentname}}"
+					],
+					"name": "Document_Name",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{systemsizekw}}"
+					],
+					"name": "System_Size_kW",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{invpsdirtyflg}}"
+					],
+					"name": "invPSDirtyFlg",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{quantity}}"
+					],
+					"name": "Quantity",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TProduct_Subclass.productclassandproductsubclass}}"
+					],
+					"name": "Product_Class_and_Product_Subclass",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~TUtility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Base_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~TUtility_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Physical_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TProduct_Bundle_Inventory_Type.productchargeandinventorytype}}"
+					],
+					"name": "Product_Charge_and_Inventory_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TProduct_Base_Physical_Inventory_Type.productchargeandinventorytype}}"
+					],
+					"name": "Product_Charge_and_Inventory_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Base_Physical_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TProduct_Base_Inventory_Type.productchargeandinventorytype}}"
+					],
+					"name": "Product_Charge_and_Inventory_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Base_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TProduct_Bundle_Physical_InventoryType.productchargeandinventorytype}}"
+					],
+					"name": "Product_Charge_and_Inventory_Type",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Physical_Property_Set"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{adjustmentaccumulatorflag}}"
+					],
+					"name": "Adjustment_Accumulator_Flag",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_GL_Charge_Type_and_Item.glchargetypeanditem}}"
+					],
+					"name": "GL_Charge_Type_and_Item",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_GL_Product_Code.glproductcode}}"
+					],
+					"name": "GL_Product_Code",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.tangibleindicator}}"
+					],
+					"name": "Tangible_Indicator",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.includeinbestoffer}}"
+					],
+					"name": "Include_in_Best_Offer",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TRetailer.utilitytypeandretailer}}"
+					],
+					"name": "Utility_Type_and_Retailer",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TFeed_In_Type.stateproductgroupandfeedintype}}"
+					],
+					"name": "State_Product_Group_and_Feed_In_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TPricing_Condition_Branch.pricingconditioncategoryandpricingcondition}}"
+					],
+					"name": "Pricing_Condition_Category_and_Pricing_Condition",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getCustomMultipleFactGuidByParent.~Lookup_Rule_Evaluation_Method.ruleevaluationmethod}}"
+					],
+					"name": "Rule_Evaluation_Method",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Conditional_Product_Rules_Active.conditionalproductrule}}"
+					],
+					"name": "Conditional_Product_Rule",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.dependentindicator}}"
+					],
+					"name": "Dependent_Indicator",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Report_Key.reportkey}}"
+					],
+					"name": "Report_Key",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_GL_Account_Code.glaccountrevenuecode}}"
+					],
+					"name": "GL_Account_Revenue_Code",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.energychargeflagforrewardplans}}"
+					],
+					"name": "Energy_Charge_Flag_for_Reward_Plans",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Prorate_Type.prorataindicator}}"
+					],
+					"name": "Pro_Rata_Indicator",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.energyrelatedindicator}}"
+					],
+					"name": "Energy_Related_Indicator",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Quote_Type.quotetype}}"
+					],
+					"name": "Quote_Type",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Package.package}}"
+					],
+					"name": "Package",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_State_Code.state}}"
+					],
+					"name": "State",
+					"instances": "single",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Physical_Property_Set"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Customer_Group.customergroup}}"
+					],
+					"name": "Customer_Group",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Physical_Property_Set"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Property_Set"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Product_Line.productline}}"
+					],
+					"name": "Product_Line",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Pricing_Condition.pricingcondition}}"
+					],
+					"name": "Pricing_Condition",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Pricing_Condition_Category.pricingconditioncategory}}"
+					],
+					"name": "Pricing_Condition_Category",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Contract_Term.contractterm}}"
+					],
+					"name": "Contract_Term",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_External_Network_Tariff_Codes_List.externaltariffcode}}"
+					],
+					"name": "External_Tariff_Code",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Distributor.distributor}}"
+					],
+					"name": "Distributor",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.bundleexpansioninvoiceindicator}}"
+					],
+					"name": "Bundle_Expansion_Invoice_Indicator",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Market_Segment.marketsegment}}"
+					],
+					"name": "Market_Segment",
+					"instances": "single",
+							"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Product_Bundle_Property_Set"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Component_Fuel.componentfuel}}"
+					],
+					"name": "Component_Fuel",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Retail_Tariff_Code.retailtariffcode}}"
+					],
+					"name": "Retail_Tariff_Code",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Product_Category.productcategory}}"
+					],
+					"name": "Product_Category",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Tariff_Zone.tariffzoneforpostcode}}"
+					],
+					"name": "Tariff_Zone_for_Post_Code",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Off_Peak_Electricity.ratetype}}"
+					],
+					"name": "Rate_Type",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Bundle_status.retailchargemethod}}"
+					],
+					"name": "Retail_Charge_Method",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Tariff_Class.tariffclass}}"
+					],
+					"name": "Tariff_Class",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Network_Tariff_Zone.networktariffzone}}"
+					],
+					"name": "Network_Tariff_Zone",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.DiscountPlanType}}"
+					],
+					"name": "Discount_Plan_Type",
+					"instances": "single",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdiscountplantype",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.OffsetFields}}"
+					],
+					"name": "Offset_Fields",
+					"instances": "single",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasoffsetfields",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TCustomer_Group.customergroup}}"
+					],
+					"name": "Customer_Group",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Residential"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Commercial"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TFeed_In_Pricing_Type.feedinpricingtype}}"
+					],
+					"name": "Feed_In_Pricing_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TResidential_Market_Segment.marketsegment}}"
+					],
+					"name": "Market_Segment",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Residential"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TCommercial_Market_Segment.marketsegment}}"
+					],
+					"name": "Market_Segment",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Commercial"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_VIC_WA"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_EME"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TStates_and_energy_jurisdictions.state}}"
+					],
+					"name": "State",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Residential"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TStates_and_energy_jurisdictions.state}}"
+					],
+					"name": "State",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Commercial"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getProductChargeClassificationCatServicesGuid.~TOffer_Type.utilitytype}}"
+					],
+					"name": "Utility_Type",
+						"condition": [
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Commercial"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "classtype",
+									"value": "Offer_Residential"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Offer_Sub_Type.offersubtype}}"
+					],
+					"name": "Offer_Sub_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Contract_Type.contracttype}}"
+					],
+					"name": "Contract_Type",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Offer_Purpose.offerpurpose}}"
+					],
+					"name": "Offer_Purpose",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{offercode}}"
+					],
+					"name": "Offer_Code"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Offer_status.offerstatus}}"
+					],
+					"name": "Offer_Status",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Campaign_Offer.defaultrenewaloffer}}"
+					],
+					"name": "Default_Renewal_Offer",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Affiliation_Team_List.affiliationteamlist}}"
+					],
+					"name": "Affiliation_Team_List",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Campaign.campaign}}"
+					],
+					"name": "Campaign",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reward_Plan.rewardplan}}"
+					],
+					"name": "Reward_Plan",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Contract_Duration.contractduration}}"
+					],
+					"name": "Contract_Duration",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reason_to_waive_Termination_Fees.reasontowaiveterminationfees}}"
+					],
+					"name": "Reason_to_Waive_Termination_Fees",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reason_to_waive_Termination_Fees.graceperiodfeewaiverreason}}"
+					],
+					"name": "Grace_Period_Fee_Waiver_Reason",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reason_to_waive_Termination_Fees.terminationfeebeforecontractstartfeewaiverreason}}"
+					],
+					"name": "Termination_Fee_before_Contract_Start_Fee_Waiver_Reason",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.terminationfees}}"
+					],
+					"name": "Termination_Fees",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Once_only_Other_charge_products_Elec.electricityexitfeebeforecontractstart}}"
+					],
+					"name": "Electricity_Exit_Fee_before_Contract_Start",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Once_only_Other_charge_products_Gas.gasexitfeebeforecontractstart}}"
+					],
+					"name": "Gas_Exit_Fee_before_Contract_Start",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Meter_Install_Code.metertypes}}"
+					],
+					"name": "Meter_Types",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Third_Party_Type.thirdpartycode}}"
+					],
+					"name": "Third_Party_Code",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Document_Asset_Category.docassetcategory}}"
+					],
+					"name": "Doc_Asset_Category",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{advanceexpirynotificationperiod}}"
+					],
+					"name": "Advance_Expiry_Notification_Period"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricityoffernumber}}"
+					],
+					"name": "Electricity_Offer_Number"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{maxelectricitycosttoacquire}}"
+					],
+					"name": "Max_Electricity_Cost_to_Acquire"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{greenpowerpercentage}}"
+					],
+					"name": "Green_Power_Percentage"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gasoffernumber}}"
+					],
+					"name": "Gas_Offer_Number"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{maxgascosttoacquire}}"
+					],
+					"name": "Max_Gas_Cost_to_Acquire"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sales}}"
+					],
+					"name": "Sales"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{exitchurnrate}}"
+					],
+					"name": "Exit_Churn_Rate"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{offersheldtomaturity}}"
+					],
+					"name": "Offers_Held_to_Maturity"
+				},
+
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{terminationfeegraceperiod}}"
+					],
+					"name": "Termination_Fee_Grace_Period"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{termsandconditions}}"
+					],
+					"name": "Terms_and_Conditions",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{productinformation}}"
+					],
+					"name": "Product_Information",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{additionalofferscripting}}"
+					],
+					"name": "Additional_Offer_Scripting",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{additionalelectricitycontractdetails}}"
+					],
+					"name": "Additional_Electricity_Contract_Details"
+				},
+				{	
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricityeligibilitycriteriaforwelcomepack}}"
+					],
+					"name": "Electricity_Eligibility_Criteria_for_Welcome_Pack"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gasexitfees}}"
+					],
+					"name": "Gas_Exit_Fees"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gaseligibilitycriteriaforwelcomepack}}"
+					],
+					"name": "Gas_Eligibility_Criteria_for_Welcome_Pack"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{contractdurationterms}}"
+					],
+					"name": "Contract_Duration_Terms"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{addnote}}"
+					],
+					"name": "Add_Note"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{documents}}"
+					],
+					"name": "Documents"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{discountinformationforratesheet}}"
+					],
+					"name": "Discount_Information_for_Rate_Sheet",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{meteringchargeinformationforratesheet}}"
+					],
+					"name": "Metering_Charge_Information_for_Rate_Sheet",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{demandinformationforratesheet}}"
+					],
+					"name": "Demand_Information_for_Rate_Sheet",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricitytermsandconditions}}"
+					],
+					"name": "Electricity_Terms_and_Conditions",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricitypricevariationdescription}}"
+					],
+					"name": "Electricity_Price_Variation_Description",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{controlledloaddetails}}"
+					],
+					"name": "Controlled_Load_Details",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricityadditionalfeeterms}}"
+					],
+					"name": "Electricity_Additional_Fee_Terms",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricityexpirydetails}}"
+					],
+					"name": "Electricity_Expiry_Details",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gastermsandconditions}}"
+					],
+					"name": "Gas_Terms_and_Conditions",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gaspricevariationdescription}}"
+					],
+					"name": "Gas_Price_Variation_Description",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gasadditionalfeeterms}}"
+					],
+					"name": "Gas_Additional_Fee_Terms",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gasexpirydetails}}"
+					],
+					"name": "Gas_Expiry_Details",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{electricitycontractdetails}}"
+					],
+					"name": "Electricity_Contract_Details",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{gascontractdetails}}"
+					],
+					"name": "Gas_Contract_Details",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Reading_Event.readingevent}}"
+					],
+					"name": "Reading_Event",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.gaspriceisfixed}}"
+					],
+					"name": "Gas_Price_is_Fixed",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.electricitypriceisfixed}}"
+					],
+					"name": "Electricity_Price_is_Fixed",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.generalavailability}}"
+					],
+					"name": "General_Availability",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.newcustomeroffer}}"
+					],
+					"name": "New_Customer_Offer",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_YESNO.availableviathirdpartyonly}}"
+					],
+					"name": "Available_via_Third_Party_Only",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Payment_Options.electricitypaymentoptions}}"
+					],
+					"name": "Electricity_Payment_Options",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Payment_Options.gaspaymentoptions}}"
+					],
+					"name": "Gas_Payment_Options",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Offer_Product_Sell_Scope.productsellscope}}"
+					],
+					"name": "Product_Sell_Scope",
+					"instances": "single"
+				},
+ 				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Time Band Mapping.ratingplanid::timebandid.ratingplanid::timebandid.{{nestedTag.TimeBandMapping}}}}"
+					],
+					"name": "{{parent.{{timebandmappingxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hastimebandmappingattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Consumption Units.ratingplanid::consumptionunitsid.ratingplanid::consumptionunitsid.{{nestedTag.ConsumptionUnits}}}}"
+					],
+					"name": "{{parent.{{consumptionunitsxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasconsumptionunitsattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Inclusive Loss Factors.ratingplanid::inclusivelossfactorsid.ratingplanid::inclusivelossfactorsid.{{nestedTag.InclusiveLossFactors}}}}"
+					],
+					"name": "{{parent.{{inclusivelossfactorsxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasinclusivelossfactorsattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Use Daylight Saving Time.ratingplanid::usedaylightsavingtimeid.ratingplanid::usedaylightsavingtimeid.{{nestedTag.UseDaylightSavingTime}}}}"
+					],
+					"name": "{{parent.{{usedaylightsavingtimexsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasusedaylightsavingtimeattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Demand Units.ratingplanid::demandunitsid.ratingplanid::demandunitsid.{{nestedTag.DemandUnits}}}}"
+					],
+					"name": "{{parent.{{demandunitsxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdemandunitsattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Demand Source.ratingplanid::demandsourceofagreedcapacityid.ratingplanid::demandsourceofagreedcapacityid.{{nestedTag.DemandSourceOfAgreedCapacity}}}}"
+					],
+					"name": "{{parent.{{demandsourceofagreedcapacityxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdemandsourceofagreedcapacityattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Consumption Value.ratingplanid::consumptionvalueid.ratingplanid::consumptionvalueid.{{nestedTag.ConsumptionValue}}}}"
+					],
+					"name": "{{parent.{{consumptionvaluexsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasconsumptionvalueattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Cap Amount.discountplanid::capamountid.discountplanid::capamountid.{{nestedTag.CapAmount}}}}"
+					],
+					"name": "{{parent.{{capamountxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hascapamountattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Base Amount.discountplanid::baseamountid.discountplanid::baseamountid.{{nestedTag.BaseAmount}}}}"
+					],
+					"name": "{{parent.{{baseamountxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasbaseamountattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Notification_Percentage.discountplanid::notificationpercentageid.discountplanid::notificationpercentageid.{{nestedTag.NotificationPercentage}}}}"
+					],
+					"name": "{{parent.{{notificationpercentagexsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasnotificationpercentageattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Vintage.productid::vintageid.productid::vintageid.{{nestedTag.Vintage}}}}"
+					],
+					"name": "{{parent.{{vintagexsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasvintageattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Product Document.productid::productdocumentid.productid::productdocumentid.{{nestedTag.ProductDocument}}}}"
+					],
+					"name": "{{parent.{{productdocumentxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasproductdocumentattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Warranty Term.productid::warrantytermid.productid::warrantytermid.{{nestedTag.WarrantyTerm}}}}"
+					],
+					"name": "{{parent.{{warrantytermxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "haswarrantytermattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Marketing.offerid::marketingid.offerid::marketingid.{{nestedTag.Marketing}}}}"
+					],
+					"name": "{{parent.{{marketingxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasmarketingattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.is_a_Default_Renewal_Offer.offerid::defaultrenewaloffergid.offerid::defaultrenewaloffergid.{{nestedTag.DefaultRenewalOffer}}}}"
+					],
+					"name": "{{parent.{{defaultrenewalofferxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdefaultrenewalofferattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Market_Status.offerid::marketstatusid.offerid::marketstatusid.{{nestedTag.MarketStatus}}}}"
+					],
+					"name": "{{parent.{{marketstatusxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasmarketstatusattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Documents.offerid::documentsid.offerid::documentsid.{{nestedTag.Documents}}}}"
+					],
+					"name": "{{parent.{{documentsxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdocumentsattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+						{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Sales_Channel_To_Offer_Mapping.saleschanneltoofferid.saleschanneltoofferid.{{nestedTag.SalesChannelToOfferMapping}}}}"
+					],
+					"name": "{{parent.{{saleschanneltoofferxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hassaleschanneltoofferattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				
+						{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.NTC_to_RTC_Mapping.ntctortcmappingid.ntctortcmappingid.{{nestedTag.NTCtoRTCMapping}}}}"
+					],
+					"name": "{{parent.{{ntctortcmappingxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasntctortcmappingattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+						{
+						"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Rewards.offerid::rewardsid.offerid::rewardsid.{{nestedTag.Rewards}}}}"
+					],
+					"name": "{{parent.{{rewardsxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasrewardsattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},	
+					{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.electricityExitFees.offerid::electricityexitfeesid.offerid::electricityexitfeesid.{{nestedTag.ElectricityExitFees}}}}"
+					],
+					"name": "{{parent.{{electricityexitfeesxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "haselectricityexitfeesattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+						{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.gasExitFees.offerid::gasexitfeesid.offerid::gasexitfeesid.{{nestedTag.GasExitFees}}}}"
+					],
+					"name": "{{parent.{{gasexitfeesxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasgasexitfeesattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Bundle_Attributes.ratingplanid::bundleattributesid.ratingplanid::bundleattributesid.{{nestedTag.BundleAttributes}}}}"
+					],
+					"name": "{{parent.{{bundleattributesxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasbundleattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Discount_Plans_Relation.discountplansrelationid::offerid.discountplansrelationid::offerid.{{nestedTag.DiscountPlansRelation}}}}"
+					],
+					"name": "{{parent.{{discountplansrelationxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasdiscountplansrelationattribute",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Reference.referenceid::productid.referenceid::productid.{{nestedTag.Reference}}}}"
+					],
+					"name": "{{parent.{{referencexsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasreference",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Solar_FIT.solarfitid::offerid.solarfitid::offerid.{{nestedTag.SolarFIT}}}}"
+					],
+					"name": "{{parent.{{solarfitxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hassolarfit",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Electricity_Offer_Eligibility.electricityoffereligibilityid::offerid.electricityoffereligibilityid::offerid.{{nestedTag.ElectricityOfferEligibility}}}}"
+					],
+					"name": "{{parent.{{electricityoffereligibilityxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "haselectricityoffereligibility",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Gas_Offer_Eligibility.gasoffereligibilityid::offerid.gasoffereligibilityid::offerid.{{nestedTag.GasOfferEligibility}}}}"
+					],
+					"name": "{{parent.{{gasoffereligibilityxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasgasoffereligibility",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Electricity_Other_Fees.electricityotherfeesid::offerid.electricityotherfeesid::offerid.{{nestedTag.ElectricityOtherFees}}}}"
+					],
+					"name": "{{parent.{{electricityotherfeesxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "haselectricityotherfees",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Gas_Other_Fees.gasotherfeesid::offerid.gasotherfeesid::offerid.{{nestedTag.GasOtherFees}}}}"
+					],
+					"name": "{{parent.{{gasotherfeesxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasgasotherfees",
+									"value": "true"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{sheet.Rule Evaluation Method.ruleevaluationmethodid::productid.ruleevaluationmethodid::productid.{{nestedTag.RuleEvaluationMethod}}}}"
+					],
+					"name": "{{parent.{{ruleevaluationmethodxsdname}}}}",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasruleevaluationmethod",
+									"value": "true"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

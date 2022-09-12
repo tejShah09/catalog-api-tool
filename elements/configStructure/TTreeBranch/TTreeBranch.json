@@ -1,0 +1,44 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{description}}"
+					],
+					"name": "Description"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{uid}}"
+					],
+					"name": "UID"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{Sort}}"
+					],
+					"name": "Sort"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{Weight}}"
+					],
+					"name": "Weight"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.parentclassname.parentname}}"
+					],
+					"name": "Parent"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.AssociationsAttributes}}"
+					],
+					"name": "{{relationtype}}",
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"				
+						}
+					]
+				}
+			]
+		}
+	]
+}

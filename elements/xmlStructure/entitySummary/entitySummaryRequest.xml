@@ -1,0 +1,9 @@
+<FindEntitiesRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+    <ClassTypes/>
+    <IncludeEndDatedItems>true</IncludeEndDatedItems>
+    <ItemsPerPage>5000</ItemsPerPage>
+    <PageNumber>1</PageNumber>
+    <SearchCurrent>false</SearchCurrent>
+    <SearchText>{{entityname}}</SearchText>
+    <WorkflowStatuses/>
+</FindEntitiesRequest>

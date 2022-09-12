@@ -1,0 +1,37 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [				
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{value1}}"
+					],
+					"name": "Value_1",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getFactGuid.$Operator.operator}}"
+					],
+					"name": "Operator",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{value2}}"
+					],
+					"name": "Value_2",
+					"instances": "single"
+				}
+			]
+		}
+	],
+	"criteria": [
+		"operator",
+		"value1"
+	]
+}

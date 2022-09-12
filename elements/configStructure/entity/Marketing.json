@@ -1,0 +1,25 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Supply_Point.supplypoint}}"
+					],
+					"name": "Supply_Point",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Rating_Plan.ratingplan}}"
+					],
+					"name": "Rating_Plan",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

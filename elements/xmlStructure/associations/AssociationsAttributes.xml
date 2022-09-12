@@ -1,0 +1,19 @@
+<ValueDefinition>
+	<Definition>
+     	<ClassType>{{action.getProperites.relationtype}}</ClassType>
+	    <Intent>{{intent}}</Intent>
+     	<ItemElements>
+        	<ItemElement>
+				 <Intent>{{intent}}</Intent>
+                 <Name>{{action.getEntityType.relationtype}}</Name>
+                 <Type>Any</Type>
+                 <Values>
+                 	<ValueDefinition>
+                    	<Value>{{relatedentityguid}}</Value>
+                    </ValueDefinition>
+                 </Values>
+            </ItemElement>
+        </ItemElements>
+	</Definition>
+    <Value>{{associationguid}}</Value>
+</ValueDefinition>	

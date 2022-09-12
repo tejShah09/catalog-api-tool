@@ -1,0 +1,110 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{action.getIntent.intent}}",
+					"value": [
+						"{{ratepath}}"
+					],
+					"name": "Path_To_Adjusted_Entity",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "intent",
+									"value": "New"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "{{action.getIntent.intent}}",
+					"value": [
+						"{{nestedTag.InnerRate}}"
+					],
+					"name": "Rate",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "intent",
+									"value": "New"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "intent",
+									"value": "Modify"
+								}
+							]
+						},
+						{
+							"rule": [
+								{
+									"key": "intent",
+									"value": "Append"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "Delete",
+					"value": [
+						"{{nestedTag.DeleteRate}}"
+					],
+					"name": "Rate",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "intent",
+									"value": "Delete"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "New",
+					"value": [
+						"false"
+					],
+					"name": "ExcludeTargetCost",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "rateclass",
+									"value": "Cost"
+								}
+							]
+						}
+					]
+				},
+				{
+					"intent": "New",
+					"value": [
+						"false"
+					],
+					"name": "ExcludeTargetDiscount",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "rateclass",
+									"value": "Discount"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,33 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getBusienssID.entity}}"
+					],
+					"name": "Entity",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getEntityValuePath.entityvalue.characteristicname}}"
+					],
+					"name": "EntityValue",
+					"instances": "single"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{action.getFactGuid.$Scope.scope}}"
+					],
+					"name": "Scope",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.leafclass.leafname}}"
+					],
+					"name": "{{elementxsdname}}",
+					"groups":[
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"					
+						}
+					]
+				}
+			]
+		}
+	]
+}

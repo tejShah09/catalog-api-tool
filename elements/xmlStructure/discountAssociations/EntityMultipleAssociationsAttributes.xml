@@ -1,0 +1,10 @@
+<ValueDefinition>
+	<Definition>
+		<ClassType>Discount_Plans</ClassType>                           
+		<Intent>{{intent}}</Intent>		
+		<ItemElements>		                     
+		</ItemElements>                        
+	</Definition>
+	<Value>{{associationguid}}</Value>
+</ValueDefinition>
+ 

@@ -1,0 +1,3 @@
+<CheckDecoratorRequest xmlns="http://schema.sigma-systems.com/catalog.api/models">
+	<ChargePath>{{chargePath}}</ChargePath>
+</CheckDecoratorRequest>

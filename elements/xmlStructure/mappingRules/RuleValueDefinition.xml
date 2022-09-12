@@ -1,0 +1,30 @@
+
+<ValueDefinition>
+	<Definition>
+		<ClassType>$MappingRules</ClassType>
+		<Intent>{{intent}}</Intent>
+		<ItemElements>
+			<ItemElement>
+				<Intent>{{intent}}</Intent>
+				<Name>Name</Name>
+				<Type>String</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{name}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>
+			<ItemElement>
+				<Intent>{{intent}}</Intent>
+				<Name>Sequence</Name>
+				<Type>Any</Type>
+				<Values>
+					<ValueDefinition>
+						<Value>{{sequence}}</Value>
+					</ValueDefinition>
+				</Values>
+			</ItemElement>
+		</ItemElements>
+	</Definition>
+	<Value>{{mappingruleguid}}</Value>
+</ValueDefinition>

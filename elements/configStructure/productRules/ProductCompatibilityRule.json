@@ -1,0 +1,66 @@
+{
+	"optionalElements": [
+		{
+			"path": "ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{nestedTag.ProductRuleValueDefinition}}"
+					],
+					"name": "{{rulename}}",
+					"groups": [
+						{
+							"groupKey": "Name",
+							"groupPath": "../Values/ValueDefinition"
+						}
+					]
+				}
+			]
+		},
+		{
+			"path": "ItemElements/ItemElement/Values/ValueDefinition[Value='{{compatibilityruleguid}}']/Definition/ItemElements",
+			"itemElements": [
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "StartDate"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{errormessage}}"
+					],
+					"name": "ErrorMessage"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "EndDate"
+				},
+				{
+					"intent": "{{parent.{{intent}}}}",
+					"value": [
+						"{{sheet.Compatibility Rule Conditions.entityname::compatibilityruleid.entityname::compatibilityruleid.{{nestedTag.ProductConditionElement}}}}"
+					],
+					"name": "Exists",
+					"condition": [
+						{
+							"rule": [
+								{
+									"key": "hasconditions",
+									"value": "true"
+								}
+							]
+						}
+					],
+					"instances": "single"
+				}
+			]
+		}
+	]
+}

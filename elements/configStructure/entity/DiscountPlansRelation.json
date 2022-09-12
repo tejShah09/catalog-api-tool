@@ -1,0 +1,73 @@
+{
+	"optionalElements": [
+		{
+			"path": "Definition/ItemElements",
+			"itemElements": [
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{enddate}}"
+					],
+					"name": "End_Date",
+					"instances": "single"
+				},
+				{
+					"intent": "{{intent}}",
+					"value": [
+						"{{startdate}}"
+					],
+					"name": "Start_Date",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{newsequence}}"
+					],
+					"name": "New_Sequence",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{billdescription}}"
+					],
+					"name": "Bill_Description",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getFactGuid.~Lookup_Off_Peak_Electricity.ratetype}}"
+					],
+					"name": "Rate_Type",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{action.getCustomMultipleFactGuidByParent.~Lookup_Discount_Group.discountgroup}}"
+					],
+					"name": "Discount_Group",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+					   "{{action.getBusienssIDUsingGuid.discountplanclasstype.discountplanreference}}"
+					],
+					"name": "Discount_Plan_Reference",
+					"instances": "single"
+				},
+					{
+					"intent": "{{intent}}",
+					"value": [
+						"{{incentiveconditions}}"
+					],
+					"name": "Incentive_Conditions",
+					"instances": "single"
+				}
+			]
+		}
+	]
+}
