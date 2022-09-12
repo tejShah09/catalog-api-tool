@@ -127,8 +127,13 @@ public class BundleService extends AbstractShellProcessService {
                 talend.executeJob(jobId, "getStatusCount", config);
 
                 // Step 13 Check And ReportAny Live
-                talend.checkForStatusError(jobId, JOBKeywords.ENTITY_STAGE, jobCategory,
+                talend.checkForStatusError(jobId, JOBKeywords.ENTITY_LIVE, jobCategory,
                                 "Bundle Live Failed JobId : " + jobId + " Task : Live Entity");
+
+                // Step 14 Change Stragy to Stub (catalgo only)
+                config = new HashMap<>();
+                config.put("hubIntegration", "true");
+                talend.executeJob(jobId, "ChangeStrategy", config);
 
         }
 

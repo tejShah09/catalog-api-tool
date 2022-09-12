@@ -9,7 +9,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.sigma.catalog.api.drools.ExecutionEngine;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
-import com.sigma.catalog.api.restservices.CatalogHelperService;
+import com.sigma.catalog.api.restservices.CatalogRowService;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.talendService.model.JobRequest;
 import com.sigma.catalog.api.utility.StringUtility;
@@ -157,7 +157,7 @@ public class Entity {
         String category = (String) request.get("category");
         String json = new Gson().toJson(request.get("payload"), LinkedHashMap.class);
 
-        ExecutionEngine engin = CatalogHelperService.startEngine();
+        ExecutionEngine engin = CatalogRowService.startEngine();
         LinkedHashMap excludeUpdates = null;
         if (request.get("excludeUpdates") instanceof LinkedHashMap) {
             excludeUpdates = (LinkedHashMap) request.get("excludeUpdates");
@@ -168,7 +168,7 @@ public class Entity {
             excludeUpdates = gson.fromJson(exludestring, LinkedHashMap.class);
         }
 
-        String response = CatalogHelperService.generateXMLForEntity(category, json, sheets, engin, excludeUpdates);
+        String response = CatalogRowService.generateXMLForEntity(category, json, sheets, engin, excludeUpdates);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 

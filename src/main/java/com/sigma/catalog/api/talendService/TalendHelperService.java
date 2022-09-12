@@ -103,9 +103,10 @@ public class TalendHelperService {
         }
         Class<T> jobClass = builder.getJobClass(jobName);
         String[][] result = null;
-        try {
+        try {      
+            T newObj = jobClass.getDeclaredConstructor().newInstance();    
             result = jobClass.getDeclaredConstructor().newInstance().runJob(buildContext(config));
-
+          
         } catch (Exception e) {
             throw new TalendException(e.getMessage());
         }
@@ -180,7 +181,18 @@ public class TalendHelperService {
     }
 
     public ResponseEntity<Object> generateFailResponse(String jobId, TalendException e) {
+
         return new ResponseEntity<Object>(e.getCustomException(jobId), HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity<Object> generateFailCountResponse(String jobId, TalendException e) {
+
+        return new ResponseEntity<Object>(e.getRowOuptutException(jobId), HttpStatus.BAD_REQUEST);
+    }
+    public ResponseEntity<Object> getSucessResponse(String jobId) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("jobId", jobId);
+        return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
 
     public void checkForError(String jobId, String jobType, String jobCategory) throws TalendException {
@@ -199,9 +211,9 @@ public class TalendHelperService {
 
         }
     }
-  
 
-    public void checkForStatusError(String jobId, String jobType, String jobCategory,String CustomError) throws TalendException {       
+    public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)
+            throws TalendException {
         List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
         if (statusJob != null && statusJob.size() > 0) {
             List<Map<String, Object>> countList = new ArrayList<>();
@@ -211,23 +223,22 @@ public class TalendHelperService {
             } catch (Exception e) {
                 throw new TalendException(e.getMessage());
             }
-           
+
             boolean failedRecordfound = false;
-            System.out.println(countList);
+           
             for (Map<String, Object> ctObj : countList) {
-                if (!StringUtility.contains((String) ctObj.get("status"), "success")) {
+                if (!StringUtility.contains((String) ctObj.get("response"), "success")) {
                     failedRecordfound = true;
                 }
 
             }
 
             if (failedRecordfound) {
-                TalendException e = new TalendException(CustomError,countList);
+                TalendException e = new TalendException(CustomError, countList);
                 throw e;
             }
-            
 
-        }else{
+        } else {
             throw new TalendException("NO COUNT FOUND");
         }
     }

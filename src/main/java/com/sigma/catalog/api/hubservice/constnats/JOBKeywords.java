@@ -13,7 +13,9 @@ public class JOBKeywords {
     public static String ENTITY_APPROVE  = "ENTITY_APPROVE";
     public static String ENTITY_STAGE  = "ENTITY_STAGE";
     public static String ENTITY_LIVE  = "ENTITY_LIVE";
-    
+    public static String ADD_HOOK  = "ADD_HOOK";
+
+
     // JOB CATEGORY
     public static String BUNDLE= "BUNDLE";
     public static String COMPONENT = "COMPONENT";

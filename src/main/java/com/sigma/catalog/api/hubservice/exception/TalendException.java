@@ -24,6 +24,7 @@ public class TalendException extends Exception {
         super();
         this.talendErrorMessage = errorMessage;
         this.outputError = errors;
+        this.dberrors = new HashMap<String, List<String>>();
     }
 
     public TalendException(Map<String, List<String>> err) {

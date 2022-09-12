@@ -13,20 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
-import com.sigma.catalog.api.hubservice.repository.JOBRepository;
-import com.sigma.catalog.api.hubservice.services.BundleService;
-import com.sigma.catalog.api.hubservice.services.EmailService;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
 
 @RestController
 @RequestMapping("/utility")
 public class Utilities {
-   
 
     @Autowired
     private TalendHelperService talend;
-
 
     @PostMapping("/sendEmail")
     public ResponseEntity<Object> sendMail(
@@ -47,18 +42,48 @@ public class Utilities {
         }
 
         try {
-            if (StringUtility.equals(config.get("AsyncJob"), "true")) {
-                talend.executeAsyncJob(jobId, config.get("jobName"), config);
-            } else {
-                talend.executeJob(jobId, config.get("jobName"), config);
-            }
+            talend.executeJob(jobId, config.get("jobName"), config);
+            return talend.getSucessResponse(jobId);
 
         } catch (TalendException e) {
             return talend.generateFailResponse(jobId, e);
         }
 
-        return talend.generateSuccessResponse(jobId);
+    }
 
+    @PostMapping("/executeJobAndFindResult")
+    public ResponseEntity<Object> executeJobAndFindResult(@RequestBody Map<String, String> request) {
+        HashMap<String, String> config = new HashMap<String, String>(request);
+        String jobId = talend.generateUniqJobId();
+        if (StringUtility.isEmpty(config.get("jobId"))) {
+            config.put("jobId", jobId);
+        } else {
+            jobId = config.get("jobId");
+        }
+
+        try {
+            talend.executeJob(jobId, config.get("jobName"), config);
+
+            HashMap<String, String> configNew = new HashMap<>();
+            configNew.put("tableName", config.get("statusTable"));
+            configNew.put("jobType", JOBKeywords.ADD_HOOK);
+            configNew.put("jobCategory", config.get("jobName"));
+            configNew.put("keyName", config.get("keyName"));
+            configNew.put("jobStatus", JOBKeywords.TASK_END);
+            talend.executeJob(jobId, "getStatusCount", configNew);
+
+
+        } catch (TalendException e) {
+            return talend.generateFailResponse(jobId, e);
+        }
+
+        try {
+            talend.checkForStatusError(jobId, JOBKeywords.ADD_HOOK, config.get("jobName"),
+                    config.get("jobName") + " Failed JobId : " + jobId);
+        } catch (TalendException e) {
+            return talend.generateFailCountResponse(jobId, e);
+        }
+        return talend.getSucessResponse(jobId);
     }
 
 }
