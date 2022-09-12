@@ -16,6 +16,7 @@ import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.repository.JOBRepository;
 import com.sigma.catalog.api.hubservice.services.BundleService;
+import com.sigma.catalog.api.hubservice.services.RatePlanDetailService;
 import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
@@ -33,6 +34,9 @@ public class RatingPlanShells {
         @Autowired
         private BundleService bundleService;
 
+        @Autowired
+        private RatePlanDetailService ratePlanDetailService;
+
         private static final Logger LOG = LoggerFactory.getLogger(RatingPlanShells.class);
 
         @PostMapping("/Bundle/upload")
@@ -42,7 +46,7 @@ public class RatingPlanShells {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                ResponseEntity<Object> resp =  bundleService.process(jobId, BundleUploadFile);
+                ResponseEntity<Object> resp = bundleService.process(jobId, BundleUploadFile);
                 bundleService.processAsync(jobId);
                 return resp;
 
@@ -74,16 +78,10 @@ public class RatingPlanShells {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                LOG.info("JOB_ID recrvied " + jobId);
-                String fileName = "RatingPlanDetailUploadFile_" + jobId + ".csv";
+                ResponseEntity<Object> resp = ratePlanDetailService.process(jobId, RatingPlanDetailUploadFile);
+                ratePlanDetailService.processAsync(jobId);
+                return resp;
 
-                talend.writeFile(RatingPlanDetailUploadFile, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
-
-                jobtable.save(new JOB(jobId, JOBKeywords.START, JOBKeywords.RATEPLANDETAIL,
-                                JOBKeywords.TASK_SUCCESS,
-                                RatingPlanDetailUploadFile.getOriginalFilename() + " :: " + fileName));
-
-                return talend.generateSuccessResponse(jobId);
         }
 
         @PostMapping("/RatingPlanRate/upload")

@@ -10,6 +10,8 @@ public class JOBKeywords {
     public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
     public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";
     public static String CATALOG_REQUEST_SUBMITION  = "CATALOG_REQUEST_SUBMITION";
+    public static String CATALOG_ASSOC_CREATION = "CATALOG_ASSOC_CREATION";
+    public static String CATALOG_ASSOC_SUBMITION  = "CATALOG_ASSOC_SUBMITION";
     public static String ENTITY_APPROVE  = "ENTITY_APPROVE";
     public static String ENTITY_STAGE  = "ENTITY_STAGE";
     public static String ENTITY_LIVE  = "ENTITY_LIVE";
@@ -17,9 +19,9 @@ public class JOBKeywords {
 
 
     // JOB CATEGORY
-    public static String BUNDLE= "BUNDLE";
+    public static String BUNDLE= "Bundle";
     public static String COMPONENT = "COMPONENT";
-    public static String RATEPLANDETAIL = "RATEPLANDETAIL";
+    public static String RATEPLANDETAIL = "RatePlanDetail";
     public static String RATEPLANRATE = "RATEPLANRATE";
     
     

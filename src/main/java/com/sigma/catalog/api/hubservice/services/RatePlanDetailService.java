@@ -6,17 +6,20 @@ import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 
 @Service
-public class BundleService extends AbstractShellProcessService {
+public class RatePlanDetailService extends AbstractShellProcessService {
 
-        BundleService() {
-                jobCategory = JOBKeywords.BUNDLE;
-                sheets = "'Entity','Vintage'";
+        RatePlanDetailService() {
+                jobCategory = JOBKeywords.RATEPLANDETAIL;
+                sheets = "'Consumption Units','Inclusive Loss Factors','Use Daylight Saving Time','Consumption Value','Demand Units','Entity'";
         }
 
         public void startASyncProcessing(String jobId) throws TalendException {
 
                 // Step 1 Create Entity
                 createEntity(jobId);
+
+                // Step 1.1 Associate Charge
+               // createAssoc(jobId);
 
                 // Step 2 Aporve Entity
                 approveEntity(jobId);
