@@ -29,7 +29,7 @@ public class JobBuilder {
 
             String joblocation = props.getProperty(jobName,JOBKeywords.JOB_NOT_FOUND);
             if(JOBKeywords.JOB_NOT_FOUND.equals(joblocation)){
-                throw new TalendException("JOB Configuration not found. verify talendjars.properties");
+                throw new TalendException("JOB Configuration not found. verify talendjars.properties :: "+jobName);
             }
             jobclass = Class.forName(joblocation);
         } catch (ClassNotFoundException e) {

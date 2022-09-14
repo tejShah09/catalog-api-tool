@@ -12,17 +12,21 @@ public class JOBKeywords {
     public static String CATALOG_REQUEST_SUBMITION  = "CATALOG_REQUEST_SUBMITION";
     public static String CATALOG_ASSOC_CREATION = "CATALOG_ASSOC_CREATION";
     public static String CATALOG_ASSOC_SUBMITION  = "CATALOG_ASSOC_SUBMITION";
+    public static String CATALOG_RATE_CREATION = "CATALOG_RATE_CREATION";
+    public static String CATALOG_RATE_SUBMITION  = "CATALOG_RATE_SUBMITION";
     public static String ENTITY_APPROVE  = "ENTITY_APPROVE";
     public static String ENTITY_STAGE  = "ENTITY_STAGE";
     public static String ENTITY_LIVE  = "ENTITY_LIVE";
+    public static String ENTITY_DELETE  = "ENTITY_DELETE";
+    public static String ENTITY_EDIT  = "ENTITY_EDIT";
     public static String ADD_HOOK  = "ADD_HOOK";
 
 
     // JOB CATEGORY
     public static String BUNDLE= "Bundle";
-    public static String COMPONENT = "COMPONENT";
+    public static String COMPONENT = "Component";
     public static String RATEPLANDETAIL = "RatePlanDetail";
-    public static String RATEPLANRATE = "RATEPLANRATE";
+    public static String RATEPLANRATE = "RatePlanRate";
     
     
     // STATUS

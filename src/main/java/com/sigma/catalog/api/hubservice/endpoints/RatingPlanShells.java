@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.repository.JOBRepository;
 import com.sigma.catalog.api.hubservice.services.BundleService;
 import com.sigma.catalog.api.hubservice.services.RatePlanDetailService;
+import com.sigma.catalog.api.hubservice.services.RatePlanRateService;
 import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
@@ -37,6 +39,9 @@ public class RatingPlanShells {
         @Autowired
         private RatePlanDetailService ratePlanDetailService;
 
+        @Autowired
+        private RatePlanRateService ratePlanRateService;
+
         private static final Logger LOG = LoggerFactory.getLogger(RatingPlanShells.class);
 
         @PostMapping("/Bundle/upload")
@@ -47,7 +52,9 @@ public class RatingPlanShells {
                         jobId = talend.generateUniqJobId();
                 }
                 ResponseEntity<Object> resp = bundleService.process(jobId, BundleUploadFile);
-                bundleService.processAsync(jobId);
+                if (resp.getStatusCode() == HttpStatus.OK) {
+                        bundleService.processAsync(jobId);
+                }
                 return resp;
 
         }
@@ -79,7 +86,9 @@ public class RatingPlanShells {
                         jobId = talend.generateUniqJobId();
                 }
                 ResponseEntity<Object> resp = ratePlanDetailService.process(jobId, RatingPlanDetailUploadFile);
-                ratePlanDetailService.processAsync(jobId);
+                if (resp.getStatusCode() == HttpStatus.OK) {
+                        ratePlanDetailService.processAsync(jobId);
+                }
                 return resp;
 
         }
@@ -91,16 +100,13 @@ public class RatingPlanShells {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                LOG.info("JOB_ID recrvied " + jobId);
-                String fileName = "RatingPlanRateUploadFile_" + jobId + ".csv";
+                ResponseEntity<Object> resp = ratePlanRateService.process(jobId, RatingPlanRateUploadFile);
 
-                talend.writeFile(RatingPlanRateUploadFile, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
+                if (resp.getStatusCode() == HttpStatus.OK) {
+                        ratePlanRateService.processAsync(jobId);
+                }
+                return resp;
 
-                jobtable.save(new JOB(jobId, JOBKeywords.START, JOBKeywords.RATEPLANRATE,
-                                JOBKeywords.TASK_SUCCESS,
-                                RatingPlanRateUploadFile.getOriginalFilename() + " :: " + fileName));
-
-                return talend.generateSuccessResponse(jobId);
         }
 
 }

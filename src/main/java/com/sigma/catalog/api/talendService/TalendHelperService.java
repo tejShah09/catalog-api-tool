@@ -103,10 +103,10 @@ public class TalendHelperService {
         }
         Class<T> jobClass = builder.getJobClass(jobName);
         String[][] result = null;
-        try {      
-            T newObj = jobClass.getDeclaredConstructor().newInstance();    
+        try {
+            T newObj = jobClass.getDeclaredConstructor().newInstance();
             result = jobClass.getDeclaredConstructor().newInstance().runJob(buildContext(config));
-          
+
         } catch (Exception e) {
             throw new TalendException(e.getMessage());
         }
@@ -189,6 +189,7 @@ public class TalendHelperService {
 
         return new ResponseEntity<Object>(e.getRowOuptutException(jobId), HttpStatus.BAD_REQUEST);
     }
+
     public ResponseEntity<Object> getSucessResponse(String jobId) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("jobId", jobId);
@@ -214,18 +215,33 @@ public class TalendHelperService {
 
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)
             throws TalendException {
+        checkForStatusError(jobId, jobType, jobCategory, CustomError, false);
+    }
+
+    public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError,
+            boolean isNullReportAllowed)
+            throws TalendException {
         List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
         if (statusJob != null && statusJob.size() > 0) {
             List<Map<String, Object>> countList = new ArrayList<>();
             try {
                 ObjectMapper mapper = new ObjectMapper();
-                countList = mapper.readValue(statusJob.get(0).getMessage(), List.class);
+                if (statusJob.get(0).getMessage() == null) {
+                    if (!isNullReportAllowed) {
+                        throw new TalendException("NO REPORT FOUND TASK");
+                    }
+                } else {
+                    countList = mapper.readValue(statusJob.get(0).getMessage(), List.class);
+                }
+
+            } catch (TalendException e) {
+                throw e;
             } catch (Exception e) {
                 throw new TalendException(e.getMessage());
             }
 
             boolean failedRecordfound = false;
-           
+
             for (Map<String, Object> ctObj : countList) {
                 if (!StringUtility.contains((String) ctObj.get("response"), "success")) {
                     failedRecordfound = true;
