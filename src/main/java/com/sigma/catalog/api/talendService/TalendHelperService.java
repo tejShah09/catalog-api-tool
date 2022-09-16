@@ -120,7 +120,7 @@ public class TalendHelperService {
             LOG.info(" JOB Execution Failed ID " + jobId + "_" + jobName + ", Timings "
                     + ((endTime - startTime) / 1000000));
             throw new TalendException("JOB FAILED jobId : " + jobId + " jobName : " + jobName + " configuration "
-                    + inputConfig.toString());
+                    + ((inputConfig != null) ? inputConfig.toString() : ""));
         }
 
         return "eaam";

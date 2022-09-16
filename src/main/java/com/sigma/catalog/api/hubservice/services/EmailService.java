@@ -3,6 +3,7 @@ package com.sigma.catalog.api.hubservice.services;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -93,7 +94,9 @@ public class EmailService {
          Multipart multipart = new MimeMultipart();
          BodyPart attachmentBodyPart = new MimeBodyPart();
          String fileName = jobrprops.jobId;
-         DataSource source = new FileDataSource("emails/" + jobrprops.jobId);
+         String emailFile = ".\\emails\\" + jobrprops.jobId;
+         saveFile(emailFile, emailBody);
+         DataSource source = new FileDataSource(emailFile);
          attachmentBodyPart.setDataHandler(new DataHandler(source));
          attachmentBodyPart.setFileName(fileName);
          multipart.addBodyPart(attachmentBodyPart);
@@ -116,7 +119,23 @@ public class EmailService {
 
    public static void main(String[] args) {
       EmailService e = new EmailService();
-e.sendMail(new JobProperites("jobId"), "EAAM", "eaaam");
+      e.sendMail(new JobProperites("jobId"), "EAAM", "eaaam");
+   }
+
+   public void saveFile(String fileNAme, String body) throws IOException {
+      File path = new File(fileNAme);
+
+      // passing file instance in filewriter
+      FileWriter wr = new FileWriter(path);
+
+      // calling writer.write() method with the string
+      wr.write(body);
+
+      // flushing the writer
+      wr.flush();
+
+      // closing the writer
+      wr.close();
    }
 
    String getEmailTemplate() {

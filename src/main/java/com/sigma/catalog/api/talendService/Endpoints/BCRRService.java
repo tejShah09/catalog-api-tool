@@ -7,6 +7,7 @@ import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.talendService.model.JobRequest;
+import com.sigma.catalog.api.utility.StringUtility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.sigma.catalog.api.utility.StringUtility;
+
 
 @RestController
 @RequestMapping("/jobs/bcrr")

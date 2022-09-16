@@ -16,3 +16,8 @@ lib/*
 config/catalog.properties
 config/EnvironmentDetail.xml
 
+lib_old/*
+libs/*
+libs_new/*
+emails/*
+catalog-api-tool.7z
