@@ -7,12 +7,12 @@ import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 
 @Service
-public class RatePlanRateService extends AbstractShellProcessService {
+public class ComponentService extends AbstractShellProcessService {
 
-        RatePlanRateService() {
-                jobCategory = JOBKeywords.RATEPLANRATE;
-                reportTable = "CAPI_RatePlanDetail_AllStatus";
-                inpuTableKey = "Description";
+        ComponentService() {
+                jobCategory = JOBKeywords.COMPONENT;
+                reportTable = "CAPI_Bundle_AllStatus";
+                inpuTableKey = "PRODUCT_BUNDLE";
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
@@ -21,7 +21,7 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 editEntityName(properites);
 
                 // create TimeBand in RatePlanRate
-                createEntity(properites, "RatePlanDetail", "'Entity','Time Band Mapping'");
+                createEntity(properites, "Bundle", "'Entity','Reference'");
 
                 // Associate Charge
                 createAssoc(properites);
@@ -30,16 +30,15 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 createRates(properites);
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
+                approveEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
 
                 // step 3 Stage Entity
-                stageEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
+                stageEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
 
                 // step 4 Live Entity
-                liveEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
+                liveEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
 
-                //
-                sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
+                sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
 
         }
 

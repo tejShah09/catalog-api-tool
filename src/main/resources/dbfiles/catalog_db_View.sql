@@ -88,3 +88,50 @@ LEFT JOIN
 on  e.GUID = tb.InstanceClassGUID 
 where  e.IsLive = 1 
 GO
+
+
+
+DROP VIEW  IF EXISTS CAPI_Bundle
+GO
+Create VIEW CAPI_Bundle as
+select  st.SchemaClass as 'ClassType', 
+e.Name as 'Name',
+e.GUID as 'GUID' ,
+e.BusinessID,
+e.EffectiveStartDate,
+e.EffectiveEndDate,
+e.IsLive,
+e.IsLatest,
+e.CurrentEntityGUID,
+e.WorkflowStatusID,
+e.LaunchableEntityTypeID,
+concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
+from  Entity e INNER JOIN
+(select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID and  s.OmniformName in ('Product_Bundle_Property_Set','Product_Base_Property_Set')) as st
+on st.TemplateID = e.TemplateID 
+where  e.IsLive = 1 
+GO
+
+
+
+
+DROP VIEW  IF EXISTS CAPI_Bundle_AllStatus
+GO
+create VIEW CAPI_Bundle_AllStatus as
+select  st.SchemaClass as 'ClassType', 
+e.Name as 'Name',
+e.GUID as 'GUID' ,
+e.BusinessID,
+e.EffectiveStartDate,
+e.EffectiveEndDate,
+e.IsLive,
+e.IsLatest,
+e.CurrentEntityGUID,
+(select WorkflowStatusCode from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) as WorkflowStatusCode,
+(select Ordinal from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) WorkflowOrdinal,
+e.LaunchableEntityTypeID,
+concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
+from  Entity e INNER JOIN
+(select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID and  s.OmniformName in ('Product_Bundle_Property_Set','Product_Base_Property_Set')) as st
+on st.TemplateID = e.TemplateID 
+GO

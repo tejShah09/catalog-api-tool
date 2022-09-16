@@ -33,7 +33,7 @@ public class JobBuilder {
             }
             jobclass = Class.forName(joblocation);
         } catch (ClassNotFoundException e) {
-            throw new TalendException("JOB Class not found");
+            throw new TalendException("JOB Class not found:: "+jobName);
         }
         return jobclass;
 

@@ -1,7 +1,5 @@
 package com.sigma.catalog.api.hubservice.endpoints;
 
-import java.nio.file.Paths;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
-import com.sigma.catalog.api.hubservice.dbmodel.JOB;
+import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.repository.JOBRepository;
 import com.sigma.catalog.api.hubservice.services.BundleService;
+import com.sigma.catalog.api.hubservice.services.ComponentService;
 import com.sigma.catalog.api.hubservice.services.RatePlanDetailService;
 import com.sigma.catalog.api.hubservice.services.RatePlanRateService;
-import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
 
@@ -42,18 +39,30 @@ public class RatingPlanShells {
         @Autowired
         private RatePlanRateService ratePlanRateService;
 
+        @Autowired
+        private ComponentService componentService;
+
         private static final Logger LOG = LoggerFactory.getLogger(RatingPlanShells.class);
 
         @PostMapping("/Bundle/upload")
         public ResponseEntity<Object> BundleUploadFile(
                         @RequestParam(value = "JOB_ID", required = false) String jobId,
-                        @RequestParam(value = "BundleUploadFile", required = true) MultipartFile BundleUploadFile) {
+                        @RequestParam(value = "BundleUploadFile", required = true) MultipartFile BundleUploadFile,
+                        @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
+                        @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
+                        @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                ResponseEntity<Object> resp = bundleService.process(jobId, BundleUploadFile);
+
+                JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+                                jobId);
+
+                ResponseEntity<Object> resp = bundleService.process(properties, BundleUploadFile);
                 if (resp.getStatusCode() == HttpStatus.OK) {
-                        bundleService.processAsync(jobId);
+
+                        bundleService.processAsync(properties);
                 }
                 return resp;
 
@@ -62,32 +71,44 @@ public class RatingPlanShells {
         @PostMapping("/Component/upload")
         public ResponseEntity<Object> ComponentUploadFile(
                         @RequestParam(value = "JOB_ID", required = false) String jobId,
-                        @RequestParam(value = "ComponentUploadFile", required = true) MultipartFile ComponentUploadFile) {
+                        @RequestParam(value = "ComponentUploadFile", required = true) MultipartFile ComponentUploadFile,
+                        @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
+                        @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
+                        @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                LOG.info("JOB_ID recrvied " + jobId);
-                String fileName = "ComponentUploadFile_" + jobId + ".csv";
 
-                talend.writeFile(ComponentUploadFile, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
+                JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+                                jobId);
+                ResponseEntity<Object> resp = componentService.process(properties, ComponentUploadFile);
 
-                jobtable.save(new JOB(jobId, JOBKeywords.START, JOBKeywords.COMPONENT,
-                                JOBKeywords.TASK_SUCCESS,
-                                ComponentUploadFile.getOriginalFilename() + " :: " + fileName));
+                if (resp.getStatusCode() == HttpStatus.OK) {
+                        componentService.processAsync(properties);
+                }
+                return resp;
 
-                return talend.generateSuccessResponse(jobId);
         }
 
         @PostMapping("/RatingPlanDetail/upload")
         public ResponseEntity<Object> RatingPlanDetailUploadFile(
                         @RequestParam(value = "JOB_ID", required = false) String jobId,
-                        @RequestParam(value = "RatingPlanDetailUploadFile", required = true) MultipartFile RatingPlanDetailUploadFile) {
+                        @RequestParam(value = "RatingPlanDetailUploadFile", required = true) MultipartFile RatingPlanDetailUploadFile,
+                        @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
+                        @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
+                        @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                ResponseEntity<Object> resp = ratePlanDetailService.process(jobId, RatingPlanDetailUploadFile);
+
+                JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+                                jobId);
+
+                ResponseEntity<Object> resp = ratePlanDetailService.process(properties, RatingPlanDetailUploadFile);
                 if (resp.getStatusCode() == HttpStatus.OK) {
-                        ratePlanDetailService.processAsync(jobId);
+                        ratePlanDetailService.processAsync(properties);
                 }
                 return resp;
 
@@ -96,14 +117,21 @@ public class RatingPlanShells {
         @PostMapping("/RatingPlanRate/upload")
         public ResponseEntity<Object> RatingPlanRateUploadFile(
                         @RequestParam(value = "JOB_ID", required = false) String jobId,
-                        @RequestParam(value = "RatingPlanRateUploadFile", required = true) MultipartFile RatingPlanRateUploadFile) {
+                        @RequestParam(value = "RatingPlanRateUploadFile", required = true) MultipartFile RatingPlanRateUploadFile,
+                        @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
+                        @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
+                        @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
-                ResponseEntity<Object> resp = ratePlanRateService.process(jobId, RatingPlanRateUploadFile);
+
+                JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+                                jobId);
+                ResponseEntity<Object> resp = ratePlanRateService.process(properties, RatingPlanRateUploadFile);
 
                 if (resp.getStatusCode() == HttpStatus.OK) {
-                        ratePlanRateService.processAsync(jobId);
+                        ratePlanRateService.processAsync(properties);
                 }
                 return resp;
 

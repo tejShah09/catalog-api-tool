@@ -24,7 +24,7 @@ public class JOBKeywords {
 
     // JOB CATEGORY
     public static String BUNDLE= "Bundle";
-    public static String COMPONENT = "Component";
+    public static String COMPONENT = "ProductComponent";
     public static String RATEPLANDETAIL = "RatePlanDetail";
     public static String RATEPLANRATE = "RatePlanRate";
     
@@ -41,4 +41,10 @@ public class JOBKeywords {
     // error
     public static String JOB_NOT_FOUND = "JOB_NOT_FOUND";
     public static String SYSTEM_ERROR = "SYSTEM_ERROR";
+
+
+    // Recontype
+    public static String BUNDLE_TYPE = "PRODUCT";
+    public static String RATEPLAN_TYPE = "RATING";
+    public static String OFFER_TYPE = "OFFER";
 }
