@@ -3,32 +3,32 @@ package com.sigma.catalog.api.hubservice.constnats;
 public class JOBKeywords {
 
     // JOB NAMES
-    public static String START= "START";
-    public static String STOP= "STOP";
+    public static String START = "START";
+    public static String STOP = "STOP";
     public static String UPLOAD_FILE = "UPLOAD_FILE";
     public static String FILE_VALIDATION = "FILE_VALIDATION";
     public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
     public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";
-    public static String CATALOG_REQUEST_SUBMITION  = "CATALOG_REQUEST_SUBMITION";
+    public static String CATALOG_REQUEST_SUBMITION = "CATALOG_REQUEST_SUBMITION";
     public static String CATALOG_ASSOC_CREATION = "CATALOG_ASSOC_CREATION";
-    public static String CATALOG_ASSOC_SUBMITION  = "CATALOG_ASSOC_SUBMITION";
+    public static String CATALOG_ASSOC_SUBMITION = "CATALOG_ASSOC_SUBMITION";
     public static String CATALOG_RATE_CREATION = "CATALOG_RATE_CREATION";
-    public static String CATALOG_RATE_SUBMITION  = "CATALOG_RATE_SUBMITION";
-    public static String ENTITY_APPROVE  = "ENTITY_APPROVE";
-    public static String ENTITY_STAGE  = "ENTITY_STAGE";
-    public static String ENTITY_LIVE  = "ENTITY_LIVE";
-    public static String ENTITY_DELETE  = "ENTITY_DELETE";
-    public static String ENTITY_EDIT  = "ENTITY_EDIT";
-    public static String ADD_HOOK  = "ADD_HOOK";
-
+    public static String CATALOG_RATE_SUBMITION = "CATALOG_RATE_SUBMITION";
+    public static String HUB_RECON_SUBMITION = "HUB_RECON_SUBMITION";
+    public static String ENTITY_APPROVE = "ENTITY_APPROVE";
+    public static String ENTITY_STAGE = "ENTITY_STAGE";
+    public static String ENTITY_LIVE = "ENTITY_LIVE";
+    public static String ENTITY_LIVE_CHECK_TRY_ = "ENTITY_LIVE_CHECK_TRY_";
+    public static String ENTITY_DELETE = "ENTITY_DELETE";
+    public static String ENTITY_EDIT = "ENTITY_EDIT";
+    public static String ADD_HOOK = "ADD_HOOK";
 
     // JOB CATEGORY
-    public static String BUNDLE= "Bundle";
+    public static String BUNDLE = "Bundle";
     public static String COMPONENT = "ProductComponent";
     public static String RATEPLANDETAIL = "RatePlanDetail";
     public static String RATEPLANRATE = "RatePlanRate";
-    
-    
+
     // STATUS
     public static String JOB_FAILED = "JOB_FAILED";
     public static String TASK_STARTED = "STARTED";
@@ -41,7 +41,6 @@ public class JOBKeywords {
     // error
     public static String JOB_NOT_FOUND = "JOB_NOT_FOUND";
     public static String SYSTEM_ERROR = "SYSTEM_ERROR";
-
 
     // Recontype
     public static String BUNDLE_TYPE = "PRODUCT";

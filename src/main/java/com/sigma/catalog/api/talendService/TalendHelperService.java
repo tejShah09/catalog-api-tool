@@ -218,6 +218,8 @@ public class TalendHelperService {
         checkForStatusError(jobId, jobType, jobCategory, CustomError, false);
     }
 
+
+
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError,
             boolean isNullReportAllowed)
             throws TalendException {

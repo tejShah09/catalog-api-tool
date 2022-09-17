@@ -32,7 +32,7 @@ public class RatePlanDetailService extends AbstractShellProcessService {
 
                 // step 4 Live Entity
                 liveEntity(properites);
-
+                waitLiveTobeCompleted(properites);
                 sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
 
         }

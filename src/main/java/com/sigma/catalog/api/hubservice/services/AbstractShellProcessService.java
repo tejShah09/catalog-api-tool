@@ -1,7 +1,10 @@
 package com.sigma.catalog.api.hubservice.services;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -233,7 +236,10 @@ public abstract class AbstractShellProcessService {
         config.put("entityNameKey", inpuTableKey);
         config.put("entityTable", inputTable);
         config.put("entityType", entityType);
+        config.put("jobCategory", jobCategory);
         talend.executeJob(properties.jobId, "SendReconSheetToHub", config);
+
+        talend.checkForError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION, jobCategory);
 
     }
 
@@ -310,7 +316,7 @@ public abstract class AbstractShellProcessService {
         // Step 10 Change Stragy to Stub (catalgo only)
 
         HashMap<String, String> config = new HashMap<>();
-        if (properties.isChangeStrategy()) {
+        if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
             config.put("hubIntegration", "false");
             config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
             talend.executeJob(properties.jobId, "ChangeStrategy", config);
@@ -334,14 +340,76 @@ public abstract class AbstractShellProcessService {
             // Check And ReportAny Live
             talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_LIVE, jobCategory,
                     "" + jobCategory + " Live Failed JobId : " + properties.jobId + " Task : Live Entity");
+
         }
         // Change Stragy to Stub (catalgo only)
-        if (properties.isChangeStrategy()) {
+        if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
             config = new HashMap<>();
             config.put("hubIntegration", "true");
             config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
             talend.executeJob(properties.jobId, "ChangeStrategy", config);
         }
+    }
+
+    public void waitLiveTobeCompleted(JobProperites properites) throws TalendException {
+        waitLiveTobeCompleted(properites, reportTable, properites.jobId + "_" + jobCategory + "_InputSheet",
+                inpuTableKey);
+    }
+
+    public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,
+            String inputLiveKey) throws TalendException {
+
+        if (properites.isLaunchEntity()) {
+            Integer previosCount = 0;
+            Integer currentCount = 0;
+            Integer itteration = 0;
+            do {
+                itteration++;
+                previosCount = currentCount;
+                System.out.println(properites.jobId + " Waiting for Launches to complete try " + itteration);
+                HashMap<String, String> config = new HashMap<>();
+                config.put("catalogReportTable", reportTable);
+                config.put("entityNameKey", inputLiveKey);
+                config.put("entityTable", inputLiveTable);
+                config.put("jobType", JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration));
+                config.put("jobCategory", jobCategory);
+                talend.executeJob(properites.jobId, "eCAPICheckLiveStatusEntityName", config);
+                currentCount = getLiveCountFromJobs(properites.jobId,
+                        JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration), jobCategory);
+                System.out.println(
+                        properites.jobId + " Waiting for Launches to complete. Launch pending " + currentCount);
+            } while (previosCount >= 0 && previosCount != currentCount);
+
+            if (currentCount != 0) {
+                throw new TalendException("JOB ID: " + properites.jobId + " JOBS Lauches stuck");
+            }
+        }
+
+    }
+
+    public Integer getLiveCountFromJobs(String jobId, String jobType, String jobCategory) throws TalendException {
+        List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
+        Integer count = -1;
+        if (statusJob != null && statusJob.size() > 0) {
+
+            try {
+
+                if (statusJob.get(0).getMessage() == null) {
+                    throw new TalendException("NO COUNT FOUND for LIVE STATUS CHECK");
+                } else {
+                    count = Integer.valueOf(statusJob.get(0).getMessage());
+                }
+
+            } catch (TalendException e) {
+                throw e;
+            } catch (Exception e) {
+                throw new TalendException("Cannot covert Entity LIVE count " + e.getMessage());
+            }
+
+        } else {
+            throw new TalendException("NO COUNT FOUND for LIVE STATUS CHECK");
+        }
+        return count;
     }
 
     public void startGenericSyncProcessing(JobProperites properites, String fileName) throws TalendException {
@@ -377,7 +445,8 @@ public abstract class AbstractShellProcessService {
         } catch (TalendException e) {
             jobtable.save(new JOB(properites.jobId, JOBKeywords.STOP, jobCategory,
                     JOBKeywords.JOB_FAILED, e.getMessage()));
-            emailServer.sendMail(properites, "JOB FAILED jobId : " + properites + " jobName : " + jobCategory + " Validation failed",
+            emailServer.sendMail(properites,
+                    "JOB FAILED jobId : " + properites.jobId + " jobName : " + jobCategory,
                     e.getCustomException(properites.jobId).toString());
             return talend.generateFailResponse(properites.jobId, e);
         }

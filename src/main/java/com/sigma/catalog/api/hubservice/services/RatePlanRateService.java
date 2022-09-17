@@ -37,9 +37,11 @@ public class RatePlanRateService extends AbstractShellProcessService {
 
                 // step 4 Live Entity
                 liveEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
-
+                waitLiveTobeCompleted(properites);
                 //
                 sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
+
+               
 
         }
 

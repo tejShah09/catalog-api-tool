@@ -26,7 +26,7 @@ public class BundleService extends AbstractShellProcessService {
 
                 // step 3 Stage Entity
                 stageEntity(properites);
-
+                waitLiveTobeCompleted(properites);
                 // step 4 Live Entity
                 liveEntity(properites);
 

@@ -46,6 +46,8 @@ public class EmailService {
    public void sendMail(JobProperites jobrprops, String subject, String emailBody) {
       if (!jobrprops.isSendEmail()) {
          System.out.println("Email is stubed");
+         System.out.println("Subject:: " + subject);
+         System.out.println("Email :: " + emailBody);
          return;
       }
       // Recipient's email ID needs to be mentioned.
@@ -113,7 +115,7 @@ public class EmailService {
 
       } catch (Exception e) {
          e.printStackTrace();
-         throw new RuntimeException(e);
+         System.out.println("Cant Send Email...............");
       }
    }
 
