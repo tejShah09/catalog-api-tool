@@ -239,7 +239,7 @@ public abstract class AbstractShellProcessService {
         config.put("jobCategory", jobCategory);
         talend.executeJob(properties.jobId, "SendReconSheetToHub", config);
 
-        talend.checkForError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION, jobCategory);
+        talend.checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION, jobCategory);
 
     }
 
@@ -438,6 +438,7 @@ public abstract class AbstractShellProcessService {
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
         try {
+            talend.checkForJob(properites.jobId);
             String fileName = this.saveFile(properites.jobId, file);
             this.startGenericSyncProcessing(properites, fileName);
             this.startSyncProcessing(properites);

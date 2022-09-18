@@ -213,6 +213,32 @@ public class TalendHelperService {
         }
     }
 
+    public void checkTextError(String jobId, String jobType, String jobCategory) throws TalendException {
+        List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
+        if (statusJob != null && statusJob.size() > 0
+                && !StringUtility.equals(statusJob.get(0).getStatus(), JOBKeywords.TASK_SUCCESS)) {
+            
+           
+                throw new TalendException("JOB ID "+ jobId+ " Failed");
+            
+            
+           
+
+        }
+    }
+
+    public void checkForJob(String jobId) throws TalendException {
+        List<JOB> statusJob = jobtable.findJobEvents(jobId);
+        if (statusJob != null && statusJob.size() > 0) {
+            
+           
+                throw new TalendException("JOB ID "+ jobId+ " is already Present");
+            
+            
+           
+
+        }
+    }
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)
             throws TalendException {
         checkForStatusError(jobId, jobType, jobCategory, CustomError, false);
