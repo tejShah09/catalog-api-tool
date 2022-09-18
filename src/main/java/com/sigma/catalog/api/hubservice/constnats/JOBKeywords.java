@@ -28,6 +28,8 @@ public class JOBKeywords {
     public static String COMPONENT = "ProductComponent";
     public static String RATEPLANDETAIL = "RatePlanDetail";
     public static String RATEPLANRATE = "RatePlanRate";
+    public static String PRODUCTXMLRATES = "ProductXMLRates";
+    public static String RATEPLANXMLRATES = "RatePlanXMLRates";
 
     // STATUS
     public static String JOB_FAILED = "JOB_FAILED";

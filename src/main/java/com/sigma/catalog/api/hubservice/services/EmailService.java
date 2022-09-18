@@ -44,40 +44,40 @@ public class EmailService {
    }
 
    public void sendMail(JobProperites jobrprops, String subject, String emailBody) {
-      if (!jobrprops.isSendEmail()) {
-         System.out.println("Email is stubed");
-         System.out.println("Subject:: " + subject);
-         System.out.println("Email :: " + emailBody);
-         return;
-      }
-      // Recipient's email ID needs to be mentioned.
-      String to = emailProperties.getProperty("to_list", "tejas.shah@hansencx.com");
-
-      // Sender's email ID needs to be mentioned
-      String from = emailProperties.getProperty("from", "no-reply.capitool@hansencx.com");
-      final String username = emailProperties.getProperty("user_name");
-      final String password = emailProperties.getProperty("password");
-      // Assuming you are sending email through relay.jangosmtp.net
-      String host = emailProperties.getProperty("smtphost");
-
-      Properties props = new Properties();
-      props.put("mail.smtp.auth", emailProperties.getProperty("auth", "false"));
-      props.put("mail.smtp.starttls.enable", "true");
-      props.put("mail.smtp.host", host);
-      props.put("mail.smtp.ssl.protocols", "TLSv1.2");
-      props.put("mail.smtp.port", emailProperties.getProperty("port", "25"));
-
-      System.out.println(props);
-      System.out.println(username + "___" + password);
-      // Get the Session object.
-      Session session = Session.getInstance(props,
-            new javax.mail.Authenticator() {
-               protected PasswordAuthentication getPasswordAuthentication() {
-                  return new PasswordAuthentication(username, password);
-               }
-            });
-
       try {
+         if (!jobrprops.isSendEmail()) {
+            System.out.println("Email is stubed");
+            System.out.println("Subject:: " + subject);
+            System.out.println("Email :: " + emailBody);
+            return;
+         }
+         // Recipient's email ID needs to be mentioned.
+         String to = emailProperties.getProperty("to_list", "tejas.shah@hansencx.com");
+
+         // Sender's email ID needs to be mentioned
+         String from = emailProperties.getProperty("from", "no-reply.capitool@hansencx.com");
+         final String username = emailProperties.getProperty("user_name");
+         final String password = emailProperties.getProperty("password");
+         // Assuming you are sending email through relay.jangosmtp.net
+         String host = emailProperties.getProperty("smtphost");
+
+         Properties props = new Properties();
+         props.put("mail.smtp.auth", emailProperties.getProperty("auth", "false"));
+         props.put("mail.smtp.starttls.enable", "true");
+         props.put("mail.smtp.host", host);
+         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+         props.put("mail.smtp.port", emailProperties.getProperty("port", "25"));
+
+         System.out.println(props);
+         System.out.println(username + "___" + password);
+         // Get the Session object.
+         Session session = Session.getInstance(props,
+               new javax.mail.Authenticator() {
+                  protected PasswordAuthentication getPasswordAuthentication() {
+                     return new PasswordAuthentication(username, password);
+                  }
+               });
+
          // Create a default MimeMessage object.
          Message message = new MimeMessage(session);
 

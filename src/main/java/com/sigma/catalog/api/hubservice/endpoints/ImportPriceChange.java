@@ -1,11 +1,7 @@
 package com.sigma.catalog.api.hubservice.endpoints;
 
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
-import com.sigma.catalog.api.talendService.TalendConstants;
+import com.sigma.catalog.api.hubservice.services.JobService;
+import com.sigma.catalog.api.hubservice.services.ProductXMLRatesService;
+import com.sigma.catalog.api.hubservice.services.RatePlanXMLRatesService;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
 
@@ -24,6 +22,12 @@ public class ImportPriceChange {
 
     @Autowired
     private TalendHelperService talend;
+
+    @Autowired
+    ProductXMLRatesService productXmlService;
+
+    @Autowired
+    RatePlanXMLRatesService ratePlanXmlService;
 
     @PostMapping("/importPrice/upload")
     public ResponseEntity<Object> stage(
@@ -37,44 +41,32 @@ public class ImportPriceChange {
         JobProperites properties = new JobProperites(
                 jobId);
 
-        List<String> ratefileNames = new ArrayList();
-        List<String> bundlefileNames = new ArrayList();
-        List<String> responseses = new ArrayList<>();
-
+        ResponseEntity<Object> resp = productXmlService.validateJobId(properties);
+        if (resp != null) {
+            return resp;
+        }
         if (rateXmls != null) {
 
-            Arrays.asList(rateXmls).stream().forEach(file -> {
+            resp = ratePlanXmlService.processXML(properties, rateXmls);
+            if (resp.getStatusCode() == HttpStatus.OK) {
 
-                String oringalFile = file.getOriginalFilename();
-                if (StringUtility.contains(oringalFile, ".xml")) {
-                    oringalFile = oringalFile.replace(".xml", "");
-                }
-                String fileNAme = "Rate_" + oringalFile + "_" + properties.jobId;
+                ratePlanXmlService.processAsync(properties);
+            } else {
+                return resp;
+            }
 
-                talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileNAme + ".xml");
-                ratefileNames.add(fileNAme);
-
-            });
         }
-
         if (bundlXmls != null) {
-            Arrays.asList(bundlXmls).stream().forEach(file -> {
+            resp = productXmlService.processXML(properties, bundlXmls);
+            if (resp.getStatusCode() == HttpStatus.OK) {
 
-                String oringalFile = file.getOriginalFilename();
-                if (StringUtility.contains(oringalFile, ".xml")) {
-                    oringalFile = oringalFile.replace(".xml", "");
-                }
-                String fileNAme = "Bundle_" + oringalFile + "_" + properties.jobId;
-
-                talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileNAme + ".xml");
-                bundlefileNames.add(fileNAme);
-
-            });
-
+                productXmlService.processAsync(properties);
+            } else {
+                return resp;
+            }
         }
-        System.out.println(properties.jobId+" Received Rate filesss" + ratefileNames.toString());
-        System.out.println(properties.jobId+ "Received Bundle filesss" + bundlefileNames.toString());
-        return talend.generateSuccessResponse(properties.jobId);
+
+        return resp;
 
     }
 

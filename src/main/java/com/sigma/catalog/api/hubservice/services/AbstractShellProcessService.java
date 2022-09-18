@@ -2,9 +2,9 @@ package com.sigma.catalog.api.hubservice.services;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
-import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
-import com.sigma.catalog.api.hubservice.repository.JOBRepository;
 import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
-import com.sigma.catalog.api.utility.ConfigurationUtility;
+import com.sigma.catalog.api.utility.StringUtility;
 
 @Configuration
 @EnableAsync
@@ -43,14 +39,12 @@ class AsynchConfigurationService {
 
 @Service
 public abstract class AbstractShellProcessService {
-    @Autowired
-    public JOBRepository jobtable;
 
     @Autowired
     public TalendHelperService talend;
 
     @Autowired
-    private EmailService emailServer;
+    private JobService jobService;
 
     public String jobCategory;
     public String sheets;
@@ -61,186 +55,52 @@ public abstract class AbstractShellProcessService {
 
     public abstract void startASyncProcessing(JobProperites properties) throws TalendException;
 
-    public String saveFile(String jobId, MultipartFile file) throws TalendException {
-        String fileName = "" + jobCategory + "UploadFile_" + jobId + ".csv";
-        talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
-        jobtable.save(new JOB(jobId, JOBKeywords.START, jobCategory,
-                JOBKeywords.TASK_SUCCESS,
-                file.getOriginalFilename() + " :: " + fileName));
-        return fileName;
-    }
-
     public void createEntity(JobProperites properties) throws TalendException {
-        createEntity(properties, jobCategory, sheets);
+        jobService.createEntity(properties, jobCategory, jobCategory, sheets);
     }
 
-    public void createEntity(JobProperites properties, String category, String sheetList) throws TalendException {
-        jobtable.save(
-                new JOB(properties.jobId, JOBKeywords.CATALOG_REQUEST_CREATION, category,
-                        JOBKeywords.TASK_STARTED,
-                        properties.jobId + "_" + category + "_Entity"));
-        HashMap<String, String> config = new HashMap<>();
-        config.put("group", category);
-        config.put("subSheets", sheetList);
-        config.put("catalogStub", "false");
-        talend.executeJob(properties.jobId, "eCAPICreateEntities", config);
-
-        // generate Report
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + category + "_Entity");
-        config.put("jobType", JOBKeywords.CATALOG_REQUEST_SUBMITION);
-        config.put("jobCategory", category);
-        config.put("keyName", "Name");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Error
-        talend.checkForStatusError(properties.jobId, JOBKeywords.CATALOG_REQUEST_SUBMITION, category,
-                "" + category + " Upload Failed JobId : " + properties.jobId + " Task : Entity Creation");
+    public void createEntity(JobProperites properties, String group, String sheets) throws TalendException {
+        jobService.createEntity(properties, group, jobCategory, sheets);
     }
 
     public void createAssoc(JobProperites properties) throws TalendException {
-        jobtable.save(
-                new JOB(properties.jobId, JOBKeywords.CATALOG_ASSOC_CREATION, jobCategory,
-                        JOBKeywords.TASK_STARTED,
-                        properties.jobId + "_" + jobCategory + "_Associations"));
-        HashMap<String, String> config = new HashMap<>();
-        config.put("group", jobCategory);
-        config.put("catalogStub", "false");
-        talend.executeJob(properties.jobId, "eCAPICreateAssoc", config);
-
-        // generate Report
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + jobCategory + "_Associations");
-        config.put("jobType", JOBKeywords.CATALOG_ASSOC_SUBMITION);
-        config.put("jobCategory", jobCategory);
-        config.put("keyName", "Parent_Entity_Name");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Error
-        talend.checkForStatusError(properties.jobId, JOBKeywords.CATALOG_ASSOC_SUBMITION, jobCategory,
-                "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
+        jobService.createAssoc(properties, jobCategory, jobCategory);
     }
 
     public void createRates(JobProperites properties) throws TalendException {
-        createRates(properties, jobCategory);
-    }
-
-    public void createRates(JobProperites properties, String rateCategory) throws TalendException {
-        jobtable.save(
-                new JOB(properties.jobId, JOBKeywords.CATALOG_RATE_CREATION, jobCategory,
-                        JOBKeywords.TASK_STARTED,
-                        properties.jobId + "_" + rateCategory + "_Rates"));
-        HashMap<String, String> config = new HashMap<>();
-        config.put("group", rateCategory);
-        config.put("catalogStub", "false");
-        talend.executeJob(properties.jobId, "eCAPICreateRates", config);
-
-        // generate Report
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + rateCategory + "_Rates");
-        config.put("jobType", JOBKeywords.CATALOG_RATE_SUBMITION);
-        config.put("jobCategory", rateCategory);
-        config.put("keyName", "Parent_Entity_Name");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Error
-        talend.checkForStatusError(properties.jobId, JOBKeywords.CATALOG_RATE_SUBMITION, jobCategory,
-                "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
+        jobService.createRates(properties, jobCategory, jobCategory);
     }
 
     public void deleteNonLiveEntityName(JobProperites properties) throws TalendException {
-        deleteNonLiveEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet", reportTable,
-                inpuTableKey);
+        jobService.deleteNonLiveEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet",
+                inpuTableKey, reportTable, jobCategory,
+                properties.jobId + "_" + jobCategory + "_Entity_Status");
     }
 
     public void deleteNonLiveEntityName(JobProperites properties, String inputTable) throws TalendException {
-        deleteNonLiveEntityName(properties, inputTable, reportTable, inpuTableKey);
-    }
-
-    public void deleteNonLiveEntityName(JobProperites properties, String inputTable, String eReportTable,
-            String inpuTableKey)
-            throws TalendException {
-        HashMap<String, String> config = new HashMap<>();
-        config.put("catalogReportTable", eReportTable);
-        config.put("entityNameKey", inpuTableKey);
-        config.put("entityTable", inputTable);
-        config.put("statusTable", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        talend.executeJob(properties.jobId, "eCAPIDeleteNonLiveEntityName", config);
-
-        // Generate report for Delte
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        config.put("jobType", JOBKeywords.ENTITY_DELETE);
-        config.put("jobCategory", jobCategory);
-        config.put("keyName", "PublicID");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Delte
-        talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_DELETE, jobCategory,
-                "" + jobCategory + " Delete Failed JobId : " + properties.jobId + " Task : Delete Entity", true);
+        jobService.deleteNonLiveEntityName(properties, inputTable, inpuTableKey, reportTable, jobCategory,
+                properties.jobId + "_" + jobCategory + "_Entity_Status");
     }
 
     public void editEntityName(JobProperites properties) throws TalendException {
-        editEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet", reportTable, inpuTableKey);
+        jobService.editEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey,
+                reportTable, jobCategory,
+                properties.jobId + "_" + jobCategory + "_Entity_Status");
     }
 
     public void editEntityName(JobProperites properties, String inputTable) throws TalendException {
-        editEntityName(properties, inputTable, reportTable, inpuTableKey);
-    }
-
-    public void editEntityName(JobProperites properties, String inputTable, String eReportTable, String inpuTableKey)
-            throws TalendException {
-        HashMap<String, String> config = new HashMap<>();
-        config.put("catalogReportTable", eReportTable);
-        config.put("entityNameKey", inpuTableKey);
-        config.put("entityTable", inputTable);
-        config.put("statusTable", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        talend.executeJob(properties.jobId, "eCAPIEditEntityName", config);
-
-        // Generate report for Edit
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        config.put("jobType", JOBKeywords.ENTITY_EDIT);
-        config.put("jobCategory", jobCategory);
-        config.put("keyName", "PublicID");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Edit
-        talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_EDIT, jobCategory,
-                "" + jobCategory + " Edit Failed JobId : " + properties.jobId + " Task : Edit Entity");
+        jobService.editEntityName(properties, inputTable, inpuTableKey, reportTable, jobCategory,
+                properties.jobId + "_" + jobCategory + "_Entity_Status");
     }
 
     public void sendReconfile(JobProperites properties, String entityType) throws TalendException {
-        sendReconfile(properties, properties.jobId + "_" + jobCategory + "_InputSheet", reportTable, inpuTableKey,
-                entityType);
+        jobService.sendReconfile(properties, properties.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey,
+                reportTable,
+                entityType, jobCategory);
     }
 
     public void sendReconfile(JobProperites properties, String inputTable, String entityType) throws TalendException {
-        sendReconfile(properties, inputTable, reportTable, inpuTableKey, entityType);
-    }
-
-    public void sendReconfile(JobProperites properties, String inputTable, String eReportTable, String inpuTableKey,
-            String entityType)
-            throws TalendException {
-        if (!properties.isSendReconSheet() || !properties.isLaunchEntity()) {
-            System.out.println("Recon file is skipped");
-            return;
-        }
-        HashMap<String, String> config = new HashMap<>();
-        config.put("catalogReportTable", eReportTable);
-        config.put("entityNameKey", inpuTableKey);
-        config.put("entityTable", inputTable);
-        config.put("entityType", entityType);
-        config.put("jobCategory", jobCategory);
-        talend.executeJob(properties.jobId, "SendReconSheetToHub", config);
-
-        talend.checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION, jobCategory);
-
+        jobService.sendReconfile(properties, inputTable, inpuTableKey, reportTable, entityType, jobCategory);
     }
 
     public void approveEntity(JobProperites properties) throws TalendException {
@@ -254,23 +114,8 @@ public abstract class AbstractShellProcessService {
     }
 
     public void approveEntity(JobProperites properties, String query) throws TalendException {
-        HashMap<String, String> config = new HashMap<>();
-        config.put("query", query);
-        config.put("statusTable", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        talend.executeJob(properties.jobId, "eCAPIApproveEntity", config);
-
-        // Generate report for Approve
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        config.put("jobType", JOBKeywords.ENTITY_APPROVE);
-        config.put("jobCategory", jobCategory);
-        config.put("keyName", "PublicID");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Approve
-        talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_APPROVE, jobCategory,
-                "" + jobCategory + " Approve Failed JobId : " + properties.jobId + " Task : Approve Entity");
+        jobService.approveEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status",
+                jobCategory);
 
     }
 
@@ -283,23 +128,7 @@ public abstract class AbstractShellProcessService {
     }
 
     public void stageEntity(JobProperites properties, String query) throws TalendException {
-        HashMap<String, String> config = new HashMap<>();
-        config.put("query", query);
-        config.put("statusTable", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        talend.executeJob(properties.jobId, "eCAPIStageEntity", config);
-
-        // Generate report for Stage
-        config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + jobCategory + "_Entity_Status");
-        config.put("jobType", JOBKeywords.ENTITY_STAGE);
-        config.put("jobCategory", jobCategory);
-        config.put("keyName", "PublicID");
-        config.put("jobStatus", JOBKeywords.TASK_END);
-        talend.executeJob(properties.jobId, "getStatusCount", config);
-
-        // Check And ReportAny Stage
-        talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_STAGE, jobCategory,
-                "" + jobCategory + " Stage Failed JobId : " + properties.jobId + " Task : Stage Entity");
+        jobService.stageEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status", jobCategory);
     }
 
     public void liveEntity(JobProperites properties) throws TalendException {
@@ -312,43 +141,7 @@ public abstract class AbstractShellProcessService {
     }
 
     public void liveEntity(JobProperites properties, String query) throws TalendException {
-
-        // Step 10 Change Stragy to Stub (catalgo only)
-
-        HashMap<String, String> config = new HashMap<>();
-        if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
-            config.put("hubIntegration", "false");
-            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
-            talend.executeJob(properties.jobId, "ChangeStrategy", config);
-        }
-        // Live Entity
-        if (properties.isLaunchEntity()) {
-            config = new HashMap<>();
-            config.put("query", query);
-            config.put("statusTable", properties.jobId + "_" + jobCategory + "_Entity_Status");
-            talend.executeJob(properties.jobId, "eCAPILiveEntity", config);
-
-            // Generate report for Live
-            config = new HashMap<>();
-            config.put("tableName", properties.jobId + "_" + jobCategory + "_Entity_Status");
-            config.put("jobType", JOBKeywords.ENTITY_LIVE);
-            config.put("jobCategory", jobCategory);
-            config.put("keyName", "PublicID");
-            config.put("jobStatus", JOBKeywords.TASK_END);
-            talend.executeJob(properties.jobId, "getStatusCount", config);
-
-            // Check And ReportAny Live
-            talend.checkForStatusError(properties.jobId, JOBKeywords.ENTITY_LIVE, jobCategory,
-                    "" + jobCategory + " Live Failed JobId : " + properties.jobId + " Task : Live Entity");
-
-        }
-        // Change Stragy to Stub (catalgo only)
-        if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
-            config = new HashMap<>();
-            config.put("hubIntegration", "true");
-            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
-            talend.executeJob(properties.jobId, "ChangeStrategy", config);
-        }
+        jobService.liveEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status", jobCategory);
     }
 
     public void waitLiveTobeCompleted(JobProperites properites) throws TalendException {
@@ -358,96 +151,37 @@ public abstract class AbstractShellProcessService {
 
     public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,
             String inputLiveKey) throws TalendException {
-
-        if (properites.isLaunchEntity()) {
-            Integer previosCount = 0;
-            Integer currentCount = 0;
-            Integer itteration = 0;
-            do {
-                itteration++;
-                previosCount = currentCount;
-                System.out.println(properites.jobId + " Waiting for Launches to complete try " + itteration);
-                HashMap<String, String> config = new HashMap<>();
-                config.put("catalogReportTable", reportTable);
-                config.put("entityNameKey", inputLiveKey);
-                config.put("entityTable", inputLiveTable);
-                config.put("jobType", JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration));
-                config.put("jobCategory", jobCategory);
-                talend.executeJob(properites.jobId, "eCAPICheckLiveStatusEntityName", config);
-                currentCount = getLiveCountFromJobs(properites.jobId,
-                        JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration), jobCategory);
-                System.out.println(
-                        properites.jobId + " Waiting for Launches to complete. Launch pending " + currentCount);
-            } while (previosCount >= 0 && previosCount != currentCount);
-
-            if (currentCount != 0) {
-                throw new TalendException("JOB ID: " + properites.jobId + " JOBS Lauches stuck");
-            }
-        }
-
+        jobService.waitLiveTobeCompleted(properites, reportLiveTable, inputLiveTable, inputLiveKey, jobCategory);
     }
 
-    public Integer getLiveCountFromJobs(String jobId, String jobType, String jobCategory) throws TalendException {
-        List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
-        Integer count = -1;
-        if (statusJob != null && statusJob.size() > 0) {
-
-            try {
-
-                if (statusJob.get(0).getMessage() == null) {
-                    throw new TalendException("NO COUNT FOUND for LIVE STATUS CHECK");
-                } else {
-                    count = Integer.valueOf(statusJob.get(0).getMessage());
-                }
-
-            } catch (TalendException e) {
-                throw e;
-            } catch (Exception e) {
-                throw new TalendException("Cannot covert Entity LIVE count " + e.getMessage());
-            }
-
-        } else {
-            throw new TalendException("NO COUNT FOUND for LIVE STATUS CHECK");
-        }
-        return count;
-    }
-
-    public void startGenericSyncProcessing(JobProperites properites, String fileName) throws TalendException {
+    public void startGenericSyncProcessing(JobProperites properties, String fileName) throws TalendException {
 
         // Step 1 SaveFile
-        HashMap<String, String> config = new HashMap<>();
-        config.put("fileName", TalendConstants.INPUT_FILE_LOCATION + fileName);
-        talend.executeJob(properites.jobId, "Read" + jobCategory + "Sheet", config);
-        jobtable.save(
-                new JOB(properites.jobId, JOBKeywords.UPLOAD_FILE, jobCategory, JOBKeywords.TASK_SUCCESS,
-                        properites.jobId + "_" + jobCategory + "_InputSheet"));
+        jobService.readFileJob(properties, fileName, jobCategory);
 
         // Step 2 ValidateFile
-        talend.executeJob(properites.jobId, "Validate" + jobCategory + "Sheet", null);
+        jobService.validateFileJob(properties, jobCategory);
 
-        // Step 3 Check And ReportAny Error
-        talend.checkForError(properites.jobId, JOBKeywords.FILE_VALIDATION, jobCategory);
-
-        // Step 4 cretae CAPI input
-        talend.executeJob(properites.jobId, "CAPIInput" + jobCategory + "Sheet", null);
-        jobtable.save(
-                new JOB(properites.jobId, JOBKeywords.CAPI_FILE_CREATION, jobCategory, JOBKeywords.TASK_SUCCESS,
-                        properites.jobId + "_" + jobCategory + "_Entity"));
+        // Step 3 CrateCAPIfile
+        jobService.createCAPIFileJob(properties, jobCategory);
 
     }
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
         try {
-            talend.checkForJob(properites.jobId);
-            String fileName = this.saveFile(properites.jobId, file);
+            jobService.jobValidation(properites.jobId);
+            // SaveFile
+            String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
+
+            // Generic Process
             this.startGenericSyncProcessing(properites, fileName);
+
+            // Overrided sync process
             this.startSyncProcessing(properites);
 
         } catch (TalendException e) {
-            jobtable.save(new JOB(properites.jobId, JOBKeywords.STOP, jobCategory,
-                    JOBKeywords.JOB_FAILED, e.getMessage()));
-            emailServer.sendMail(properites,
-                    "JOB FAILED jobId : " + properites.jobId + " jobName : " + jobCategory,
+
+            jobService.saveErrorAndSendErrorEmail(properites, jobCategory,
                     e.getCustomException(properites.jobId).toString());
             return talend.generateFailResponse(properites.jobId, e);
         }
@@ -455,18 +189,72 @@ public abstract class AbstractShellProcessService {
         return talend.generateSuccessResponse(properites.jobId);
     }
 
+    public ResponseEntity<Object> processXML(JobProperites properties, MultipartFile[] rateXmls) {
+        try {
+
+            // SaveFile
+            List<String> ratefileNames = new ArrayList<>();
+
+            if (rateXmls != null) {
+
+                Arrays.asList(rateXmls).stream().forEach(file -> {
+
+                    String oringalFile = file.getOriginalFilename();
+                    if (StringUtility.contains(oringalFile, ".xml")) {
+                        oringalFile = oringalFile.replace(".xml", "");
+                    }
+                    String fileNAme = jobCategory + "_" + oringalFile + "_" + properties.jobId + ".xml";
+
+                    talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileNAme);
+                    ratefileNames.add(TalendConstants.INPUT_FILE_LOCATION + fileNAme);
+
+                });
+
+                for (int i = 0; i < ratefileNames.size(); i++) {
+                    HashMap<String, String> config = new HashMap<>();
+                    config.put("fileName", ratefileNames.get(i));
+                    talend.executeJob(properties.jobId, "Read" + jobCategory + "Sheet", config);
+
+                }
+
+            }
+
+            jobService.validateFileJob(properties, jobCategory);
+            jobService.createCAPIFileJob(properties, jobCategory);
+            // Overrided sync process
+            this.startSyncProcessing(properties);
+
+        } catch (TalendException e) {
+
+            jobService.saveErrorAndSendErrorEmail(properties, jobCategory,
+                    e.getCustomException(properties.jobId).toString());
+            return talend.generateFailResponse(properties.jobId, e);
+        }
+
+        return talend.generateSuccessResponse(properties.jobId);
+    }
+
+    public ResponseEntity<Object> validateJobId(JobProperites properties) {
+        try {
+            jobService.jobValidation(properties.jobId);
+        } catch (TalendException e) {
+            jobService.saveErrorAndSendErrorEmail(properties, jobCategory,
+                    e.getCustomException(properties.jobId).toString());
+            return talend.generateFailResponse(properties.jobId, e);
+        }
+        return null;
+
+    }
+
     @Async("asyncExecutorService")
     public void processAsync(JobProperites properties) {
         try {
             this.startASyncProcessing(properties);
-            jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, jobCategory,
-                    JOBKeywords.JOB_SUCCESS, "eaam Enjoy"));
+            jobService.saveSucessJobs(properties, jobCategory);
         } catch (TalendException e) {
-            // Send Email
-            jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, jobCategory,
-                    JOBKeywords.JOB_FAILED, e.getRowOuptutException(properties.jobId).toString()));
-            emailServer.sendMail(properties, e.getMessage(),
+            jobService.saveErrorAndSendErrorEmail(properties, jobCategory,
                     e.getRowOuptutException(properties.jobId).toString());
+
         }
     }
 }

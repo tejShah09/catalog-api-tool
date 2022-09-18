@@ -16,6 +16,7 @@ import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.hubservice.services.EmailService;
+import com.sigma.catalog.api.hubservice.services.JobService;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.ConfigurationUtility;
 import com.sigma.catalog.api.utility.StringUtility;
@@ -29,6 +30,9 @@ public class Utilities {
 
     @Autowired
     private EmailService emailServer;
+
+    @Autowired
+    private JobService jobservice;
 
     @PostMapping("/sendEmail")
     public ResponseEntity<Object> sendMail(
@@ -127,7 +131,7 @@ public class Utilities {
         }
 
         try {
-            talend.checkForStatusError(jobId, JOBKeywords.ADD_HOOK, config.get("jobName"),
+            jobservice.checkForStatusError(jobId, JOBKeywords.ADD_HOOK, config.get("jobName"),
                     config.get("jobName") + " Failed JobId : " + jobId);
         } catch (TalendException e) {
             return talend.generateFailCountResponse(jobId, e);
@@ -143,5 +147,4 @@ public class Utilities {
         return talend.getSucessResponse("jobId");
     }
 
- 
 }
