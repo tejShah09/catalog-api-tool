@@ -292,7 +292,7 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
     }
 
-    public void createEntity(JobProperites properties, String group, String sheetList, String jobCategory)
+    public void createEntity(JobProperites properties, String group, String jobCategory, String sheetList)
             throws TalendException {
         jobtable.save(
                 new JOB(properties.jobId, JOBKeywords.CATALOG_REQUEST_CREATION, jobCategory,
