@@ -71,6 +71,10 @@ public abstract class AbstractShellProcessService {
         jobService.createRates(properties, jobCategory, jobCategory);
     }
 
+    public void createRates(JobProperites properties, String group) throws TalendException {
+        jobService.createRates(properties, group, jobCategory);
+    }
+
     public void deleteNonLiveEntityName(JobProperites properties) throws TalendException {
         jobService.deleteNonLiveEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet",
                 inpuTableKey, reportTable, jobCategory,
@@ -147,6 +151,11 @@ public abstract class AbstractShellProcessService {
     public void waitLiveTobeCompleted(JobProperites properites) throws TalendException {
         waitLiveTobeCompleted(properites, reportTable, properites.jobId + "_" + jobCategory + "_InputSheet",
                 inpuTableKey);
+    }
+
+    public void waitLiveTobeCompleted(JobProperites properites, String inputLiveTable,
+            String inputLiveKey) throws TalendException {
+        jobService.waitLiveTobeCompleted(properites, reportTable, inputLiveTable, inputLiveKey, jobCategory);
     }
 
     public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,

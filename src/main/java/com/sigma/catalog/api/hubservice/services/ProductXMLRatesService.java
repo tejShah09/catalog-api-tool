@@ -11,11 +11,30 @@ public class ProductXMLRatesService extends AbstractShellProcessService {
 
     ProductXMLRatesService() {
         jobCategory = JOBKeywords.PRODUCTXMLRATES;
+        reportTable = "CAPI_Bundle_AllStatus";
+        inpuTableKey = "Parent_Entity_Name";
+
     }
 
     @Override
     public void startASyncProcessing(JobProperites properties) throws TalendException {
-        // TODO Auto-generated method stub
+
+        String inpuTable = properties.jobId + "_" + JOBKeywords.COMPONENT + "_Rates";
+        deleteNonLiveEntityName(properties, inpuTable);
+
+        editEntityName(properties, inpuTable);
+
+        createRates(properties, JOBKeywords.COMPONENT);
+
+        approveEntity(properties, inpuTable, "Parent_Entity_GUID");
+
+        // step 3 Stage Entity
+        stageEntity(properties, inpuTable, "Parent_Entity_GUID");
+        waitLiveTobeCompleted(properties, inpuTable, "Parent_Entity_GUID");
+        // step 4 Live Entity
+        liveEntity(properties, inpuTable, "Parent_Entity_GUID");
+
+        sendReconfile(properties, inpuTable, JOBKeywords.BUNDLE_TYPE);
 
     }
 

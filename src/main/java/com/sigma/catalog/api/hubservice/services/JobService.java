@@ -258,7 +258,7 @@ public class JobService {
         config = new HashMap<>();
         config.put("tableName", properties.jobId + "_" + group + "_Rates");
         config.put("jobType", JOBKeywords.CATALOG_RATE_SUBMITION);
-        config.put("jobCategory", group);
+        config.put("jobCategory", jobCategory);
         config.put("keyName", "Parent_Entity_Name");
         config.put("jobStatus", JOBKeywords.TASK_END);
         talend.executeJob(properties.jobId, "getStatusCount", config);
