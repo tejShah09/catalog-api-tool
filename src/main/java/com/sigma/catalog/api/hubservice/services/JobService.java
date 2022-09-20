@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
@@ -386,7 +387,7 @@ public class JobService {
                 JOBKeywords.JOB_FAILED, errorMsg));
 
         List<JOB> jobs = jobtable.findJobEvents(properties.jobId);
-        errorMsg = errorMsg + "\n\n\n\n" + jobs.toString();
+        errorMsg = errorMsg + "\n\n\n\n" + new Gson().toJson(jobs);
         emailServer.sendMail(properties,
                 "JOB failed Id : " + properties.jobId + " jobName : " + category,
                 errorMsg);
