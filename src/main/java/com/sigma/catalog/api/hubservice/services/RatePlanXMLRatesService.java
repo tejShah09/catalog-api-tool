@@ -11,11 +11,31 @@ public class RatePlanXMLRatesService extends AbstractShellProcessService {
 
     RatePlanXMLRatesService() {
         jobCategory = JOBKeywords.RATEPLANXMLRATES;
+        reportTable = "CAPI_RatePlanDetail_AllStatus";
+        inpuTableKey = "Parent_Entity_Name";
     }
 
     @Override
     public void startASyncProcessing(JobProperites properties) throws TalendException {
-        // TODO Auto-generated method stub
+        String inpuTable = properties.jobId + "_" + JOBKeywords.HUBRATEPLANRATE + "_Rates";
+        deleteNonLiveEntityName(properties, inpuTable);
+
+        editEntityName(properties, inpuTable);
+
+        createRates(properties, JOBKeywords.HUBRATEPLANRATE);
+
+        approveEntity(properties, inpuTable, "Parent_Entity_GUID");
+
+        // step 3 Stage Entity
+        stageEntity(properties, inpuTable, "Parent_Entity_GUID");
+
+        // step 4 Live Entity
+        changeStrategy(properties, false);
+        liveEntity(properties, inpuTable, "Parent_Entity_GUID");
+        waitLiveTobeCompleted(properties, inpuTable, "Parent_Entity_GUID");
+        changeStrategy(properties, true);
+
+        sendReconfile(properties, inpuTable, JOBKeywords.RATEPLAN_TYPE);
 
     }
 

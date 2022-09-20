@@ -58,17 +58,20 @@ public class JobService {
                 "" + jobCategory + " Stage Failed JobId : " + properties.jobId + " Task : Stage Entity");
     }
 
-    public void liveEntity(JobProperites properties, String query, String statusTable, String jobCategory)
-            throws TalendException {
-
-        // Step 10 Change Stragy to Stub (catalgo only)
-
+    public void changeStrategy(JobProperites properties, boolean hubIntegration) throws TalendException {
         HashMap<String, String> config = new HashMap<>();
         if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
-            config.put("hubIntegration", "false");
+            config.put("hubIntegration", String.valueOf(hubIntegration));
             config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
             talend.executeJob(properties.jobId, "ChangeStrategy", config);
         }
+    }
+
+    public void liveEntity(JobProperites properties, String query, String statusTable, String jobCategory)
+            throws TalendException {
+
+        HashMap<String, String> config = new HashMap<>();
+
         // Live Entity
         if (properties.isLaunchEntity()) {
             config = new HashMap<>();
@@ -90,13 +93,7 @@ public class JobService {
                     "" + jobCategory + " Live Failed JobId : " + properties.jobId + " Task : Live Entity");
 
         }
-        // Change Stragy to Stub (catalgo only)
-        if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
-            config = new HashMap<>();
-            config.put("hubIntegration", "true");
-            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
-            talend.executeJob(properties.jobId, "ChangeStrategy", config);
-        }
+
     }
 
     public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,
@@ -387,14 +384,17 @@ public class JobService {
     public void saveErrorAndSendErrorEmail(JobProperites properties, String category, String errorMsg) {
         jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, category,
                 JOBKeywords.JOB_FAILED, errorMsg));
+
+        List<JOB> jobs = jobtable.findJobEvents(properties.jobId);
+        errorMsg = errorMsg + "\n\n\n\n" + jobs.toString();
         emailServer.sendMail(properties,
-                "JOB FAILED jobId : " + properties.jobId + " jobName : " + category,
+                "JOB failed Id : " + properties.jobId + " jobName : " + category,
                 errorMsg);
     }
 
     public void saveSucessJobs(JobProperites properties, String category) {
         jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, category,
-        JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
+                JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
     }
 
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)

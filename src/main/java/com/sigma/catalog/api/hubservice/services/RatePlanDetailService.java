@@ -18,21 +18,22 @@ public class RatePlanDetailService extends AbstractShellProcessService {
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
 
-                // Step 1 Create Entity
+           
                 createEntity(properites);
 
-                // Step 1.1 Associate Charge
-               // createAssoc(jobId);
-
-                // Step 2 Aporve Entity
+            
                 approveEntity(properites);
 
-                // step 3 Stage Entity
+                
                 stageEntity(properites);
 
-                // step 4 Live Entity
+               
+                changeStrategy(properites, false);
                 liveEntity(properites);
                 waitLiveTobeCompleted(properites);
+                changeStrategy(properites, true);
+
+                
                 sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
 
         }

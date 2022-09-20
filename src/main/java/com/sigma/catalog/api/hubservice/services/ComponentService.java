@@ -34,9 +34,13 @@ public class ComponentService extends AbstractShellProcessService {
 
                 // step 3 Stage Entity
                 stageEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
-                waitLiveTobeCompleted(properites);
-                // step 4 Live Entity
+
+
+                changeStrategy(properites, false);
                 liveEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
+                waitLiveTobeCompleted(properites);
+                changeStrategy(properites, true);
+               
 
                 sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
 

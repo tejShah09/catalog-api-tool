@@ -30,9 +30,12 @@ public class ProductXMLRatesService extends AbstractShellProcessService {
 
         // step 3 Stage Entity
         stageEntity(properties, inpuTable, "Parent_Entity_GUID");
-        waitLiveTobeCompleted(properties, inpuTable, "Parent_Entity_GUID");
+    
         // step 4 Live Entity
+        changeStrategy(properties, false);
         liveEntity(properties, inpuTable, "Parent_Entity_GUID");
+        waitLiveTobeCompleted(properties, inpuTable, "Parent_Entity_GUID");
+        changeStrategy(properties, true);
 
         sendReconfile(properties, inpuTable, JOBKeywords.BUNDLE_TYPE);
 

@@ -26,9 +26,13 @@ public class BundleService extends AbstractShellProcessService {
 
                 // step 3 Stage Entity
                 stageEntity(properites);
-                waitLiveTobeCompleted(properites);
+
                 // step 4 Live Entity
+
+                changeStrategy(properites, false);
                 liveEntity(properites);
+                waitLiveTobeCompleted(properites);
+                changeStrategy(properites, true);
 
                 sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
 

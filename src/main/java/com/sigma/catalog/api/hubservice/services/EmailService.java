@@ -96,7 +96,7 @@ public class EmailService {
          Multipart multipart = new MimeMultipart();
          BodyPart attachmentBodyPart = new MimeBodyPart();
          String fileName = jobrprops.jobId;
-         String emailFile = ".\\emails\\" + jobrprops.jobId;
+         String emailFile = ".\\emails\\" + jobrprops.jobId+".txt";
          saveFile(emailFile, emailBody);
          DataSource source = new FileDataSource(emailFile);
          attachmentBodyPart.setDataHandler(new DataHandler(source));
@@ -141,7 +141,7 @@ public class EmailService {
    }
 
    String getEmailTemplate() {
-      String data = "something went  wrong. Please find attached technical detail";
+      String data = "";
       try {
 
          File myObj = new File("config/emailTemplate.html");

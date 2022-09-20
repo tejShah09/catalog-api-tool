@@ -158,6 +158,10 @@ public abstract class AbstractShellProcessService {
         jobService.waitLiveTobeCompleted(properites, reportTable, inputLiveTable, inputLiveKey, jobCategory);
     }
 
+    public void changeStrategy(JobProperites properites, boolean isHubIntegration) throws TalendException {
+        jobService.changeStrategy(properites, isHubIntegration);
+    }
+
     public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,
             String inputLiveKey) throws TalendException {
         jobService.waitLiveTobeCompleted(properites, reportLiveTable, inputLiveTable, inputLiveKey, jobCategory);

@@ -28,6 +28,7 @@ public class JOBKeywords {
     public static String COMPONENT = "ProductComponent";
     public static String RATEPLANDETAIL = "RatePlanDetail";
     public static String RATEPLANRATE = "RatePlanRate";
+    public static String HUBRATEPLANRATE = "HUBRatePlanRate";
     public static String PRODUCTXMLRATES = "ProductXMLRates";
     public static String RATEPLANXMLRATES = "RatePlanXMLRates";
 
