@@ -41,7 +41,7 @@ public class RatePlanXMLRatesService extends AbstractShellProcessService {
 
     @Override
     public void startSyncProcessing(JobProperites properties) throws TalendException {
-
+        validateInputSheetRowCount(properties, properties.jobId + "_HUBExtract_Rates");
     }
 
 }

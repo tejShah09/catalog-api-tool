@@ -18,3 +18,4 @@ public interface JOBRepository extends JpaRepository<JOB, String> {
     List<JOB> findJobEvents(String jobId);
 
 }
+

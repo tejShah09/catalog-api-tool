@@ -7,6 +7,7 @@ public class JOBKeywords {
     public static String STOP = "STOP";
     public static String UPLOAD_FILE = "UPLOAD_FILE";
     public static String FILE_VALIDATION = "FILE_VALIDATION";
+    public static String FILE_ROW_COUNT = "FILE_ROW_COUNT";
     public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
     public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";
     public static String CATALOG_REQUEST_SUBMITION = "CATALOG_REQUEST_SUBMITION";

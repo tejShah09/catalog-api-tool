@@ -316,6 +316,21 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Entity Creation");
     }
 
+    public void validateForEmptyInput(JobProperites properties, String tableName, String jobCategory)
+            throws TalendException {
+
+        HashMap<String, String> config = new HashMap<>();
+        config.put("tableName", tableName);
+        config.put("jobType", JOBKeywords.FILE_ROW_COUNT);
+        config.put("jobCategory", jobCategory);
+
+        talend.executeJob(properties.jobId, "RowCountFromTable", config);
+
+ 
+        // Check And ReportAny Error
+        checkForError(properties.jobId, JOBKeywords.FILE_ROW_COUNT, jobCategory);
+    }
+
     public void readFileJob(JobProperites properties, String fileName, String jobCategory) throws TalendException {
         HashMap<String, String> config = new HashMap<>();
         config.put("fileName", TalendConstants.INPUT_FILE_LOCATION + fileName);

@@ -69,3 +69,34 @@ END IF;
   END;
 END
 $BODY$;
+
+
+
+
+
+CREATE OR REPLACE FUNCTION public.getRowCount(
+	tablename character varying)
+    RETURNS INTEGER 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+
+AS $BODY$
+DECLARE 
+  
+   inputs VARCHAR [];
+   code VARCHAR;
+   rowcount INTEGER;
+   
+BEGIN
+SELECT ARRAY_AGG(column_name) into inputs FROM information_schema.columns where table_name like tablename;
+
+IF inputs is  NULL THEN
+rowcount := 0;
+ELSE
+ EXECUTE  'select count(*)  from "'||tablename || '"' INTO  rowcount;
+END IF;
+
+return rowcount;
+END
+$BODY$;

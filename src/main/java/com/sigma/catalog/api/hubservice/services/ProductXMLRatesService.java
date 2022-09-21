@@ -30,7 +30,7 @@ public class ProductXMLRatesService extends AbstractShellProcessService {
 
         // step 3 Stage Entity
         stageEntity(properties, inpuTable, "Parent_Entity_GUID");
-    
+
         // step 4 Live Entity
         changeStrategy(properties, false);
         liveEntity(properties, inpuTable, "Parent_Entity_GUID");
@@ -43,7 +43,7 @@ public class ProductXMLRatesService extends AbstractShellProcessService {
 
     @Override
     public void startSyncProcessing(JobProperites properties) throws TalendException {
-
+        validateInputSheetRowCount(properties, properties.jobId + "_HUBExtract_ProductRates");
     }
 
 }

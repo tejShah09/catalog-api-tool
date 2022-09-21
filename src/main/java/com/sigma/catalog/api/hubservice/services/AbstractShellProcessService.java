@@ -172,12 +172,21 @@ public abstract class AbstractShellProcessService {
         // Step 1 SaveFile
         jobService.readFileJob(properties, fileName, jobCategory);
 
+        this.validateInputSheetRowCount(properties);
         // Step 2 ValidateFile
         jobService.validateFileJob(properties, jobCategory);
 
         // Step 3 CrateCAPIfile
         jobService.createCAPIFileJob(properties, jobCategory);
 
+    }
+
+    public void validateInputSheetRowCount(JobProperites properties) throws TalendException {
+        jobService.validateForEmptyInput(properties, properties.jobId + "_" + jobCategory + "_InputSheet", jobCategory);
+    }
+
+    public void validateInputSheetRowCount(JobProperites properties, String inputTable) throws TalendException {
+        jobService.validateForEmptyInput(properties, inputTable, jobCategory);
     }
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
@@ -231,11 +240,11 @@ public abstract class AbstractShellProcessService {
                 }
 
             }
+            // Overrided sync process
+            this.startSyncProcessing(properties);
 
             jobService.validateFileJob(properties, jobCategory);
             jobService.createCAPIFileJob(properties, jobCategory);
-            // Overrided sync process
-            this.startSyncProcessing(properties);
 
         } catch (TalendException e) {
 
