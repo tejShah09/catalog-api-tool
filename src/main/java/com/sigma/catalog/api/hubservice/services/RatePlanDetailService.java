@@ -28,10 +28,7 @@ public class RatePlanDetailService extends AbstractShellProcessService {
                 stageEntity(properites);
 
                
-                changeStrategy(properites, false);
-                liveEntity(properites);
-                waitLiveTobeCompleted(properites);
-                changeStrategy(properites, true);
+                makeLiveWithStatusCheck(properites);
 
                 
                 sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);

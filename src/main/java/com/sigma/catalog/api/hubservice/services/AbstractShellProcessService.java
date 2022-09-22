@@ -167,6 +167,43 @@ public abstract class AbstractShellProcessService {
         jobService.waitLiveTobeCompleted(properites, reportLiveTable, inputLiveTable, inputLiveKey, jobCategory);
     }
 
+    public void makeLiveWithStatusCheck(JobProperites properites)
+            throws TalendException {
+        makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity", "PublicID",
+                properites.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey);
+    }
+
+    public void makeLiveWithStatusCheck(JobProperites properites, String liveInputTable,
+            String liveInpuTablekey)
+            throws TalendException {
+        makeLiveWithStatusCheck(properites, reportTable, liveInputTable, liveInpuTablekey,
+                properites.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey);
+    }
+
+    public void makeLiveWithStatusCheck(JobProperites properites, String liveInputTable,
+            String liveInpuTablekey, String coutInputTable,
+            String countInputTableKey)
+            throws TalendException {
+        makeLiveWithStatusCheck(properites, reportTable, liveInputTable, liveInpuTablekey,
+                coutInputTable, countInputTableKey);
+    }
+
+    public void makeLiveWithStatusCheck(JobProperites properites, String reportTable, String liveInputTable,
+            String liveInpuTablekey, String coutInputTable, String countInputTableKey)
+            throws TalendException {
+
+        try {
+            changeStrategy(properites, false);
+            liveEntity(properites, liveInputTable, liveInpuTablekey);
+            waitLiveTobeCompleted(properites, reportTable, coutInputTable, countInputTableKey);
+        } catch (TalendException e) {
+            throw e;
+        } finally {
+            changeStrategy(properites, true);
+        }
+
+    }
+
     public void startGenericSyncProcessing(JobProperites properties, String fileName) throws TalendException {
 
         // Step 1 SaveFile

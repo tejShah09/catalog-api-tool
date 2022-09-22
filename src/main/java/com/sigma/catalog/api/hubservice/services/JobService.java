@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
@@ -326,7 +325,6 @@ public class JobService {
 
         talend.executeJob(properties.jobId, "RowCountFromTable", config);
 
- 
         // Check And ReportAny Error
         checkForError(properties.jobId, JOBKeywords.FILE_ROW_COUNT, jobCategory);
     }
@@ -402,9 +400,11 @@ public class JobService {
                 JOBKeywords.JOB_FAILED, errorMsg));
 
         List<JOB> jobs = jobtable.findJobEvents(properties.jobId);
-        errorMsg = errorMsg + "\n\n\n\n" + new Gson().toJson(jobs);
-        emailServer.sendMail(properties,
-                "JOB failed Id : " + properties.jobId + " jobName : " + category,
+
+        errorMsg = errorMsg + "\n\n\n\n JOB Events Status ****************************\n" + new GsonBuilder().setPrettyPrinting().create().toJson(jobs);
+        emailServer.sendMail(properties, "[" +
+                ConfigurationUtility.getEnvConfigModel().getEnvironment() + "]JOB failed Id : " + properties.jobId
+                + " jobName : " + category,
                 errorMsg);
     }
 

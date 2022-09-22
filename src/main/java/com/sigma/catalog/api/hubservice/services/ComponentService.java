@@ -16,7 +16,7 @@ public class ComponentService extends AbstractShellProcessService {
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
-
+                String processingTable = properites.jobId + "_" + jobCategory + "_Associations";
                 deleteNonLiveEntityName(properites);
                 editEntityName(properites);
 
@@ -30,17 +30,12 @@ public class ComponentService extends AbstractShellProcessService {
                 createRates(properites);
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
+                approveEntity(properites, processingTable, "Parent_Entity_GUID");
 
                 // step 3 Stage Entity
-                stageEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
+                stageEntity(properites, processingTable, "Parent_Entity_GUID");
 
-
-                changeStrategy(properites, false);
-                liveEntity(properites, properites.jobId + "_" + jobCategory + "_Associations", "Parent_Entity_GUID");
-                waitLiveTobeCompleted(properites);
-                changeStrategy(properites, true);
-               
+                makeLiveWithStatusCheck(properites, processingTable, "Parent_Entity_GUID");
 
                 sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
 

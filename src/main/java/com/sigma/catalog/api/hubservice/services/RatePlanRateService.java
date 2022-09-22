@@ -16,7 +16,7 @@ public class RatePlanRateService extends AbstractShellProcessService {
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
-
+                String inpuTable = properites.jobId + "_" + jobCategory + "_Rates";
                 deleteNonLiveEntityName(properites);
                 editEntityName(properites);
 
@@ -30,16 +30,14 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 createRates(properites);
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
+                approveEntity(properites, inpuTable, "Parent_Entity_GUID");
 
                 // step 3 Stage Entity
-                stageEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
+                stageEntity(properites, inpuTable, "Parent_Entity_GUID");
 
                 // step 4 Live Entity
-                changeStrategy(properites, false);
-                liveEntity(properites, properites.jobId + "_" + jobCategory + "_Rates", "Parent_Entity_GUID");
-                waitLiveTobeCompleted(properites);
-                changeStrategy(properites, true);
+                makeLiveWithStatusCheck(properites, inpuTable, "Parent_Entity_GUID");
+
                 //
                 sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
 

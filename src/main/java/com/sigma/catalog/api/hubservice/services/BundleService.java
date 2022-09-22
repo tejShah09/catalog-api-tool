@@ -29,10 +29,7 @@ public class BundleService extends AbstractShellProcessService {
 
                 // step 4 Live Entity
 
-                changeStrategy(properites, false);
-                liveEntity(properites);
-                waitLiveTobeCompleted(properites);
-                changeStrategy(properites, true);
+                makeLiveWithStatusCheck(properites);
 
                 sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
 
