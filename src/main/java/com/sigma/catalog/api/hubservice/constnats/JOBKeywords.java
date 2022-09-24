@@ -8,6 +8,7 @@ public class JOBKeywords {
     public static String UPLOAD_FILE = "UPLOAD_FILE";
     public static String FILE_VALIDATION = "FILE_VALIDATION";
     public static String FILE_ROW_COUNT = "FILE_ROW_COUNT";
+    public static String EDIT_FILE_ROW_COUNT = "EDIT_FILE_ROW_COUNT";
     public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
     public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";
     public static String CATALOG_REQUEST_SUBMITION = "CATALOG_REQUEST_SUBMITION";
@@ -15,10 +16,12 @@ public class JOBKeywords {
     public static String CATALOG_ASSOC_SUBMITION = "CATALOG_ASSOC_SUBMITION";
     public static String CATALOG_RATE_CREATION = "CATALOG_RATE_CREATION";
     public static String CATALOG_RATE_SUBMITION = "CATALOG_RATE_SUBMITION";
+    public static String RESTART_IIS = "RESTART_IIS";
     public static String HUB_RECON_SUBMITION = "HUB_RECON_SUBMITION";
     public static String ENTITY_APPROVE = "ENTITY_APPROVE";
     public static String ENTITY_STAGE = "ENTITY_STAGE";
     public static String ENTITY_LIVE = "ENTITY_LIVE";
+    public static String ENTITY_LIVE_RETRY = "ENTITY_LIVE_RETRY";
     public static String ENTITY_LIVE_CHECK_TRY_ = "ENTITY_LIVE_CHECK_TRY_";
     public static String ENTITY_DELETE = "ENTITY_DELETE";
     public static String ENTITY_EDIT = "ENTITY_EDIT";

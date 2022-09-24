@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EnvironmentProperties>
+    <jksLoad>true</jksLoad>
+    <IdentityURL>https://identity.catvm.local:3443/Issue/WebApi</IdentityURL>
+    <SigmaCatalogServicesApiURL>http://localhost/cs</SigmaCatalogServicesApiURL>
+    <ManagementURL>https://management.catvm.local:4443/</ManagementURL>
+    <CatalogAPIURL>https://catalogapi.catvm.local:6443/</CatalogAPIURL>
+    <Username>Administrator</Username>
+    <Password>S3amuscat</Password>
+    <AuthToken>NA</AuthToken>
+    <CatalogInstance>Simply_UAT</CatalogInstance>
+    <CatalogAPIToken>NA</CatalogAPIToken>
+    <TokenType>urn:oasis:names:tc:SAML:2.0:assertion</TokenType>
+    <TrustStore>./config/catalogStore/catalog.jks</TrustStore>
+    <trustPassword>changeit</trustPassword>
+    <ConnectTimeout>1200000</ConnectTimeout>
+    <ReadTimeout>1200000</ReadTimeout>
+    <catalogInstanceID>fb71d83e-05f6-41e1-bb68-0baad0adea05</catalogInstanceID>
+	<environment>UAT</environment>
+    <catalogDataAPIInstance>CatalogAPI</catalogDataAPIInstance>
+</EnvironmentProperties>

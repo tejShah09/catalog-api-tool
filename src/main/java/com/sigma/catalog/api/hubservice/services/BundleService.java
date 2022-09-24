@@ -18,6 +18,14 @@ public class BundleService extends AbstractShellProcessService {
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
 
+                String editInputTable = properites.jobId + "_" + jobCategory + "_Enddate_InputSheet";
+
+                if (!checkIfTableEmpty(properites, editInputTable,
+                                JOBKeywords.EDIT_FILE_ROW_COUNT)) {
+                        deleteNonLiveEntityName(properites, editInputTable);
+                        editEntityName(properites, editInputTable);
+                }
+
                 // Step 1 Create Entity
                 createEntity(properites);
 
@@ -29,9 +37,11 @@ public class BundleService extends AbstractShellProcessService {
 
                 // step 4 Live Entity
 
-                makeLiveWithStatusCheck(properites);
+                makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
+                                "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
 
-                sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
+                sendReconfile(properites, JOBKeywords.BUNDLE_TYPE, properites.jobId + "_" + jobCategory + "_Entity",
+                                "Name");
 
         }
 

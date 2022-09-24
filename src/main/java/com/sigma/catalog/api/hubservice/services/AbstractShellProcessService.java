@@ -16,6 +16,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.talendService.TalendConstants;
@@ -99,6 +101,13 @@ public abstract class AbstractShellProcessService {
 
     public void sendReconfile(JobProperites properties, String entityType) throws TalendException {
         jobService.sendReconfile(properties, properties.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey,
+                reportTable,
+                entityType, jobCategory);
+    }
+
+    public void sendReconfile(JobProperites properties, String entityType, String inputTableNameR,
+            String inputtableKeyR) throws TalendException {
+        jobService.sendReconfile(properties, inputTableNameR, inputtableKeyR,
                 reportTable,
                 entityType, jobCategory);
     }
@@ -219,11 +228,31 @@ public abstract class AbstractShellProcessService {
     }
 
     public void validateInputSheetRowCount(JobProperites properties) throws TalendException {
-        jobService.validateForEmptyInput(properties, properties.jobId + "_" + jobCategory + "_InputSheet", jobCategory);
+        jobService.validateForEmptyInput(properties, properties.jobId + "_" + jobCategory + "_InputSheet", jobCategory,
+                JOBKeywords.FILE_ROW_COUNT);
     }
 
     public void validateInputSheetRowCount(JobProperites properties, String inputTable) throws TalendException {
-        jobService.validateForEmptyInput(properties, inputTable, jobCategory);
+        jobService.validateForEmptyInput(properties, inputTable, jobCategory, JOBKeywords.FILE_ROW_COUNT);
+    }
+
+    public void validateInputSheetRowCount(JobProperites properties, String inputTable, String jobType)
+            throws TalendException {
+        jobService.validateForEmptyInput(properties, inputTable, jobCategory, jobType);
+    }
+
+    public boolean checkIfTableEmpty(JobProperites properties, String inputTable, String jobType) {
+        boolean isEmpty = true;
+
+        try {
+            validateInputSheetRowCount(properties, inputTable, jobType);
+            isEmpty = false;
+        } catch (TalendException e) {
+            isEmpty = true;
+        }
+
+        return isEmpty;
+
     }
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {

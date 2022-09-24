@@ -248,14 +248,14 @@
 			<groupId>routines</groupId>
 			<artifactId>routines</artifactId>
 			<version>1.0</version>
-			<systemPath>${project.build.directory}/../lib/routines-1.0.jar</systemPath>
+			<systemPath>${project.build.directory}/../lib/routines.jar </systemPath>
 			<scope>system</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sigma</groupId>
 			<artifactId>catalog-api-tool-core</artifactId>
 			<version>1.0</version>
-			<systemPath>${project.build.directory}/../lib/catalog-api-tool-core-1.0.jar </systemPath>
+			<systemPath>${project.build.directory}/../lib/catalog-api-tool-core-1.0.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
 	</dependencies>

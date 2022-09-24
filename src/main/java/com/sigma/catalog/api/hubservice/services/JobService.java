@@ -34,8 +34,6 @@ public class JobService {
     @Autowired
     private EmailService emailServer;
 
-    @Autowired
-    private JobService jobService;
 
     public void stageEntity(JobProperites properties, String query, String statusTable, String jobCategory)
             throws TalendException {
@@ -69,6 +67,53 @@ public class JobService {
 
     public void liveEntity(JobProperites properties, String query, String statusTable, String jobCategory)
             throws TalendException {
+        if (properties.isLaunchEntity()) {
+            try {
+                liveEntityOnly(properties, query, statusTable, jobCategory,JOBKeywords.ENTITY_LIVE);
+            } catch (TalendException e) {
+                if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.ENTITY_LIVE, jobCategory, "failure,103")) {
+                    jobtable.save(
+                            new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                                    JOBKeywords.TASK_STARTED,
+                                    ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+
+                    try {
+                        System.out.println("Stoping WebSite "
+                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+                        routines.WindowService
+                                .stopWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+
+                        System.out.println("Starting WebSite "
+                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+                        routines.WindowService
+                                .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+                        Thread.sleep(5000);
+                        jobtable.save(
+                                new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                                        JOBKeywords.TASK_END,
+                                        ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+                    } catch (Exception err) {
+                        jobtable.save(
+                                new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                                        JOBKeywords.TASK_FAILED,
+                                        ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+                        System.out.println("Unable to restart webservice");
+                    }
+
+                    liveEntityOnly(properties, "select \"PublicID\" from \"" + statusTable + "\" where status like '%failure,103%'", statusTable, jobCategory,JOBKeywords.ENTITY_LIVE_RETRY);
+
+                } else {
+                    throw e;
+                }
+
+            }
+
+        }
+    }
+
+    public void liveEntityOnly(JobProperites properties, String query, String statusTable, String jobCategory,
+            String jobyType)
+            throws TalendException {
 
         HashMap<String, String> config = new HashMap<>();
 
@@ -82,14 +127,15 @@ public class JobService {
             // Generate report for Live
             config = new HashMap<>();
             config.put("tableName", statusTable);
-            config.put("jobType", JOBKeywords.ENTITY_LIVE);
+            config.put("jobType", jobyType);
             config.put("jobCategory", jobCategory);
             config.put("keyName", "PublicID");
             config.put("jobStatus", JOBKeywords.TASK_END);
             talend.executeJob(properties.jobId, "getStatusCount", config);
 
             // Check And ReportAny Live
-            checkForStatusError(properties.jobId, JOBKeywords.ENTITY_LIVE, jobCategory,
+
+            checkForStatusError(properties.jobId, jobyType, jobCategory,
                     "" + jobCategory + " Live Failed JobId : " + properties.jobId + " Task : Live Entity");
 
         }
@@ -114,7 +160,7 @@ public class JobService {
                 config.put("jobType", JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration));
                 config.put("jobCategory", jobCategory);
                 talend.executeJob(properites.jobId, "eCAPICheckLiveStatusEntityName", config);
-                currentCount = getLiveCountFromJobs(properites.jobId,
+                currentCount = getCountFromJobs(properites.jobId,
                         JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration), jobCategory);
                 System.out.println(
                         properites.jobId + " Waiting for Launches to complete. Launch pending " + currentCount);
@@ -127,7 +173,7 @@ public class JobService {
 
     }
 
-    public Integer getLiveCountFromJobs(String jobId, String jobType, String jobCategory) throws TalendException {
+    public Integer getCountFromJobs(String jobId, String jobType, String jobCategory) throws TalendException {
         List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
         Integer count = -1;
         if (statusJob != null && statusJob.size() > 0) {
@@ -315,18 +361,18 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Entity Creation");
     }
 
-    public void validateForEmptyInput(JobProperites properties, String tableName, String jobCategory)
+    public void validateForEmptyInput(JobProperites properties, String tableName, String jobCategory, String jobType)
             throws TalendException {
 
         HashMap<String, String> config = new HashMap<>();
         config.put("tableName", tableName);
-        config.put("jobType", JOBKeywords.FILE_ROW_COUNT);
+        config.put("jobType", jobType);
         config.put("jobCategory", jobCategory);
 
         talend.executeJob(properties.jobId, "RowCountFromTable", config);
 
         // Check And ReportAny Error
-        checkForError(properties.jobId, JOBKeywords.FILE_ROW_COUNT, jobCategory);
+        checkForError(properties.jobId, jobType, jobCategory);
     }
 
     public void readFileJob(JobProperites properties, String fileName, String jobCategory) throws TalendException {
@@ -401,7 +447,8 @@ public class JobService {
 
         List<JOB> jobs = jobtable.findJobEvents(properties.jobId);
 
-        errorMsg = errorMsg + "\n\n\n\n JOB Events Status ****************************\n" + new GsonBuilder().setPrettyPrinting().create().toJson(jobs);
+        errorMsg = errorMsg + "\n\n\n\n JOB Events Status ****************************\n"
+                + new GsonBuilder().setPrettyPrinting().create().toJson(jobs);
         emailServer.sendMail(properties, "[" +
                 ConfigurationUtility.getEnvConfigModel().getEnvironment() + "]JOB failed Id : " + properties.jobId
                 + " jobName : " + category,
@@ -457,5 +504,34 @@ public class JobService {
         } else {
             throw new TalendException("NO COUNT FOUND");
         }
+    }
+
+    public boolean isStatusCheckErrorPresent(String jobId, String jobType, String jobCategory, String customError)
+            throws TalendException {
+        boolean failedRecordfound = false;
+        List<JOB> statusJob = jobtable.findJobValidationStatus(jobId, jobType, jobCategory);
+        if (statusJob != null && statusJob.size() > 0) {
+            List<Map<String, Object>> countList = new ArrayList<>();
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                if (statusJob.get(0).getMessage() != null) {
+
+                    countList = mapper.readValue(statusJob.get(0).getMessage(), List.class);
+                }
+
+            } catch (Exception e) {
+                throw new TalendException(e.getMessage());
+            }
+
+            for (Map<String, Object> ctObj : countList) {
+                if (!StringUtility.contains(StringUtility.trim((String) ctObj.get("response")), customError)) {
+                    failedRecordfound = true;
+                }
+
+            }
+
+        }
+
+        return failedRecordfound;
     }
 }

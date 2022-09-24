@@ -18,20 +18,25 @@ public class RatePlanDetailService extends AbstractShellProcessService {
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
 
-           
+                String editInputTable = properites.jobId + "_" + jobCategory + "_Enddate_InputSheet";
+
+                if (!checkIfTableEmpty(properites, editInputTable,
+                                JOBKeywords.EDIT_FILE_ROW_COUNT)) {
+                        deleteNonLiveEntityName(properites, editInputTable);
+                        editEntityName(properites, editInputTable);
+                }
+
                 createEntity(properites);
 
-            
                 approveEntity(properites);
 
-                
                 stageEntity(properites);
 
-               
-                makeLiveWithStatusCheck(properites);
+                makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
+                                "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
 
-                
-                sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
+                sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE, properites.jobId + "_" + jobCategory + "_Entity",
+                                "Name");
 
         }
 
