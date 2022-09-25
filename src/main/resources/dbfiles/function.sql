@@ -55,7 +55,7 @@ DECLARE
    messagesize Integer;
 BEGIN
 
-finalQuery = 'select CAST(json_agg(to_json(t)) as TEXT) as ct from (SELECT  "status",count(*),status_reason as response,ARRAY_AGG("'||keyname||'") as entites FROM "'||tablename||'" group by status,status_reason) as t';
+finalQuery = 'select CAST(json_agg(to_json(t)) as TEXT) as ct from (SELECT  "status",count(*),response as response,ARRAY_AGG("'||keyname||'") as entites FROM "'||tablename||'" group by status,response) as t';
 countQuery = 'select  length(ct)  from ( '||finalQuery||' ) as t';
 EXECUTE countQuery into messagesize;
 IF messagesize < 2048 THEN

@@ -34,7 +34,6 @@ public class JobService {
     @Autowired
     private EmailService emailServer;
 
-
     public void stageEntity(JobProperites properties, String query, String statusTable, String jobCategory)
             throws TalendException {
         HashMap<String, String> config = new HashMap<>();
@@ -69,9 +68,10 @@ public class JobService {
             throws TalendException {
         if (properties.isLaunchEntity()) {
             try {
-                liveEntityOnly(properties, query, statusTable, jobCategory,JOBKeywords.ENTITY_LIVE);
+                liveEntityOnly(properties, query, statusTable, jobCategory, JOBKeywords.ENTITY_LIVE);
             } catch (TalendException e) {
-                if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.ENTITY_LIVE, jobCategory, "failure,103")) {
+                if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.ENTITY_LIVE,
+                        jobCategory, "failure,103")) {
                     jobtable.save(
                             new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
                                     JOBKeywords.TASK_STARTED,
@@ -100,7 +100,9 @@ public class JobService {
                         System.out.println("Unable to restart webservice");
                     }
 
-                    liveEntityOnly(properties, "select \"PublicID\" from \"" + statusTable + "\" where status like '%failure,103%'", statusTable, jobCategory,JOBKeywords.ENTITY_LIVE_RETRY);
+                    liveEntityOnly(properties,
+                            "select \"PublicID\" from \"" + statusTable + "\" where status='Live' and response like '%failure,103%'",
+                            statusTable, jobCategory, JOBKeywords.ENTITY_LIVE_RETRY);
 
                 } else {
                     throw e;
@@ -524,7 +526,7 @@ public class JobService {
             }
 
             for (Map<String, Object> ctObj : countList) {
-                if (!StringUtility.contains(StringUtility.trim((String) ctObj.get("response")), customError)) {
+                if (StringUtility.contains(StringUtility.trim((String) ctObj.get("response")), customError)) {
                     failedRecordfound = true;
                 }
 

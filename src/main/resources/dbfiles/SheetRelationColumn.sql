@@ -1,8 +1,0 @@
-id,sheetColumn,parentSheetColumn
-1,Rating_Plan_ID,Rating_Plan_ID
-2,Time_Band_ID,Time_Band_ID
-3,Consumption_Units_Id,Consumption_Units_Id
-4,Inclusive_Loss_Factors_Id,Inclusive_Loss_Factors_Id
-5,Use_Daylight_Saving_Time_Id,Use_Daylight_Saving_Time_Id
-6,Consumption_Value_Id,Consumption_Value_Id
-7,Demand_Units_Id,Demand_Units_Id
