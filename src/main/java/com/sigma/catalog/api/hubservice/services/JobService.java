@@ -82,11 +82,17 @@ public class JobService {
                                 + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
                         routines.WindowService
                                 .stopWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-
+                        Thread.sleep(2000);
                         System.out.println("Starting WebSite "
                                 + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
                         routines.WindowService
                                 .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+
+                        Thread.sleep(2000);
+                        System.out.println("restarting  Applciation ppol "
+                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+                        routines.WindowService
+                                .runCommand("powershell.exe Restart-WebAppPool "+ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
                         Thread.sleep(5000);
                         jobtable.save(
                                 new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
@@ -101,7 +107,8 @@ public class JobService {
                     }
 
                     liveEntityOnly(properties,
-                            "select \"PublicID\" from \"" + statusTable + "\" where status='Live' and response like '%failure,103%'",
+                            "select \"PublicID\" from \"" + statusTable
+                                    + "\" where status='Live' and response like '%failure,103%'",
                             statusTable, jobCategory, JOBKeywords.ENTITY_LIVE_RETRY);
 
                 } else {

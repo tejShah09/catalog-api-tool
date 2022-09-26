@@ -21,8 +21,10 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 editEntityName(properites);
 
                 // create TimeBand in RatePlanRate
-                createEntity(properites, "RatePlanDetail", "'Entity','Time Band Mapping'");
-
+                if (!checkIfTableEmpty(properites, properites.jobId + "_" + "RatePlanDetail_Entity",
+                                JOBKeywords.TABLE_FILE_ROW_COUNT)) {
+                        createEntity(properites, "RatePlanDetail", "'Entity','Time Band Mapping'");
+                }
                 // Associate Charge
                 createAssoc(properites);
 

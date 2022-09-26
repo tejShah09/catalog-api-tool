@@ -248,7 +248,7 @@
 			<groupId>routines</groupId>
 			<artifactId>routines</artifactId>
 			<version>1.0</version>
-			<systemPath>${project.build.directory}/../lib/routines.jar </systemPath>
+			<systemPath>${project.build.directory}/../lib/routines.jar</systemPath>
 			<scope>system</scope>
 		</dependency>
 		<dependency>

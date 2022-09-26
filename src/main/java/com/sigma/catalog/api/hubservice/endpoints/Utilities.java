@@ -1,17 +1,25 @@
 package com.sigma.catalog.api.hubservice.endpoints;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
+import com.sigma.catalog.api.authentication.JKSFileLoad;
+import com.sigma.catalog.api.catalog.CatalogCommunicator;
 import com.sigma.catalog.api.catalog.FactsForAttributes;
+import com.sigma.catalog.api.configuration.CatalogConstants;
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
@@ -145,6 +153,34 @@ public class Utilities {
         System.out.println(FactsForAttributes.parseFile(input));
 
         return talend.getSucessResponse("jobId");
+    }
+
+    @PostMapping("/callCSAPI")
+    public ResponseEntity<Object> callCSAPI(@RequestBody Map<String, String> request) {
+
+        String url = ConfigurationUtility.getEnvConfigModel().getSigmaCatalogServicesApiURL();
+        if (!StringUtility.isEmpty(request.get("url"))) {
+            url = request.get("url");
+        }
+        String sixthUrlString = url + request.get("basepath");
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(CatalogConstants.ACCEPT, CatalogConstants.APPLICATION_XML);
+        headers.add(CatalogConstants.CONTENT_TYPE, CatalogConstants.APPLICATION_XML);
+        HttpEntity<String> requestTemp = new HttpEntity<>(headers);
+        RestTemplate rs;
+        if (StringUtility.equalsAnyIgnoreCase("true", request.get("isSSL"))) {
+            rs = JKSFileLoad.getNonSSLTemplate();
+        } else {
+            rs = JKSFileLoad.getRestTemplate();
+        }
+        byte[] createEntityResponse = CatalogCommunicator.getAPIResponseByte(JKSFileLoad.getRestTemplate(),
+                sixthUrlString,
+                HttpMethod.GET, requestTemp);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("url", sixthUrlString);
+        map.put("body", new String(createEntityResponse, StandardCharsets.UTF_8));
+        return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
 
 }
