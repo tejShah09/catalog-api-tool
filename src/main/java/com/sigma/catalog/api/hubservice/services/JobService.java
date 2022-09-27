@@ -59,7 +59,7 @@ public class JobService {
         HashMap<String, String> config = new HashMap<>();
         if (properties.isChangeStrategy() && properties.isLaunchEntity()) {
             config.put("hubIntegration", String.valueOf(hubIntegration));
-            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
+            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstanceID());
             talend.executeJob(properties.jobId, "ChangeStrategy", config);
         }
     }
@@ -89,10 +89,11 @@ public class JobService {
                                 .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
 
                         Thread.sleep(2000);
-                        System.out.println("restarting  Applciation ppol "
+                        System.out.println("restarting  application  pools "
                                 + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
                         routines.WindowService
-                                .runCommand("powershell.exe Restart-WebAppPool "+ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+                                .runCommand("powershell.exe Restart-WebAppPool "
+                                        + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
                         Thread.sleep(5000);
                         jobtable.save(
                                 new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
@@ -244,7 +245,9 @@ public class JobService {
         config.put("jobCategory", jobCategory);
         talend.executeJob(properties.jobId, "SendReconSheetToHub", config);
 
-        checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION, jobCategory);
+        // Commeting this recon failuer
+        // checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION,
+        // jobCategory);
 
     }
 
@@ -459,7 +462,7 @@ public class JobService {
         errorMsg = errorMsg + "\n\n\n\n JOB Events Status ****************************\n"
                 + new GsonBuilder().setPrettyPrinting().create().toJson(jobs);
         emailServer.sendMail(properties, "[" +
-                ConfigurationUtility.getEnvConfigModel().getEnvironment() + "]JOB failed Id : " + properties.jobId
+                ConfigurationUtility.getEnvConfigModel().getEnvironment() + "] JOB failed Id : " + properties.jobId
                 + " jobName : " + category,
                 errorMsg);
     }
@@ -467,6 +470,9 @@ public class JobService {
     public void saveSucessJobs(JobProperites properties, String category) {
         jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, category,
                 JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
+        emailServer.sendSuccessMail(properties, "[" +
+                ConfigurationUtility.getEnvConfigModel().getEnvironment() + "] JOB Success Id : " + properties.jobId
+                + " jobName : " + category + "[Witout reconciliation]");
     }
 
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)

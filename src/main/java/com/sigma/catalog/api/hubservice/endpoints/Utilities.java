@@ -83,7 +83,7 @@ public class Utilities {
 
             config.put("hubIntegration",
                     StringUtility.isEmpty(request.get("hubIntegration")) ? "true" : request.get("hubIntegration"));
-            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstance());
+            config.put("instanceId", ConfigurationUtility.getEnvConfigModel().getCatalogInstanceID());
             talend.executeJob(jobId, "ChangeStrategy", config);
             return talend.getSucessResponse(jobId);
 

@@ -20,22 +20,25 @@ public class ProductXMLRatesService extends AbstractShellProcessService {
     public void startASyncProcessing(JobProperites properties) throws TalendException {
 
         String inpuTable = properties.jobId + "_" + JOBKeywords.COMPONENT + "_Rates";
-        deleteNonLiveEntityName(properties, inpuTable);
+        if (!checkIfTableEmpty(properties, inpuTable,
+                JOBKeywords.TABLE_FILE_ROW_COUNT)) {
 
-        editEntityName(properties, inpuTable);
+            deleteNonLiveEntityName(properties, inpuTable);
 
-        createRates(properties, JOBKeywords.COMPONENT);
+            editEntityName(properties, inpuTable);
 
-        approveEntity(properties, inpuTable, "Parent_Entity_GUID");
+            createRates(properties, JOBKeywords.COMPONENT);
 
-        // step 3 Stage Entity
-        stageEntity(properties, inpuTable, "Parent_Entity_GUID");
+            approveEntity(properties, inpuTable, "Parent_Entity_GUID");
 
-        // step 4 Live Entity
-        makeLiveWithStatusCheck(properties, inpuTable, "Parent_Entity_GUID", inpuTable, "Parent_Entity_Name");
+            // step 3 Stage Entity
+            stageEntity(properties, inpuTable, "Parent_Entity_GUID");
 
-        sendReconfile(properties, inpuTable, JOBKeywords.BUNDLE_TYPE);
+            // step 4 Live Entity
+            makeLiveWithStatusCheck(properties, inpuTable, "Parent_Entity_GUID", inpuTable, "Parent_Entity_Name");
 
+            sendReconfile(properties, inpuTable, JOBKeywords.BUNDLE_TYPE);
+        }
     }
 
     @Override

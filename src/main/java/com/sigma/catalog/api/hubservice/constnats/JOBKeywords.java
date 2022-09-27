@@ -36,6 +36,7 @@ public class JOBKeywords {
     public static String HUBRATEPLANRATE = "HUBRatePlanRate";
     public static String PRODUCTXMLRATES = "ProductXMLRates";
     public static String RATEPLANXMLRATES = "RatePlanXMLRates";
+    public static String IMPORTPRICECHANGE = "ImportPriceChange";
 
     // STATUS
     public static String JOB_FAILED = "JOB_FAILED";

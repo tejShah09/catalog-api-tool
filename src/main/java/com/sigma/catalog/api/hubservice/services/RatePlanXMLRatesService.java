@@ -18,22 +18,24 @@ public class RatePlanXMLRatesService extends AbstractShellProcessService {
     @Override
     public void startASyncProcessing(JobProperites properties) throws TalendException {
         String inpuTable = properties.jobId + "_" + JOBKeywords.HUBRATEPLANRATE + "_Rates";
-        deleteNonLiveEntityName(properties, inpuTable);
+        if (!checkIfTableEmpty(properties, inpuTable,
+                JOBKeywords.TABLE_FILE_ROW_COUNT)) {
+            deleteNonLiveEntityName(properties, inpuTable);
 
-        editEntityName(properties, inpuTable);
+            editEntityName(properties, inpuTable);
 
-        createRates(properties, JOBKeywords.HUBRATEPLANRATE);
+            createRates(properties, JOBKeywords.HUBRATEPLANRATE);
 
-        approveEntity(properties, inpuTable, "Parent_Entity_GUID");
+            approveEntity(properties, inpuTable, "Parent_Entity_GUID");
 
-        // step 3 Stage Entity
-        stageEntity(properties, inpuTable, "Parent_Entity_GUID");
+            // step 3 Stage Entity
+            stageEntity(properties, inpuTable, "Parent_Entity_GUID");
 
-        // step 4 Live Entity
-        makeLiveWithStatusCheck(properties, inpuTable, "Parent_Entity_GUID", inpuTable, "Parent_Entity_Name");
+            // step 4 Live Entity
+            makeLiveWithStatusCheck(properties, inpuTable, "Parent_Entity_GUID", inpuTable, "Parent_Entity_Name");
 
-        sendReconfile(properties, inpuTable, JOBKeywords.RATEPLAN_TYPE);
-
+            sendReconfile(properties, inpuTable, JOBKeywords.RATEPLAN_TYPE);
+        }
     }
 
     @Override

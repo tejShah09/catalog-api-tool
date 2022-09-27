@@ -14,7 +14,7 @@ public interface JOBRepository extends JpaRepository<JOB, String> {
     @Query("SELECT j FROM #{#entityName} j WHERE j.jobId = ?1 and j.jobType = ?2 and j.jobCategory = ?3")
     List<JOB> findJobValidationStatus(String jobId, String jobType, String jobCategory);
 
-    @Query("SELECT j FROM #{#entityName} j WHERE j.jobId = ?1 ")
+    @Query("SELECT j FROM #{#entityName} j WHERE j.jobId = ?1 order by id ")
     List<JOB> findJobEvents(String jobId);
 
 }

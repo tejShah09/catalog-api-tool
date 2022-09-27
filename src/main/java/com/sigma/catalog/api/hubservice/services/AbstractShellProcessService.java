@@ -46,7 +46,7 @@ public abstract class AbstractShellProcessService {
     public TalendHelperService talend;
 
     @Autowired
-    private JobService jobService;
+    public JobService jobService;
 
     public String jobCategory;
     public String sheets;
@@ -260,7 +260,7 @@ public abstract class AbstractShellProcessService {
             jobService.jobValidation(properites.jobId);
             // SaveFile
             String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
-
+            properites.addInputFileNAme(fileName);
             // Generic Process
             this.startGenericSyncProcessing(properites, fileName);
 
@@ -284,15 +284,17 @@ public abstract class AbstractShellProcessService {
             List<String> ratefileNames = new ArrayList<>();
 
             if (rateXmls != null) {
-
-                Arrays.asList(rateXmls).stream().forEach(file -> {
+                
+                Arrays.asList(rateXmls).stream().forEach((file) -> {
 
                     String oringalFile = file.getOriginalFilename();
                     if (StringUtility.contains(oringalFile, ".xml")) {
                         oringalFile = oringalFile.replace(".xml", "");
                     }
-                    String fileNAme = jobCategory + "_" + oringalFile + "_" + properties.jobId + ".xml";
-
+                    String fileNAme =  jobCategory + "_" + oringalFile + "_"
+                            + properties.jobId
+                            + ".xml";
+                    properties.addInputFileNAme(fileNAme);
                     talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileNAme);
                     ratefileNames.add(TalendConstants.INPUT_FILE_LOCATION + fileNAme);
 
@@ -345,4 +347,5 @@ public abstract class AbstractShellProcessService {
 
         }
     }
+
 }

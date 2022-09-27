@@ -1,5 +1,8 @@
 package com.sigma.catalog.api.hubservice.dbmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.sigma.catalog.api.utility.StringUtility;
 
 public class JobProperites {
@@ -8,6 +11,7 @@ public class JobProperites {
     private boolean sendEmail;
     private boolean changeStrategy;
     public String jobId;
+    private List<String> inputFiles;
 
     public JobProperites(String jobId) {
         launchEntity = true;
@@ -15,6 +19,15 @@ public class JobProperites {
         sendEmail = true;
         changeStrategy = true;
         this.jobId = jobId;
+        inputFiles = new ArrayList<>();
+    }
+
+    public void addInputFileNAme(String fileName) {
+        inputFiles.add(fileName);
+    }
+
+    public List<String> getInputFileNames() {
+        return inputFiles;
     }
 
     public JobProperites(String launchEntity, String sendReconSheet, String sendEmail, String changeStrategy,
@@ -24,6 +37,7 @@ public class JobProperites {
         this.sendEmail = covertToBoolean(sendEmail);
         this.changeStrategy = covertToBoolean(changeStrategy);
         this.jobId = jobId;
+        inputFiles = new ArrayList<>();
     }
 
     private boolean covertToBoolean(String property) {
