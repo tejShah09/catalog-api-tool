@@ -112,7 +112,7 @@ public class EmailService {
    }
 
    private void addAttachment(Multipart multipart, String filename, String fileLocation) throws MessagingException {
-      DataSource source = new FileDataSource(filename);
+      DataSource source = new FileDataSource(fileLocation);
       BodyPart messageBodyPart = new MimeBodyPart();
       messageBodyPart.setDataHandler(new DataHandler(source));
       messageBodyPart.setFileName(filename);

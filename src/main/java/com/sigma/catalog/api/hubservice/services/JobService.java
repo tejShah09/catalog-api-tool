@@ -94,7 +94,7 @@ public class JobService {
                         routines.WindowService
                                 .runCommand("powershell.exe Restart-WebAppPool "
                                         + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        Thread.sleep(5000);
+                        Thread.sleep(10000);
                         jobtable.save(
                                 new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
                                         JOBKeywords.TASK_END,
