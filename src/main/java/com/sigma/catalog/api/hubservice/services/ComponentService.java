@@ -21,13 +21,20 @@ public class ComponentService extends AbstractShellProcessService {
                 editEntityName(properites);
 
                 // create TimeBand in RatePlanRate
-                createEntity(properites, "Bundle", "'Entity','Reference'");
+                // create TimeBand in RatePlanRate
+                if (!checkIfTableEmpty(properites, properites.jobId + "_" + "Bundle_Entity",
+                                JOBKeywords.TABLE_FILE_ROW_COUNT)) {
+                        createEntity(properites, "Bundle", "'Entity','Reference'");
+                }
 
                 // Associate Charge
                 createAssoc(properites);
 
                 // create Rate
-                createRates(properites);
+                if (!checkIfTableEmpty(properites, properites.jobId + "_" + "ProductComponent_Rates",
+                                JOBKeywords.RATE_FILE_ROW_COUNT)) {
+                        createRates(properites);
+                }
 
                 // Step 2 Aporve Entity
                 approveEntity(properites, processingTable, "Parent_Entity_GUID");

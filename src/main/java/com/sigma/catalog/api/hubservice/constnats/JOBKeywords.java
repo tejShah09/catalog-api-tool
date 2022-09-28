@@ -9,6 +9,7 @@ public class JOBKeywords {
     public static String FILE_VALIDATION = "FILE_VALIDATION";
     public static String FILE_ROW_COUNT = "FILE_ROW_COUNT";
     public static String EDIT_FILE_ROW_COUNT = "EDIT_FILE_ROW_COUNT";
+    public static String RATE_FILE_ROW_COUNT = "RATE_FILE_ROW_COUNT";
     public static String TABLE_FILE_ROW_COUNT = "TABLE_FILE_ROW_COUNT";
     public static String CAPI_FILE_CREATION = "CAPI_FILE_CREATION";
     public static String CATALOG_REQUEST_CREATION = "CATALOG_REQUEST_CREATION";

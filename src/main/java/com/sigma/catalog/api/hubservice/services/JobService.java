@@ -472,7 +472,7 @@ public class JobService {
                 JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
         emailServer.sendSuccessMail(properties, "[" +
                 ConfigurationUtility.getEnvConfigModel().getEnvironment() + "] JOB Success Id : " + properties.jobId
-                + " jobName : " + category + "[Witout reconciliation]");
+                + " jobName : " + category + " [Without reconciliation]");
     }
 
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)
