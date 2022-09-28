@@ -6,6 +6,7 @@ public class JOBKeywords {
     public static String START = "START";
     public static String STOP = "STOP";
     public static String UPLOAD_FILE = "UPLOAD_FILE";
+    public static String JOB_ID_VALIDATION = "JOB_ID_VALIDATION";
     public static String FILE_VALIDATION = "FILE_VALIDATION";
     public static String FILE_ROW_COUNT = "FILE_ROW_COUNT";
     public static String EDIT_FILE_ROW_COUNT = "EDIT_FILE_ROW_COUNT";

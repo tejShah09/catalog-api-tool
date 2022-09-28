@@ -44,7 +44,7 @@ public class ImportPriceChageService {
 
     public ResponseEntity<Object> validateJobId(JobProperites properties) {
         try {
-            jobService.jobValidation(properties.jobId);
+            jobService.jobValidation(properties.jobId,JOBKeywords.IMPORTPRICECHANGE);
         } catch (TalendException e) {
             jobService.saveErrorAndSendErrorEmail(properties, JOBKeywords.IMPORTPRICECHANGE,
                     e.getCustomException(properties.jobId).toString());

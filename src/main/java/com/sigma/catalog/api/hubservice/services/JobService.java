@@ -444,13 +444,15 @@ public class JobService {
         }
     }
 
-    public void jobValidation(String jobId) throws TalendException {
+    public void jobValidation(String jobId, String jobCategory) throws TalendException {
         List<JOB> statusJob = jobtable.findJobEvents(jobId);
         if (statusJob != null && statusJob.size() > 0) {
 
             throw new TalendException("JOB ID " + jobId + " is already Present");
 
         }
+        jobtable.save(new JOB(jobId, JOBKeywords.JOB_ID_VALIDATION, jobCategory,
+                JOBKeywords.TASK_SUCCESS, null));
     }
 
     public void saveErrorAndSendErrorEmail(JobProperites properties, String category, String errorMsg) {
