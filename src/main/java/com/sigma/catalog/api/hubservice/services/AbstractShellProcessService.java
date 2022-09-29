@@ -72,11 +72,11 @@ public abstract class AbstractShellProcessService {
     public void createRates(JobProperites properties) throws TalendException {
         jobService.createRates(properties, jobCategory, jobCategory);
     }
+
     public void createRateRecall(JobProperites properties) throws TalendException {
         jobService.createRateRecall(properties, jobCategory, jobCategory);
     }
 
-    
     public void createRates(JobProperites properties, String group) throws TalendException {
         jobService.createRates(properties, group, jobCategory);
     }
@@ -261,7 +261,7 @@ public abstract class AbstractShellProcessService {
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
         try {
-            jobService.jobValidation(properites.jobId,jobCategory);
+            jobService.jobValidation(properites.jobId, jobCategory);
             // SaveFile
             String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
             properites.addInputFileNAme(fileName);
@@ -330,6 +330,10 @@ public abstract class AbstractShellProcessService {
 
     @Async("asyncExecutorService")
     public void processAsync(JobProperites properties) {
+        if (properties.isOnlySync()) {
+            System.out.println("Async process is stubed");
+            return;
+        }
         try {
             this.startASyncProcessing(properties);
             jobService.saveSucessJobs(properties, jobCategory);

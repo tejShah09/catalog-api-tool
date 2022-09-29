@@ -28,7 +28,10 @@ public class ImportPriceChageService {
 
     @Async("asyncExecutorService")
     public void processAsyncXML(JobProperites properties, List<AbstractShellProcessService> xmlServices) {
-
+        if (properties.isOnlySync()) {
+            System.out.println("Async process is stubed");
+            return;
+        }
         try {
             for (AbstractShellProcessService xmlService : xmlServices) {
                 xmlService.startASyncProcessing(properties);
@@ -44,7 +47,7 @@ public class ImportPriceChageService {
 
     public ResponseEntity<Object> validateJobId(JobProperites properties) {
         try {
-            jobService.jobValidation(properties.jobId,JOBKeywords.IMPORTPRICECHANGE);
+            jobService.jobValidation(properties.jobId, JOBKeywords.IMPORTPRICECHANGE);
         } catch (TalendException e) {
             jobService.saveErrorAndSendErrorEmail(properties, JOBKeywords.IMPORTPRICECHANGE,
                     e.getCustomException(properties.jobId).toString());

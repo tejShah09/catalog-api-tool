@@ -47,12 +47,13 @@ public class ImportPriceChange {
             @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
             @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
             @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-            @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+            @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+            @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
         if (StringUtility.isEmpty(jobId)) {
             jobId = talend.generateUniqJobId();
         }
 
-        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,onlySync,
                 jobId);
         ResponseEntity<Object> resp = rateRecallService.process(properties, RateRecallUploadFile);
 
@@ -71,13 +72,14 @@ public class ImportPriceChange {
             @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
             @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
             @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-            @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+            @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+            @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
         if (StringUtility.isEmpty(jobId)) {
             jobId = talend.generateUniqJobId();
 
         }
 
-        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,onlySync,
                 jobId);
 
         ResponseEntity<Object> resp = importPriceChangeService.validateJobId(properties);

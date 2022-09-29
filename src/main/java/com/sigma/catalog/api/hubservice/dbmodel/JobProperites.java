@@ -10,6 +10,8 @@ public class JobProperites {
     private boolean sendReconSheet;
     private boolean sendEmail;
     private boolean changeStrategy;
+    private boolean onlySync;
+
     public String jobId;
     private List<String> inputFiles;
 
@@ -18,6 +20,7 @@ public class JobProperites {
         sendReconSheet = true;
         sendEmail = true;
         changeStrategy = true;
+        onlySync = false;
         this.jobId = jobId;
         inputFiles = new ArrayList<>();
     }
@@ -31,11 +34,12 @@ public class JobProperites {
     }
 
     public JobProperites(String launchEntity, String sendReconSheet, String sendEmail, String changeStrategy,
-            String jobId) {
+            String onlySync, String jobId) {
         this.launchEntity = covertToBoolean(launchEntity);
         this.sendReconSheet = covertToBoolean(sendReconSheet);
         this.sendEmail = covertToBoolean(sendEmail);
         this.changeStrategy = covertToBoolean(changeStrategy);
+        this.onlySync = covertToBoolean(onlySync);
         this.jobId = jobId;
         inputFiles = new ArrayList<>();
     }
@@ -58,6 +62,14 @@ public class JobProperites {
 
     public boolean isChangeStrategy() {
         return changeStrategy;
+    }
+
+    public boolean isOnlySync() {
+        return onlySync;
+    }
+
+    public void setOnlySync(boolean onlySync) {
+        this.onlySync = onlySync;
     }
 
 }

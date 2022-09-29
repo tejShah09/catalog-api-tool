@@ -51,13 +51,14 @@ public class RatingPlanShells {
                         @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
                         @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
                         @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+                        @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
 
                 JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
-                                jobId);
+                                onlySync, jobId);
 
                 ResponseEntity<Object> resp = bundleService.process(properties, BundleUploadFile);
                 if (resp.getStatusCode() == HttpStatus.OK) {
@@ -75,13 +76,14 @@ public class RatingPlanShells {
                         @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
                         @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
                         @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+                        @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
 
                 JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
-                                jobId);
+                                onlySync, jobId);
                 ResponseEntity<Object> resp = componentService.process(properties, ComponentUploadFile);
 
                 if (resp.getStatusCode() == HttpStatus.OK) {
@@ -98,12 +100,14 @@ public class RatingPlanShells {
                         @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
                         @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
                         @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+                        @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
 
                 JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
+                                onlySync,
                                 jobId);
 
                 ResponseEntity<Object> resp = ratePlanDetailService.process(properties, RatingPlanDetailUploadFile);
@@ -121,13 +125,14 @@ public class RatingPlanShells {
                         @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
                         @RequestParam(value = "sendReconSheet", required = false, defaultValue = "true") String sendReconSheet,
                         @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
-                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy) {
+                        @RequestParam(value = "changeStrategy", required = false, defaultValue = "true") String changeStrategy,
+                        @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
                 if (StringUtility.isEmpty(jobId)) {
                         jobId = talend.generateUniqJobId();
                 }
 
                 JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,
-                                jobId);
+                                onlySync, jobId);
                 ResponseEntity<Object> resp = ratePlanRateService.process(properties, RatingPlanRateUploadFile);
 
                 if (resp.getStatusCode() == HttpStatus.OK) {
