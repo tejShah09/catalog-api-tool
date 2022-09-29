@@ -72,7 +72,11 @@ public abstract class AbstractShellProcessService {
     public void createRates(JobProperites properties) throws TalendException {
         jobService.createRates(properties, jobCategory, jobCategory);
     }
+    public void createRateRecall(JobProperites properties) throws TalendException {
+        jobService.createRateRecall(properties, jobCategory, jobCategory);
+    }
 
+    
     public void createRates(JobProperites properties, String group) throws TalendException {
         jobService.createRates(properties, group, jobCategory);
     }

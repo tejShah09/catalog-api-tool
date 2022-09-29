@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
+import com.sigma.catalog.api.talendService.TalendConstants;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class JobBuilder {
 
     public JobBuilder(){
         LOG.debug("Loading catalog properties");
-		try (InputStream input = new FileInputStream("config/talendjars.properties");) {
+		try (InputStream input = new FileInputStream(TalendConstants.CONFIG_FILE_LOCATION+"talendjars.properties");) {
 			props = new Properties();
 			props.load(input);
 		} catch (IOException ex) {

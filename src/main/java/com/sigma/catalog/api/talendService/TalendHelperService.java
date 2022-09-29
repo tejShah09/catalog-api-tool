@@ -1,5 +1,6 @@
 package com.sigma.catalog.api.talendService;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
-import com.sigma.catalog.api.hubservice.dbmodel.JOB;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.hubservice.repository.JOBRepository;
 import com.sigma.catalog.api.talendService.model.JobBuilder;
-import com.sigma.catalog.api.utility.StringUtility;
 
 import routines.system.api.TalendJob;
 
@@ -60,8 +56,6 @@ public class TalendHelperService {
     private static final Logger LOG = LoggerFactory.getLogger(TalendHelperService.class);
     Properties talendProperties;
 
-    @Autowired
-    private JOBRepository jobtable;
     @Autowired
     private JobBuilder builder;
 
@@ -88,7 +82,7 @@ public class TalendHelperService {
         config.put("syncMeta", "false");
         config.put("inputExcelFileLocation", TalendConstants.INPUT_FILE_LOCATION);
         config.put("outputExcelFileLocation", TalendConstants.OUTPUT_FILE_LOCATION);
-        config.put("initialRefData", "./config/initialData.json");
+        config.put("initialRefData", TalendConstants.CONFIG_FILE_LOCATION + "initialData.json");
         config.put("sheetInputPostFix", "_" + jobId);
         return config;
     }
@@ -160,6 +154,18 @@ public class TalendHelperService {
         }
     }
 
+    public void createJobsFolders() {
+
+        try {
+            FileUtils.forceMkdir(new File(TalendConstants.INPUT_FILE_LOCATION));
+            FileUtils.forceMkdir(new File(TalendConstants.OUTPUT_FILE_LOCATION));
+            FileUtils.forceMkdir(new File(TalendConstants.EMAIL_FILE_LOCATION));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     public String generateUniqJobId() {
         String uniqueKey = String.valueOf(System.currentTimeMillis());
         return uniqueKey.toString();
@@ -195,6 +201,5 @@ public class TalendHelperService {
         map.put("jobId", jobId);
         return new ResponseEntity<Object>(map, HttpStatus.OK);
     }
-
 
 }

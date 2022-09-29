@@ -323,6 +323,29 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
     }
 
+    public void createRateRecall(JobProperites properties, String group, String jobCategory) throws TalendException {
+        jobtable.save(
+                new JOB(properties.jobId, JOBKeywords.CATALOG_RATE_CREATION, jobCategory,
+                        JOBKeywords.TASK_STARTED,
+                        properties.jobId + "_" + group + "_Rates"));
+        HashMap<String, String> config = new HashMap<>();
+        config.put("catalogStub", "false");
+        talend.executeJob(properties.jobId, "eCAPICreateRateRecall", config);
+
+        // generate Report
+        config = new HashMap<>();
+        config.put("tableName", properties.jobId + "_" + group + "_Entity");
+        config.put("jobType", JOBKeywords.CATALOG_RATE_SUBMITION);
+        config.put("jobCategory", jobCategory);
+        config.put("keyName", "id");
+        config.put("jobStatus", JOBKeywords.TASK_END);
+        talend.executeJob(properties.jobId, "getStatusCount", config);
+
+        // Check And ReportAny Error
+        checkForStatusError(properties.jobId, JOBKeywords.CATALOG_RATE_SUBMITION, jobCategory,
+                "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
+    }
+
     public void createAssoc(JobProperites properties, String group, String jobCategory) throws TalendException {
         jobtable.save(
                 new JOB(properties.jobId, JOBKeywords.CATALOG_ASSOC_CREATION, jobCategory,

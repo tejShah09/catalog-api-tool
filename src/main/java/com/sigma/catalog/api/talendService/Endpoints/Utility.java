@@ -8,8 +8,6 @@ import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
-
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,7 +68,7 @@ public class Utility {
         String message = "Connected ";
         String jobId = talend.generateUniqJobId();
         HashMap<String, String> config = new HashMap<>();
-        config.put("InputFile", "./config/initialData.json");
+        config.put("InputFile", TalendConstants.CONFIG_FILE_LOCATION+"initialData.json");
         message = talend.executeJob(jobId, "IntialDataSetup", config);
         return talend.generateResponse(jobId, message);
     }

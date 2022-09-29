@@ -36,7 +36,8 @@ public class EmailService {
 
    EmailService() {
 
-      try (InputStream input = new FileInputStream("config/emailconfiguration.properties");) {
+      try (InputStream input = new FileInputStream(
+            TalendConstants.CONFIG_FILE_LOCATION + "emailconfiguration.properties")) {
          emailProperties = new Properties();
          emailProperties.load(input);
       } catch (IOException ex) {
@@ -171,7 +172,7 @@ public class EmailService {
          Multipart multipart = new MimeMultipart();
 
          String fileName = jobrprops.jobId + ".txt";
-         String fileLocation = ".\\emails\\" + fileName;
+         String fileLocation = TalendConstants.EMAIL_FILE_LOCATION + fileName;
          saveFile(fileLocation, emailBody);
          addAttachment(multipart, fileName, fileLocation);
 
@@ -221,7 +222,7 @@ public class EmailService {
       String data = "";
       try {
 
-         File myObj = new File("config/emailTemplate.html");
+         File myObj = new File(TalendConstants.CONFIG_FILE_LOCATION + "emailTemplate.html");
          Scanner myReader = new Scanner(myObj);
          while (myReader.hasNextLine()) {
             data = data + myReader.nextLine();
