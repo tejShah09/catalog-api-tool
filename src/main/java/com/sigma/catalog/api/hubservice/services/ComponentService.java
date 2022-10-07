@@ -16,6 +16,7 @@ public class ComponentService extends AbstractShellProcessService {
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
+                createReport(properites);
                 String processingTable = properites.jobId + "_" + jobCategory + "_Associations";
                 deleteNonLiveEntityName(properites);
                 editEntityName(properites);
@@ -44,7 +45,8 @@ public class ComponentService extends AbstractShellProcessService {
 
                 makeLiveWithStatusCheck(properites, processingTable, "Parent_Entity_GUID");
 
-                sendReconfile(properites, JOBKeywords.BUNDLE_TYPE);
+                createReport(properites);
+                sendEntityReportToHUB(properites);
 
         }
 

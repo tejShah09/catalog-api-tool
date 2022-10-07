@@ -29,6 +29,8 @@ public class BundleService extends AbstractShellProcessService {
                 // Step 1 Create Entity
                 createEntity(properites);
 
+                createReport(properites );
+
                 // Step 2 Aporve Entity
                 approveEntity(properites);
 
@@ -40,8 +42,8 @@ public class BundleService extends AbstractShellProcessService {
                 makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
                                 "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
 
-                sendReconfile(properites, JOBKeywords.BUNDLE_TYPE, properites.jobId + "_" + jobCategory + "_Entity",
-                                "Name");
+                createReport(properites);
+                sendEntityReportToHUB(properites);
 
         }
 

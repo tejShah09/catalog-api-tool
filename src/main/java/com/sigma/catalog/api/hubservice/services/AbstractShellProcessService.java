@@ -109,6 +109,20 @@ public abstract class AbstractShellProcessService {
                 entityType, jobCategory);
     }
 
+    public void sendEntityReportToHUB(JobProperites properties) throws TalendException {
+
+        jobService.sendEntityReportToHUB(properties, jobCategory,
+                properties.jobId + "_" + jobCategory + "_Report");
+
+    }
+
+    public void createReport(JobProperites properties) throws TalendException {
+
+        jobService.createEntityReport(properties, properties.jobId + "_" + jobCategory + "_Entity", "Name",
+                "PublicID", reportTable, properties.jobId + "_" + jobCategory + "_Report");
+
+    }
+
     public void sendReconfile(JobProperites properties, String entityType, String inputTableNameR,
             String inputtableKeyR) throws TalendException {
         jobService.sendReconfile(properties, inputTableNameR, inputtableKeyR,

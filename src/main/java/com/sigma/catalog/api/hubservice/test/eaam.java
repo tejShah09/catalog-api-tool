@@ -1,8 +1,6 @@
 package com.sigma.catalog.api.hubservice.test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 
 public class eaam { 

@@ -4,10 +4,6 @@
 package com.sigma.catalog.api.restservices;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sigma.catalog.api.catalog.Decorator;
 import com.sigma.catalog.api.drools.CatalogSheetsProcessing;
-import com.sigma.catalog.api.exception.PythonExecutionException;
 import com.sigma.catalog.api.export.ExportConstants;
 import com.sigma.catalog.api.export.ExportLookUp;
 import com.sigma.catalog.api.export.ProcessExport;
 import com.sigma.catalog.api.model.configuration.ConfigArgumentsModel;
-import com.sigma.catalog.api.python.PythonHelper;
 import com.sigma.catalog.api.utility.StringUtility;
 
 /**

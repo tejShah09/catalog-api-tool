@@ -71,7 +71,7 @@ public class TalendException extends Exception {
 
     public List<Map<String, Object>> getError() {
 
-        this.outputError = new ArrayList();
+        this.outputError = new ArrayList<>();
         for (Map.Entry<String, List<String>> err : this.dberrors.entrySet()) {
 
             String category = err.getKey();

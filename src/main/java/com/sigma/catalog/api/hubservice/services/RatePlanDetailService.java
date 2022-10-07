@@ -28,15 +28,16 @@ public class RatePlanDetailService extends AbstractShellProcessService {
 
                 createEntity(properites);
 
+                createReport(properites);
+
                 approveEntity(properites);
 
                 stageEntity(properites);
 
                 makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
                                 "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
-
-                sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE, properites.jobId + "_" + jobCategory + "_Entity",
-                                "Name");
+                createReport(properites);
+                sendEntityReportToHUB(properites);
 
         }
 

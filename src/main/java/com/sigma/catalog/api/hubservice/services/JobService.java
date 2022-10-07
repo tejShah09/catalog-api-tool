@@ -245,10 +245,38 @@ public class JobService {
         config.put("jobCategory", jobCategory);
         talend.executeJob(properties.jobId, "SendReconSheetToHub", config);
 
-        // Commeting this recon failuer
-        // checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION,
-        // jobCategory);
+        checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION,
+                jobCategory);
 
+    }
+
+    public void createEntityReport(JobProperites properties, String inputTable, String inpuTableNameKey,
+            String inpuTableGUIDKey, String catalogReportTable, String reportTable)
+            throws TalendException {
+
+        HashMap<String, String> config = new HashMap<>();
+        config.put("inputTableNameKey", inpuTableNameKey);
+        config.put("inputTableGUIDKey", inpuTableGUIDKey);
+        config.put("inputTable", inputTable);
+        config.put("catalogReportTable", catalogReportTable);
+        config.put("reportTable", reportTable);
+        talend.executeJob(properties.jobId, "CreateReconSheet", config);
+
+    }
+
+    public void sendEntityReportToHUB(JobProperites properties, String jobCategory, String reportTable)
+            throws TalendException {
+        if (!properties.isSendReconSheet() || !properties.isLaunchEntity()) {
+            System.out.println("Recon file is skipped");
+            return;
+        }
+        HashMap<String, String> config = new HashMap<>();
+
+        config.put("jobCategory", jobCategory);
+        config.put("reportTable", reportTable);
+        talend.executeJob(properties.jobId, "SendReconSheet", config);
+        checkTextError(properties.jobId, JOBKeywords.HUB_RECON_SUBMITION,
+                jobCategory);
     }
 
     public void editEntityName(JobProperites properties, String inputTable, String inpuTableKey, String eReportTable,
@@ -497,7 +525,7 @@ public class JobService {
                 JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
         emailServer.sendSuccessMail(properties, "[" +
                 ConfigurationUtility.getEnvConfigModel().getEnvironment() + "] JOB Success Id : " + properties.jobId
-                + " jobName : " + category + " [Without reconciliation]");
+                + " jobName : " + category + "");
     }
 
     public void checkForStatusError(String jobId, String jobType, String jobCategory, String CustomError)

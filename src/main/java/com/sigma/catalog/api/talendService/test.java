@@ -9,7 +9,6 @@ import org.springframework.http.HttpMethod;
 
 import com.sigma.catalog.api.authentication.JKSFileLoad;
 import com.sigma.catalog.api.catalog.CatalogCommunicator;
-import com.sigma.catalog.api.catalog.CatalogServicesAPI;
 import com.sigma.catalog.api.catalog.FactsForAttributes;
 import com.sigma.catalog.api.configuration.CatalogConstants;
 import com.sigma.catalog.api.utility.ConfigurationUtility;

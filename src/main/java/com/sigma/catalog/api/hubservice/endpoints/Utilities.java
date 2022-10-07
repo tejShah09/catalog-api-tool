@@ -173,7 +173,7 @@ public class Utilities {
         } else {
             rs = JKSFileLoad.getRestTemplate();
         }
-        byte[] createEntityResponse = CatalogCommunicator.getAPIResponseByte(JKSFileLoad.getRestTemplate(),
+        byte[] createEntityResponse = CatalogCommunicator.getAPIResponseByte(rs,
                 sixthUrlString,
                 HttpMethod.GET, requestTemp);
 

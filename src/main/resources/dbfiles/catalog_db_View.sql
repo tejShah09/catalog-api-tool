@@ -16,13 +16,13 @@ GO
 Create VIEW CAPI_RatePlanDetail as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
-e.GUID as 'GUID' ,
+UPPER(e.GUID) as 'GUID' ,
 e.BusinessID,
-e.EffectiveStartDate,
-e.EffectiveEndDate,
+CAST(e.EffectiveStartDate as DATE) 'EffectiveStartDate' ,
+CAST(e.EffectiveEndDate as DATE) 'EffectiveEndDate' ,
 e.IsLive,
 e.IsLatest,
-e.CurrentEntityGUID,
+UPPER(e.CurrentEntityGUID) as 'CurrentEntityGUID' ,
 e.WorkflowStatusID,
 e.LaunchableEntityTypeID,
 concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
@@ -37,13 +37,13 @@ GO
 create VIEW CAPI_RatePlanDetail_AllStatus as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
-e.GUID as 'GUID' ,
+UPPER(e.GUID) as 'GUID' ,
 e.BusinessID,
-e.EffectiveStartDate,
-e.EffectiveEndDate,
+CAST(e.EffectiveStartDate as DATE) 'EffectiveStartDate' ,
+CAST(e.EffectiveEndDate as DATE) 'EffectiveEndDate' ,
 e.IsLive,
 e.IsLatest,
-e.CurrentEntityGUID,
+UPPER(e.CurrentEntityGUID) as 'CurrentEntityGUID' ,
 (select WorkflowStatusCode from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) as WorkflowStatusCode,
 (select Ordinal from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) WorkflowOrdinal,
 e.LaunchableEntityTypeID,
@@ -58,7 +58,7 @@ GO
 DROP VIEW  IF EXISTS CAPI_RatePlanDetail_Charges
 GO
 create view CAPI_RatePlanDetail_Charges as 
-select c.ClassType,c.Name,c.GUID,
+select c.ClassType,c.Name, UPPER(c.GUID) as 'GUID',
 CAST(c.EffectiveStartDate as date)EffectiveStartDate, 
 (select count(i.ElementValue) from UV_InstanceElementValues i where c.GUID  = i.InstanceClassGUID and i.SchemaElement = 'Charge Relations') as "Charges"
 from CAPI_RatePlanDetail c 
@@ -67,7 +67,7 @@ GO
 DROP VIEW  IF EXISTS CAPI_RatePlanDetail_RatingPlanId
 GO
 create view CAPI_RatePlanDetail_RatingPlanId as 
-select c.ClassType,c.Name,c.GUID, 
+select c.ClassType,c.Name, UPPER(c.GUID) as 'GUID', 
 (select i.ElementValue from UV_InstanceElementValues i where c.GUID  = i.InstanceClassGUID and i.SchemaElement = 'Rating Plan Id') as "RatingPlanId"
 from CAPI_RatePlanDetail c
 GO
@@ -78,8 +78,8 @@ GO
 create  view CAPI_RatePlanDetail_TimeBand as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
-e.GUID as 'GUID' 
-,tb.InstanceClassGUID 'TimeBand'
+ UPPER(e.GUID) as 'GUID' 
+,UPPER(tb.InstanceClassGUID) as 'TimeBand'
 from  Entity e INNER JOIN
 (select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID and  s.OmniformName in ('Rating_Energy_Usage','Rating_Plan_Property_Set_for_Gas_Usage_Units','Rating_Plan_Property_Set_for_Gas_Usage','Rating_Plan_Property_Set_for_Graduated_Quantity','Rating_Plan_Property_Set_for_Spot_Price','Rating_Demand','Rating_Plan_Property_Set_for_Agreed_Capacity')) as st
 on st.TemplateID = e.TemplateID 
@@ -96,13 +96,13 @@ GO
 Create VIEW CAPI_Bundle as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
-e.GUID as 'GUID' ,
+ UPPER(e.GUID) as 'GUID',
 e.BusinessID,
-e.EffectiveStartDate,
-e.EffectiveEndDate,
+CAST(e.EffectiveStartDate as DATE) 'EffectiveStartDate' ,
+CAST(e.EffectiveEndDate as DATE) 'EffectiveEndDate' ,
 e.IsLive,
 e.IsLatest,
-e.CurrentEntityGUID,
+UPPER(e.CurrentEntityGUID) as 'CurrentEntityGUID' ,
 e.WorkflowStatusID,
 e.LaunchableEntityTypeID,
 concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
@@ -120,13 +120,13 @@ GO
 create VIEW CAPI_Bundle_AllStatus as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
-e.GUID as 'GUID' ,
+UPPER(e.GUID) as 'GUID',
 e.BusinessID,
-e.EffectiveStartDate,
-e.EffectiveEndDate,
+CAST(e.EffectiveStartDate as DATE) 'EffectiveStartDate' ,
+CAST(e.EffectiveEndDate as DATE) 'EffectiveEndDate' ,
 e.IsLive,
 e.IsLatest,
-e.CurrentEntityGUID,
+UPPER(e.CurrentEntityGUID) as 'CurrentEntityGUID' ,
 (select WorkflowStatusCode from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) as WorkflowStatusCode,
 (select Ordinal from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) WorkflowOrdinal,
 e.LaunchableEntityTypeID,

@@ -17,6 +17,7 @@ public class RatePlanRateService extends AbstractShellProcessService {
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
                 String inpuTable = properites.jobId + "_" + jobCategory + "_Rates";
+                createReport(properites);
                 deleteNonLiveEntityName(properites);
                 editEntityName(properites);
 
@@ -25,6 +26,7 @@ public class RatePlanRateService extends AbstractShellProcessService {
                                 JOBKeywords.TABLE_FILE_ROW_COUNT)) {
                         createEntity(properites, "RatePlanDetail", "'Entity','Time Band Mapping'");
                 }
+
                 // Associate Charge
                 createAssoc(properites);
 
@@ -41,7 +43,8 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 makeLiveWithStatusCheck(properites, inpuTable, "Parent_Entity_GUID");
 
                 //
-                sendReconfile(properites, JOBKeywords.RATEPLAN_TYPE);
+                createReport(properites);
+                sendEntityReportToHUB(properites);
 
         }
 
