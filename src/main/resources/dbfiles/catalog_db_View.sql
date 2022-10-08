@@ -149,3 +149,26 @@ Cast((select ElementValue from InstanceElementValues where InstanceClassGUID= as
 Cast((select ElementValue from InstanceElementValues where InstanceClassGUID= asoc.ElementValue and SchemaElementGUID = '5D7A88E8-A1D9-471D-884F-D6B9976C2315')as date) as 'AssociationEndDate'
  from UV_InstanceElementValues asoc inner join CAPI_Bundle cb on asoc.InstanceClassGUID=cb.GUID where asoc.SchemaElement = 'Product Associations'
  GO
+
+
+
+DROP VIEW  IF EXISTS CAPI_Entity_AllStatus
+GO
+create VIEW CAPI_Entity_AllStatus as
+select  st.SchemaClass as 'ClassType', 
+e.Name as 'Name',
+UPPER(e.GUID) as 'GUID',
+e.BusinessID,
+CAST(e.EffectiveStartDate as DATE) 'EffectiveStartDate' ,
+CAST(e.EffectiveEndDate as DATE) 'EffectiveEndDate' ,
+e.IsLive,
+e.IsLatest,
+UPPER(e.CurrentEntityGUID) as 'CurrentEntityGUID' ,
+(select WorkflowStatusCode from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) as WorkflowStatusCode,
+(select Ordinal from WorkflowStatus where WorkflowStatusID= e.WorkflowStatusID) WorkflowOrdinal,
+e.LaunchableEntityTypeID,
+concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
+from  Entity e INNER JOIN
+(select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID  ) as st
+on st.TemplateID = e.TemplateID 
+

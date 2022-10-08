@@ -10,39 +10,30 @@ import com.sigma.catalog.api.hubservice.exception.TalendException;
 public class BundleService extends AbstractShellProcessService {
 
         BundleService() {
-                jobCategory = JOBKeywords.BUNDLE;
-                sheets = "'Entity','Vintage'";
-                reportTable = "CAPI_Bundle_AllStatus";
-                inpuTableKey = "PRODUCT_BUNDLE";
+                jobCategory = JOBKeywords.BUNDLE;             
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
 
-                String editInputTable = properites.jobId + "_" + jobCategory + "_Enddate_InputSheet";
 
-                if (!checkIfTableEmpty(properites, editInputTable,
+                if (!checkIfTableEmpty(properites, properites.jobId + "_" + jobCategory + "_Enddate_InputSheet",
                                 JOBKeywords.EDIT_FILE_ROW_COUNT)) {
-                        deleteNonLiveEntityName(properites, editInputTable);
-                        editEntityName(properites, editInputTable);
+                        changeWorkFlowStatus(properites, "DeleteNonLive");
+                        changeWorkFlowStatus(properites, "Edit");
                 }
 
                 // Step 1 Create Entity
-                createEntity(properites);
-
-                createReport(properites );
+                createEntity(properites, jobCategory, "'Entity','Vintage'");
 
                 // Step 2 Aporve Entity
-                approveEntity(properites);
+                changeWorkFlowStatus(properites, "Approve");
 
                 // step 3 Stage Entity
-                stageEntity(properites);
+                changeWorkFlowStatus(properites, "Stage");
 
                 // step 4 Live Entity
+                liveEntityAndWaitToComplete(properites);
 
-                makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
-                                "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
-
-                createReport(properites);
                 sendEntityReportToHUB(properites);
 
         }

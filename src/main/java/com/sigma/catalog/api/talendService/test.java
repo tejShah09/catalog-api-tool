@@ -2,6 +2,9 @@
 package com.sigma.catalog.api.talendService;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +14,7 @@ import com.sigma.catalog.api.authentication.JKSFileLoad;
 import com.sigma.catalog.api.catalog.CatalogCommunicator;
 import com.sigma.catalog.api.catalog.FactsForAttributes;
 import com.sigma.catalog.api.configuration.CatalogConstants;
+import com.sigma.catalog.api.restservices.CatalogRowService;
 import com.sigma.catalog.api.utility.ConfigurationUtility;
 
 public class test {
@@ -20,7 +24,7 @@ public class test {
 		System.out.println(FactsForAttributes.parseFile(input));
 	}
 
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 
 		try {
 			String sixthUrlString = ConfigurationUtility.getEnvConfigModel().getSigmaCatalogServicesApiURL()
@@ -50,6 +54,62 @@ public class test {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		changeWorkflow("88816189-E694-11EA-95D9-BB12EE1F3C3A", "EditApproved", "Approve");
+	}
+
+	public static String changeWorkflow(String publicId, String currentState, String targeState) {
+		String result = "failed:NoteExecuted";
+		System.out.println("publicId-" + publicId + "-currentState-" + currentState + "-targeState-" + targeState);
+		if ("Edit".equalsIgnoreCase(targeState)) {
+
+			List<String> states = new ArrayList<String>(
+					Arrays.asList("Draft", "LiveEdit", "DraftUpdate"));
+			if (states.contains(currentState)) {
+				result = "success,200:Already " + targeState;
+			} else {
+				result = CatalogRowService.editEntity(publicId);
+			}
+
+		} else if ("Approve".equalsIgnoreCase(targeState)) {
+			List<String> states = new ArrayList<String>(
+					Arrays.asList("Approved", "EditApproved", "ApprovalRejected", "LiveApprovalRejected"));
+			if (states.contains(currentState)) {
+				result = "success,200:Already " + targeState;
+			} else {
+				result = CatalogRowService.approveEntity(publicId);
+			}
+		} else if ("Stage".equalsIgnoreCase(targeState)) {
+			List<String> states = new ArrayList<String>(
+					Arrays.asList("Staged", "LiveStaged", "StagingRejected", "LiveStagingRejected"));
+			if (states.contains(currentState)) {
+				result = "success,200:Already " + targeState;
+			} else {
+				result = CatalogRowService.StageEntity(publicId);
+			}
+		} else if ("Live".equalsIgnoreCase(targeState)) {
+			List<String> states = new ArrayList<String>(
+					Arrays.asList("Live", "AwaitingLaunch", "LaunchFailed", "AwaitingUpdateLaunch",
+							"UpdateLaunchFailed"));
+			if (states.contains(currentState)) {
+				result = "success,200:Already " + targeState;
+			} else {
+				result = CatalogRowService.LaunchEntity(publicId);
+			}
+		} else if ("Delete".equalsIgnoreCase(targeState)) {
+			List<String> states = new ArrayList<String>(
+					Arrays.asList("Deleted"));
+			if (states.contains(currentState)) {
+				result = "success,200:Already " + targeState;
+			} else {
+				result = CatalogRowService.deleteEntity(publicId);
+			}
+		}
+
+		return result;
+
 	}
 
 }

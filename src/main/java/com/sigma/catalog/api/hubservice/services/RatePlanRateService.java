@@ -11,15 +11,11 @@ public class RatePlanRateService extends AbstractShellProcessService {
 
         RatePlanRateService() {
                 jobCategory = JOBKeywords.RATEPLANRATE;
-                reportTable = "CAPI_RatePlanDetail_AllStatus";
-                inpuTableKey = "Description";
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
-                String inpuTable = properites.jobId + "_" + jobCategory + "_Rates";
-                createReport(properites);
-                deleteNonLiveEntityName(properites);
-                editEntityName(properites);
+                changeWorkFlowStatus(properites, "DeleteNonLive");
+                changeWorkFlowStatus(properites, "Edit");
 
                 // create TimeBand in RatePlanRate
                 if (!checkIfTableEmpty(properites, properites.jobId + "_" + "RatePlanDetail_Entity",
@@ -34,16 +30,14 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 createRates(properites);
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, inpuTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Approve");
 
                 // step 3 Stage Entity
-                stageEntity(properites, inpuTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Stage");
 
                 // step 4 Live Entity
-                makeLiveWithStatusCheck(properites, inpuTable, "Parent_Entity_GUID");
+                liveEntityAndWaitToComplete(properites);
 
-                //
-                createReport(properites);
                 sendEntityReportToHUB(properites);
 
         }

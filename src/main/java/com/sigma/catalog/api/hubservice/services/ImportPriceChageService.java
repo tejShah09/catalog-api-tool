@@ -13,18 +13,14 @@ import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 
 @Service
-public class ImportPriceChageService {
-    @Autowired
-    ProductXMLRatesService productXmlService;
+public class ImportPriceChageService extends AbstractShellProcessService {
 
-    @Autowired
-    RatePlanXMLRatesService ratePlanXmlService;
+    ImportPriceChageService() {
+        jobCategory = JOBKeywords.IMPORTPRICECHANGE;
+    }
 
     @Autowired
     public TalendHelperService talend;
-
-    @Autowired
-    public JobService jobService;
 
     @Async("asyncExecutorService")
     public void processAsyncXML(JobProperites properties, List<AbstractShellProcessService> xmlServices) {
@@ -32,10 +28,21 @@ public class ImportPriceChageService {
             System.out.println("Async process is stubed");
             return;
         }
+
         try {
+
             for (AbstractShellProcessService xmlService : xmlServices) {
                 xmlService.startASyncProcessing(properties);
             }
+            createReport(properties);
+            changeWorkFlowStatus(properties, "Approve");
+
+            // step 3 Stage Entity
+            changeWorkFlowStatus(properties, "Stage");
+
+            liveEntityAndWaitToComplete(properties);
+
+            sendEntityReportToHUB(properties);
 
             jobService.saveSucessJobs(properties, JOBKeywords.IMPORTPRICECHANGE);
         } catch (TalendException e) {
@@ -54,6 +61,16 @@ public class ImportPriceChageService {
             return talend.generateFailResponse(properties.jobId, e);
         }
         return null;
+
+    }
+
+    @Override
+    public void startSyncProcessing(JobProperites properties) throws TalendException {
+
+    }
+
+    @Override
+    public void startASyncProcessing(JobProperites properties) throws TalendException {
 
     }
 

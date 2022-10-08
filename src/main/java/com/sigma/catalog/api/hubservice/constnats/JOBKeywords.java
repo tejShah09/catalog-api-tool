@@ -58,4 +58,10 @@ public class JOBKeywords {
     public static String BUNDLE_TYPE = "PRODUCT";
     public static String RATEPLAN_TYPE = "RATING";
     public static String OFFER_TYPE = "OFFER";
+
+    // luachstatstus
+    public static String live = "live";
+    public static String nonlive = "nonlive";
+    public static String failed = "failed";
+    public static String waitingToStart = "waitingToStart";
 }

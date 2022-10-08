@@ -11,8 +11,6 @@ public class RatePlanXMLRatesService extends AbstractShellProcessService {
 
     RatePlanXMLRatesService() {
         jobCategory = JOBKeywords.RATEPLANXMLRATES;
-        reportTable = "CAPI_RatePlanDetail_AllStatus";
-        inpuTableKey = "Parent_Entity_Name";
     }
 
     @Override
@@ -20,21 +18,11 @@ public class RatePlanXMLRatesService extends AbstractShellProcessService {
         String inpuTable = properties.jobId + "_" + JOBKeywords.HUBRATEPLANRATE + "_Rates";
         if (!checkIfTableEmpty(properties, inpuTable,
                 JOBKeywords.TABLE_FILE_ROW_COUNT)) {
-            deleteNonLiveEntityName(properties, inpuTable);
+            changeWorkFlowStatus(properties, "DeleteNonLive");
 
-            editEntityName(properties, inpuTable);
+            changeWorkFlowStatus(properties, "Edit");
 
             createRates(properties, JOBKeywords.HUBRATEPLANRATE);
-
-            approveEntity(properties, inpuTable, "Parent_Entity_GUID");
-
-            // step 3 Stage Entity
-            stageEntity(properties, inpuTable, "Parent_Entity_GUID");
-
-            // step 4 Live Entity
-            makeLiveWithStatusCheck(properties, inpuTable, "Parent_Entity_GUID", inpuTable, "Parent_Entity_Name");
-
-            sendReconfile(properties, inpuTable, JOBKeywords.RATEPLAN_TYPE);
         }
     }
 

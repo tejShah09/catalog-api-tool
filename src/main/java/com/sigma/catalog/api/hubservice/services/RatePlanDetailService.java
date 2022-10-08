@@ -11,32 +11,29 @@ public class RatePlanDetailService extends AbstractShellProcessService {
 
         RatePlanDetailService() {
                 jobCategory = JOBKeywords.RATEPLANDETAIL;
-                sheets = "'Consumption Units','Inclusive Loss Factors','Use Daylight Saving Time','Consumption Value','Demand Units','Entity'";
-                reportTable = "CAPI_RatePlanDetail_AllStatus";
-                inpuTableKey = "Description";
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
 
-                String editInputTable = properites.jobId + "_" + jobCategory + "_Enddate_InputSheet";
-
-                if (!checkIfTableEmpty(properites, editInputTable,
+                if (!checkIfTableEmpty(properites, properites.jobId + "_" + jobCategory + "_Enddate_InputSheet",
                                 JOBKeywords.EDIT_FILE_ROW_COUNT)) {
-                        deleteNonLiveEntityName(properites, editInputTable);
-                        editEntityName(properites, editInputTable);
+                        changeWorkFlowStatus(properites, "DeleteNonLive");
+                        changeWorkFlowStatus(properites, "Edit");
                 }
 
-                createEntity(properites);
+                // Step 1 Create Entity
+                createEntity(properites, jobCategory,
+                                "'Consumption Units','Inclusive Loss Factors','Use Daylight Saving Time','Consumption Value','Demand Units','Entity'");
 
-                createReport(properites);
+                // Step 2 Aporve Entity
+                changeWorkFlowStatus(properites, "Approve");
 
-                approveEntity(properites);
+                // step 3 Stage Entity
+                changeWorkFlowStatus(properites, "Stage");
 
-                stageEntity(properites);
+                // step 4 Live Entity
+                liveEntityAndWaitToComplete(properites);
 
-                makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity",
-                                "PublicID", properites.jobId + "_" + jobCategory + "_Entity", "Name");
-                createReport(properites);
                 sendEntityReportToHUB(properites);
 
         }

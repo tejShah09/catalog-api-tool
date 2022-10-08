@@ -49,18 +49,12 @@ public abstract class AbstractShellProcessService {
     public JobService jobService;
 
     public String jobCategory;
-    public String sheets;
-    public String reportTable;
-    public String inpuTableKey;
 
     public abstract void startSyncProcessing(JobProperites properties) throws TalendException;
 
     public abstract void startASyncProcessing(JobProperites properties) throws TalendException;
 
-    public void createEntity(JobProperites properties) throws TalendException {
-        jobService.createEntity(properties, jobCategory, jobCategory, sheets);
-    }
-
+   
     public void createEntity(JobProperites properties, String group, String sheets) throws TalendException {
         jobService.createEntity(properties, group, jobCategory, sheets);
     }
@@ -81,154 +75,31 @@ public abstract class AbstractShellProcessService {
         jobService.createRates(properties, group, jobCategory);
     }
 
-    public void deleteNonLiveEntityName(JobProperites properties) throws TalendException {
-        jobService.deleteNonLiveEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet",
-                inpuTableKey, reportTable, jobCategory,
-                properties.jobId + "_" + jobCategory + "_Entity_Status");
-    }
-
-    public void deleteNonLiveEntityName(JobProperites properties, String inputTable) throws TalendException {
-        jobService.deleteNonLiveEntityName(properties, inputTable, inpuTableKey, reportTable, jobCategory,
-                properties.jobId + "_" + jobCategory + "_Entity_Status");
-    }
-
-    public void editEntityName(JobProperites properties) throws TalendException {
-        jobService.editEntityName(properties, properties.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey,
-                reportTable, jobCategory,
-                properties.jobId + "_" + jobCategory + "_Entity_Status");
-    }
-
-    public void editEntityName(JobProperites properties, String inputTable) throws TalendException {
-        jobService.editEntityName(properties, inputTable, inpuTableKey, reportTable, jobCategory,
-                properties.jobId + "_" + jobCategory + "_Entity_Status");
-    }
-
-    public void sendReconfile(JobProperites properties, String entityType) throws TalendException {
-        jobService.sendReconfile(properties, properties.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey,
-                reportTable,
-                entityType, jobCategory);
-    }
-
     public void sendEntityReportToHUB(JobProperites properties) throws TalendException {
-
-        jobService.sendEntityReportToHUB(properties, jobCategory,
+        jobService.sendEntityReportToHUB(properties, jobCategory, properties.jobId + "_" + jobCategory + "_Entity",
                 properties.jobId + "_" + jobCategory + "_Report");
 
     }
 
     public void createReport(JobProperites properties) throws TalendException {
+        jobService.createEntityReport(properties, properties.jobId + "_" + jobCategory + "_Entity",
+                properties.jobId + "_" + jobCategory + "_Report");
+    }
 
-        jobService.createEntityReport(properties, properties.jobId + "_" + jobCategory + "_Entity", "Name",
-                "PublicID", reportTable, properties.jobId + "_" + jobCategory + "_Report");
+    public void changeWorkFlowStatus(JobProperites properties, String targeState) throws TalendException {
+        jobService.changeWorkFlow(properties, properties.jobId + "_" + jobCategory + "_Entity",
+                properties.jobId + "_" + jobCategory + "_Report",
+                properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory);
 
     }
 
-    public void sendReconfile(JobProperites properties, String entityType, String inputTableNameR,
-            String inputtableKeyR) throws TalendException {
-        jobService.sendReconfile(properties, inputTableNameR, inputtableKeyR,
-                reportTable,
-                entityType, jobCategory);
-    }
-
-    public void sendReconfile(JobProperites properties, String inputTable, String entityType) throws TalendException {
-        jobService.sendReconfile(properties, inputTable, inpuTableKey, reportTable, entityType, jobCategory);
-    }
-
-    public void approveEntity(JobProperites properties) throws TalendException {
-        approveEntity(properties, "select \"PublicID\" from \"" + properties.jobId + "_" + jobCategory + "_Entity\"");
-    }
-
-    public void approveEntity(JobProperites properties, String tableName, String tableKey) throws TalendException {
-
-        approveEntity(properties, "select \"" + tableKey + "\" as \"PublicID\" from \"" + tableName + "\"");
-
-    }
-
-    public void approveEntity(JobProperites properties, String query) throws TalendException {
-        jobService.approveEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status",
-                jobCategory);
-
-    }
-
-    public void stageEntity(JobProperites properties) throws TalendException {
-        stageEntity(properties, "select \"PublicID\" from \"" + properties.jobId + "_" + jobCategory + "_Entity\"");
-    }
-
-    public void stageEntity(JobProperites properties, String tableName, String tableKey) throws TalendException {
-        stageEntity(properties, "select \"" + tableKey + "\" as \"PublicID\" from \"" + tableName + "\"");
-    }
-
-    public void stageEntity(JobProperites properties, String query) throws TalendException {
-        jobService.stageEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status", jobCategory);
-    }
-
-    public void liveEntity(JobProperites properties) throws TalendException {
-        liveEntity(properties, "select \"PublicID\" from \"" + properties.jobId + "_" + jobCategory + "_Entity\"");
-    }
-
-    public void liveEntity(JobProperites properties, String tableName, String tableKey) throws TalendException {
-        liveEntity(properties, "select \"" + tableKey + "\" as \"PublicID\" from \"" + tableName + "\"");
-
-    }
-
-    public void liveEntity(JobProperites properties, String query) throws TalendException {
-        jobService.liveEntity(properties, query, properties.jobId + "_" + jobCategory + "_Entity_Status", jobCategory);
-    }
-
-    public void waitLiveTobeCompleted(JobProperites properites) throws TalendException {
-        waitLiveTobeCompleted(properites, reportTable, properites.jobId + "_" + jobCategory + "_InputSheet",
-                inpuTableKey);
-    }
-
-    public void waitLiveTobeCompleted(JobProperites properites, String inputLiveTable,
-            String inputLiveKey) throws TalendException {
-        jobService.waitLiveTobeCompleted(properites, reportTable, inputLiveTable, inputLiveKey, jobCategory);
+    public void liveEntityAndWaitToComplete(JobProperites properites)
+            throws TalendException {
+        jobService.liveEntityAndWaitToComplete(properites, properites.jobId, jobCategory);
     }
 
     public void changeStrategy(JobProperites properites, boolean isHubIntegration) throws TalendException {
         jobService.changeStrategy(properites, isHubIntegration);
-    }
-
-    public void waitLiveTobeCompleted(JobProperites properites, String reportLiveTable, String inputLiveTable,
-            String inputLiveKey) throws TalendException {
-        jobService.waitLiveTobeCompleted(properites, reportLiveTable, inputLiveTable, inputLiveKey, jobCategory);
-    }
-
-    public void makeLiveWithStatusCheck(JobProperites properites)
-            throws TalendException {
-        makeLiveWithStatusCheck(properites, reportTable, properites.jobId + "_" + jobCategory + "_Entity", "PublicID",
-                properites.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey);
-    }
-
-    public void makeLiveWithStatusCheck(JobProperites properites, String liveInputTable,
-            String liveInpuTablekey)
-            throws TalendException {
-        makeLiveWithStatusCheck(properites, reportTable, liveInputTable, liveInpuTablekey,
-                properites.jobId + "_" + jobCategory + "_InputSheet", inpuTableKey);
-    }
-
-    public void makeLiveWithStatusCheck(JobProperites properites, String liveInputTable,
-            String liveInpuTablekey, String coutInputTable,
-            String countInputTableKey)
-            throws TalendException {
-        makeLiveWithStatusCheck(properites, reportTable, liveInputTable, liveInpuTablekey,
-                coutInputTable, countInputTableKey);
-    }
-
-    public void makeLiveWithStatusCheck(JobProperites properites, String reportTable, String liveInputTable,
-            String liveInpuTablekey, String coutInputTable, String countInputTableKey)
-            throws TalendException {
-
-        try {
-            changeStrategy(properites, false);
-            liveEntity(properites, liveInputTable, liveInpuTablekey);
-            waitLiveTobeCompleted(properites, reportTable, coutInputTable, countInputTableKey);
-        } catch (TalendException e) {
-            throw e;
-        } finally {
-            changeStrategy(properites, true);
-        }
-
     }
 
     public void startGenericSyncProcessing(JobProperites properties, String fileName) throws TalendException {

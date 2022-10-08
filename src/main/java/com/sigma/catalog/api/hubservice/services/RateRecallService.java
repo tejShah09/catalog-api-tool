@@ -11,29 +11,26 @@ public class RateRecallService extends AbstractShellProcessService {
 
         RateRecallService() {
                 jobCategory = JOBKeywords.RATERECALL;
-                reportTable = "CAPI_RatePlanDetail_AllStatus";
-                inpuTableKey = "Parent_Entity_Name";
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
-                String inpuTable = properites.jobId + "_" + jobCategory + "_Rates";
-                deleteNonLiveEntityName(properites, inpuTable);
-                editEntityName(properites, inpuTable);
+
+                changeWorkFlowStatus(properites, "DeleteNonLive");
+                changeWorkFlowStatus(properites, "Edit");
 
                 // create Rate
                 createRateRecall(properites);
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, inpuTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Approve");
 
                 // step 3 Stage Entity
-                stageEntity(properites, inpuTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Stage");
 
                 // step 4 Live Entity
-                makeLiveWithStatusCheck(properites, inpuTable, "Parent_Entity_GUID", inpuTable, inpuTableKey);
+                liveEntityAndWaitToComplete(properites);
 
-                //
-                sendReconfile(properites, inpuTable, JOBKeywords.RATEPLAN_TYPE);
+                sendEntityReportToHUB(properites);
 
         }
 

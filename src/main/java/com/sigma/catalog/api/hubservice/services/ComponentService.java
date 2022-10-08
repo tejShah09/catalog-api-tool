@@ -11,15 +11,12 @@ public class ComponentService extends AbstractShellProcessService {
 
         ComponentService() {
                 jobCategory = JOBKeywords.COMPONENT;
-                reportTable = "CAPI_Bundle_AllStatus";
-                inpuTableKey = "PRODUCT_BUNDLE";
         }
 
         public void startASyncProcessing(JobProperites properites) throws TalendException {
-                createReport(properites);
-                String processingTable = properites.jobId + "_" + jobCategory + "_Associations";
-                deleteNonLiveEntityName(properites);
-                editEntityName(properites);
+
+                changeWorkFlowStatus(properites, "DeleteNonLive");
+                changeWorkFlowStatus(properites, "Edit");
 
                 // create TimeBand in RatePlanRate
                 // create TimeBand in RatePlanRate
@@ -38,14 +35,14 @@ public class ComponentService extends AbstractShellProcessService {
                 }
 
                 // Step 2 Aporve Entity
-                approveEntity(properites, processingTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Approve");
 
                 // step 3 Stage Entity
-                stageEntity(properites, processingTable, "Parent_Entity_GUID");
+                changeWorkFlowStatus(properites, "Stage");
 
-                makeLiveWithStatusCheck(properites, processingTable, "Parent_Entity_GUID");
+                // step 4 Live Entity
+                liveEntityAndWaitToComplete(properites);
 
-                createReport(properites);
                 sendEntityReportToHUB(properites);
 
         }
