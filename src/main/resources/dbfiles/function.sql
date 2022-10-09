@@ -100,3 +100,26 @@ END IF;
 return rowcount;
 END
 $BODY$;
+
+
+CREATE OR REPLACE FUNCTION public.getReconJSON(
+	tablename character varying)
+    RETURNS TABLE(err text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+DECLARE 
+ 
+   finalQuery VARCHAR:='';
+   countQuery VARCHAR:='';
+   messagesize Integer;
+BEGIN
+
+finalQuery = 'select CAST(json_build_object(''catalogReconciliations'',json_strip_nulls(json_agg(row_to_json(t)))) as TEXT)from (select "entityType","entityName","catalogGuid","guidVersion","hubid" as "hubId" From "'||tablename||'") as t';
+RETURN QUERY EXECUTE finalQuery;
+
+END
+$BODY$;
