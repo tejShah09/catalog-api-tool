@@ -54,7 +54,6 @@ public abstract class AbstractShellProcessService {
 
     public abstract void startASyncProcessing(JobProperites properties) throws TalendException;
 
-   
     public void createEntity(JobProperites properties, String group, String sheets) throws TalendException {
         jobService.createEntity(properties, group, jobCategory, sheets);
     }
@@ -87,7 +86,7 @@ public abstract class AbstractShellProcessService {
     }
 
     public void changeWorkFlowStatus(JobProperites properties, String targeState) throws TalendException {
-        jobService.changeWorkFlow(properties, properties.jobId + "_" + jobCategory + "_Entity",
+        jobService.changeWorkFlowWith_103Retry(properties, properties.jobId + "_" + jobCategory + "_Entity",
                 properties.jobId + "_" + jobCategory + "_Report",
                 properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory);
 

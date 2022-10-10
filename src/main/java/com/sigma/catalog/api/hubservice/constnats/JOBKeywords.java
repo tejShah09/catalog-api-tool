@@ -64,4 +64,7 @@ public class JOBKeywords {
     public static String nonlive = "nonlive";
     public static String failed = "failed";
     public static String waitingToStart = "waitingToStart";
+
+
+    public static String Live = "Live";
 }

@@ -50,43 +50,10 @@ public class JobService {
             try {
                 changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory);
             } catch (TalendException e) {
-                if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.ENTITY_LIVE,
+                if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.Live,
                         jobCategory, "failure,103")) {
-                    jobtable.save(
-                            new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
-                                    JOBKeywords.TASK_STARTED,
-                                    ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
 
-                    try {
-                        System.out.println("Stoping WebSite "
-                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        routines.WindowService
-                                .stopWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        Thread.sleep(2000);
-                        System.out.println("Starting WebSite "
-                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        routines.WindowService
-                                .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-
-                        Thread.sleep(2000);
-                        System.out.println("restarting  application  pools "
-                                + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        routines.WindowService
-                                .runCommand("powershell.exe Restart-WebAppPool "
-                                        + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
-                        Thread.sleep(10000);
-                        jobtable.save(
-                                new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
-                                        JOBKeywords.TASK_END,
-                                        ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
-                    } catch (Exception err) {
-                        jobtable.save(
-                                new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
-                                        JOBKeywords.TASK_FAILED,
-                                        ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
-                        System.out.println("Unable to restart webservice");
-                    }
-
+                    restartIIS(properties, jobCategory);
                     changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory);
 
                 } else {
@@ -98,17 +65,83 @@ public class JobService {
         }
     }
 
+    public void changeWorkFlowWith_103Retry(JobProperites properties, String inpuTable, String entityTable,
+            String statusTable, String targetState,
+            String jobCategory)
+            throws TalendException {
+        if (properties.isLaunchEntity()) {
+            try {
+                changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory);
+            } catch (TalendException e) {
+                if (isStatusCheckErrorPresent(properties.jobId, targetState,
+                        jobCategory, "failure,103")) {
+
+                    restartIIS(properties, jobCategory);
+                    changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory);
+
+                } else {
+                    throw e;
+                }
+
+            }
+
+        }
+    }
+
+    public void restartIIS(JobProperites properties, String jobCategory) {
+        jobtable.save(
+                new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                        JOBKeywords.TASK_STARTED,
+                        ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+
+        try {
+            System.out.println("Stoping WebSite "
+                    + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+            routines.WindowService
+                    .stopWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+            Thread.sleep(2000);
+            System.out.println("Starting WebSite "
+                    + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+            routines.WindowService
+                    .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+
+            Thread.sleep(2000);
+            System.out.println("restarting  application  pools "
+                    + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+            routines.WindowService
+                    .runCommand("powershell.exe Restart-WebAppPool "
+                            + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
+            Thread.sleep(10000);
+            jobtable.save(
+                    new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                            JOBKeywords.TASK_END,
+                            ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+        } catch (Exception err) {
+            jobtable.save(
+                    new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
+                            JOBKeywords.TASK_FAILED,
+                            ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
+            System.out.println("Unable to restart webservice");
+        }
+    }
+
     public void liveEntityAndWaitToComplete(JobProperites properites, String targeJobId, String jobCategory)
             throws TalendException {
+
+        String entityTable = targeJobId + "_" + jobCategory + "_Entity";
+        String reportTable = properites.jobId + "_" + jobCategory + "_Report";
+        String statusTable = properites.jobId + "_" + jobCategory + "_Entity_Status";
+
         try {
+
             changeStrategy(properites, false);
-            liveEntity(properites, targeJobId + "_" + jobCategory + "_Entity",
-                    properites.jobId + "_" + jobCategory + "_Report",
-                    properites.jobId + "_" + jobCategory + "_Entity_Status", jobCategory);
+            liveEntity(properites, entityTable, reportTable, statusTable, jobCategory);
+            String response = waitLiveTobeCompleted(properites, entityTable, jobCategory);
 
-            String response = waitLiveTobeCompleted(properites,
-                    targeJobId + "_" + jobCategory + "_Entity", jobCategory);
-
+            if (StringUtility.equalsIgnoreCase(response, JOBKeywords.failed)) {
+                liveEntity(properites, entityTable, reportTable, statusTable, jobCategory);
+                response = waitLiveTobeCompleted(properites, entityTable, jobCategory);
+            }
             if (!StringUtility.equalsIgnoreCase(response, JOBKeywords.live)) {
                 throw new TalendException("Launced failed " + response);
             }
@@ -123,6 +156,7 @@ public class JobService {
             String jobCategory) throws TalendException {
         String reponse = JOBKeywords.live;
         if (properites.isLaunchEntity()) {
+            Integer secondpreviosCount = 0;
             Integer previosCount = 0;
             Integer currentCount = 0;
             Integer itteration = 0;
@@ -130,6 +164,7 @@ public class JobService {
             Integer waitingToStart = 0;
             do {
                 itteration++;
+                secondpreviosCount = previosCount;
                 previosCount = currentCount;
                 System.out.println(properites.jobId + " Waiting for Launches to complete try " + itteration);
                 HashMap<String, String> config = new HashMap<>();
@@ -147,14 +182,14 @@ public class JobService {
                 failedCount = status.get(JOBKeywords.failed);
                 waitingToStart = status.get(JOBKeywords.waitingToStart);
                 if (currentCount != 0 && failedCount == currentCount && waitingToStart == 0) {
-                    System.out.println("Launch failed " + failedCount);
-                    reponse = JOBKeywords.failed;
                     break;
                 }
 
-            } while (previosCount >= 0 && previosCount != currentCount);
-
-            if (currentCount != 0 && currentCount == waitingToStart) {
+            } while (previosCount >= 0 && !(previosCount == currentCount && previosCount == currentCount));
+            if (currentCount != 0 && failedCount == currentCount && waitingToStart == 0) {
+                System.out.println("Launch failed " + failedCount);
+                reponse = JOBKeywords.failed;
+            } else if (currentCount != 0 && currentCount == waitingToStart) {
                 System.out.println("Launch stuck " + waitingToStart);
                 reponse = JOBKeywords.waitingToStart;
             } else if (currentCount != 0) {

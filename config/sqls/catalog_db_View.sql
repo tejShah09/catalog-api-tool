@@ -171,4 +171,23 @@ concat(e.VersionNumber, '.' ,e.Minor , '.',e.IsSC) as "VersionNumber"
 from  Entity e INNER JOIN
 (select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID  ) as st
 on st.TemplateID = e.TemplateID 
+GO
+
+
+
+
+DROP VIEW  IF EXISTS CAPI_TTREE
+GO
+CREATE   VIEW CAPI_TTREE AS
+select s1.OmniformName as Characteristic_Class_Name , e1.InstanceClassGUID as Characteristic_Value_ID,e2.ElementValue as Name ,
+e1.ElementValue as Description,s2.InheritedGUID, 
+(select ElementValue from InstanceElementValues e where e.InstanceClassGUID = e1.InstanceClassGUID and e.SchemaElementGUID =(select GUID from SchemaElement where Name ='Parent' and SchemaClassGUID = e1.SchemaClassGUID ) ) as Parent_GUID, 
+(select ElementValue from InstanceElementValues where SchemaElementGUID =(select GUID from SchemaElement where Name ='Name' and SchemaClassGUID = s2.InheritedGUID ) and InstanceClassGUID = (select ElementValue from InstanceElementValues e where e.InstanceClassGUID = e1.InstanceClassGUID and e.SchemaElementGUID =(select GUID from SchemaElement where Name ='Parent' and SchemaClassGUID = e1.SchemaClassGUID ) )) as ParentName,
+(select ElementValue from InstanceElementValues where SchemaElementGUID =(select GUID from SchemaElement where Name ='Description' and SchemaClassGUID = s2.InheritedGUID ) and InstanceClassGUID = (select ElementValue from InstanceElementValues e where e.InstanceClassGUID = e1.InstanceClassGUID and e.SchemaElementGUID =(select GUID from SchemaElement where Name ='Parent' and SchemaClassGUID = e1.SchemaClassGUID ) )) as ParentDescription
+from InstanceElementValues   e1 INNER JOIN InstanceElementValues   e2 on  e1.InstanceClassGUID = e2.InstanceClassGUID ,SchemaClass s1,SchemaClass s2 
+ where s2.OmniformName in ('TTree_Branch','TTree_Leaf')  and e1.SchemaClassGUID = s1.GUID and s1.InheritedGUID = s2.GUID and e2.SchemaElementGUID= (select GUID from SchemaElement where SchemaClassGUID = s2.InheritedGUID and Name = 'Name' )  
+ and e1.SchemaElementGUID = (select GUID from SchemaElement where SchemaClassGUID = s2.InheritedGUID and Name = 'Description' )
+ --and e1.InstanceClassGUID in ( '46605c47-10a5-4fda-bd20-6da6dfed5926','eff62c93-9533-11ea-aa3a-3f31cdbdd854','cdb456d8-5b2a-99fe-18a2-db940b16493c','33fcd8fb-08dc-6455-d1a5-e67f1776313c','7a2dec4e-8cc3-5a20-8553-b44e8b3341b7')
+--and s1.OmniformName  in ('TProduct_Subclass')
+GO
 
