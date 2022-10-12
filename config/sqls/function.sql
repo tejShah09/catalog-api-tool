@@ -118,7 +118,51 @@ DECLARE
    messagesize Integer;
 BEGIN
 
-finalQuery = 'select CAST(json_build_object(''catalogReconciliations'',json_strip_nulls(json_agg(row_to_json(t)))) as TEXT)from (select "entityType","entityName","catalogGuid","guidVersion","hubid" as "hubId" From "'||tablename||'") as t';
+finalQuery = 'select CAST(json_build_object(''catalogReconciliations'',json_strip_nulls(json_agg(row_to_json(t)))) as TEXT)from (select "entityType","entityName",lower("catalogGuid") as "catalogGuid","guidVersion","hubid" as "hubId" From "'||tablename||'") as t';
+RETURN QUERY EXECUTE finalQuery;
+
+END
+$BODY$;
+
+
+CREATE OR REPLACE FUNCTION public.getAllJobs()
+    RETURNS TABLE(err text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+DECLARE 
+ 
+   finalQuery VARCHAR:='';
+   countQuery VARCHAR:='';
+   messagesize Integer;
+BEGIN
+
+finalQuery = 'select CAST(json_build_object(''response'',json_strip_nulls(json_agg(row_to_json(t)))) as TEXT)from (select  job_id,job_category as job_type,(select json_strip_nulls(json_agg(message)) from jobs where job_id = j.job_id and job_type = ''SAVED_FILE_NAME'' ) as "input",(select CASE WHEN status  like ''JOB_%'' THEN status ELSE ''JOB_IN_PROGRESS'' END from jobs where job_id = j.job_id order by done_at desc limit 1) as "status" from jobs j where job_type=''START'' order by id desc limit 100) as t';
+RETURN QUERY EXECUTE finalQuery;
+
+END
+$BODY$;
+
+
+CREATE OR REPLACE FUNCTION public.executeQuery(queryText character varying)
+    RETURNS TABLE(err text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+DECLARE 
+ 
+   finalQuery VARCHAR:='';
+   countQuery VARCHAR:='';
+   messagesize Integer;
+BEGIN
+
+finalQuery = 'select CAST(json_strip_nulls(json_agg(row_to_json(t))) as TEXT)from ('||queryText ||') as t';
 RETURN QUERY EXECUTE finalQuery;
 
 END

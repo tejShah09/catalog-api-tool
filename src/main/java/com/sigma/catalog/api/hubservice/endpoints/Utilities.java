@@ -97,6 +97,7 @@ public class Utilities {
     public ResponseEntity<Object> ExecuteJob(@RequestBody Map<String, String> request) {
         HashMap<String, String> config = new HashMap<String, String>(request);
         String jobId = talend.generateUniqJobId();
+        jobservice.startJOB(jobId, JOBKeywords.ADD_HOOK);
         if (StringUtility.isEmpty(config.get("jobId"))) {
             config.put("jobId", jobId);
         } else {
@@ -105,9 +106,11 @@ public class Utilities {
 
         try {
             talend.executeJob(jobId, config.get("jobName"), config);
+            jobservice.stopJOB(jobId, JOBKeywords.ADD_HOOK);
             return talend.getSucessResponse(jobId);
 
         } catch (TalendException e) {
+            jobservice.failedJOB(jobId, JOBKeywords.ADD_HOOK,String.valueOf(e.getCustomException(jobId)));
             return talend.generateFailResponse(jobId, e);
         }
 
@@ -124,6 +127,7 @@ public class Utilities {
         }
 
         try {
+            jobservice.startJOB(jobId, JOBKeywords.ADD_HOOK);
             talend.executeJob(jobId, config.get("jobName"), config);
 
             HashMap<String, String> configNew = new HashMap<>();
@@ -135,6 +139,7 @@ public class Utilities {
             talend.executeJob(jobId, "getStatusCount", configNew);
 
         } catch (TalendException e) {
+            jobservice.failedJOB(jobId, JOBKeywords.ADD_HOOK, String.valueOf(e.getCustomException(jobId)));
             return talend.generateFailResponse(jobId, e);
         }
 
@@ -142,8 +147,10 @@ public class Utilities {
             jobservice.checkForStatusError(jobId, JOBKeywords.ADD_HOOK, config.get("jobName"),
                     config.get("jobName") + " Failed JobId : " + jobId);
         } catch (TalendException e) {
+            jobservice.failedJOB(jobId, JOBKeywords.ADD_HOOK, String.valueOf(e.getRowOuptutException(jobId)));
             return talend.generateFailCountResponse(jobId, e);
         }
+        jobservice.stopJOB(jobId, JOBKeywords.ADD_HOOK);
         return talend.getSucessResponse(jobId);
     }
 

@@ -29,12 +29,6 @@ public class ImportPriceChange {
     private TalendHelperService talend;
 
     @Autowired
-    ProductXMLRatesService productXmlService;
-
-    @Autowired
-    RatePlanXMLRatesService ratePlanXmlService;
-
-    @Autowired
     ImportPriceChageService importPriceChangeService;
 
     @Autowired
@@ -53,7 +47,7 @@ public class ImportPriceChange {
             jobId = talend.generateUniqJobId();
         }
 
-        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,onlySync,
+        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy, onlySync,
                 jobId);
         ResponseEntity<Object> resp = rateRecallService.process(properties, RateRecallUploadFile);
 
@@ -79,35 +73,16 @@ public class ImportPriceChange {
 
         }
 
-        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy,onlySync,
+        JobProperites properties = new JobProperites(launchEntity, sendReconSheet, sendEmail, changeStrategy, onlySync,
                 jobId);
 
-        ResponseEntity<Object> resp = importPriceChangeService.validateJobId(properties);
-        List<AbstractShellProcessService> xmlServices = new ArrayList<>();
-        if (resp != null) {
-            return resp;
-        }
-        if (bundlXmls != null) {
-            resp = productXmlService.processXML(properties, bundlXmls);
-            if (resp.getStatusCode() == HttpStatus.OK) {
-                xmlServices.add(productXmlService);
-            } else {
-                return resp;
-            }
-        }
-        if (rateXmls != null) {
+        ResponseEntity<Object> resp = importPriceChangeService.procesSyncXML(properties, rateXmls, bundlXmls);
 
-            resp = ratePlanXmlService.processXML(properties, rateXmls);
-            if (resp.getStatusCode() == HttpStatus.OK) {
-                xmlServices.add(ratePlanXmlService);
-            } else {
-                return resp;
-            }
+        if (resp.getStatusCode() == HttpStatus.OK) {
+
+            importPriceChangeService.processAsyncXML(properties);
 
         }
-
-        importPriceChangeService.processAsyncXML(properties, xmlServices);
-
         return resp;
 
     }

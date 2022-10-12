@@ -185,7 +185,7 @@ public class JobService {
                     break;
                 }
 
-            } while (previosCount >= 0 && !(previosCount == currentCount && previosCount == currentCount));
+            } while (currentCount > 0 && !(previosCount == currentCount && secondpreviosCount == previosCount));
             if (currentCount != 0 && failedCount == currentCount && waitingToStart == 0) {
                 System.out.println("Launch failed " + failedCount);
                 reponse = JOBKeywords.failed;
@@ -193,7 +193,6 @@ public class JobService {
                 System.out.println("Launch stuck " + waitingToStart);
                 reponse = JOBKeywords.waitingToStart;
             } else if (currentCount != 0) {
-
                 System.out.println("Launch nonlive " + currentCount);
                 reponse = JOBKeywords.nonlive;
             }
@@ -416,12 +415,25 @@ public class JobService {
                         properties.jobId + "_" + jobCategory + "_Entity"));
     }
 
-    public String saveCSVFile(String jobId, String jobCategory, MultipartFile file) throws TalendException {
+    public String saveCSVFile(String jobId, String jobCategory, MultipartFile file) {
         String fileName = "" + jobCategory + "UploadFile_" + jobId + ".csv";
         talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
-        jobtable.save(new JOB(jobId, JOBKeywords.START, jobCategory,
-                JOBKeywords.TASK_SUCCESS,
-                file.getOriginalFilename() + " :: " + fileName));
+        jobtable.save(new JOB(jobId, JOBKeywords.RECEIVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS,
+                file.getOriginalFilename()));
+        jobtable.save(new JOB(jobId, JOBKeywords.SAVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS, fileName));
+        return fileName;
+    }
+
+    public String saveXMLFile(String jobId, String jobCategory, MultipartFile file) {
+        String oringalFile = file.getOriginalFilename();
+        if (StringUtility.contains(oringalFile, ".xml")) {
+            oringalFile = oringalFile.replace(".xml", "");
+        }
+        String fileName = jobCategory + "_" + oringalFile + "_" + jobId + ".xml";
+        talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
+        jobtable.save(new JOB(jobId, JOBKeywords.RECEIVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS,
+                file.getOriginalFilename()));
+        jobtable.save(new JOB(jobId, JOBKeywords.SAVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS, fileName));
         return fileName;
     }
 
@@ -459,8 +471,17 @@ public class JobService {
             throw new TalendException("JOB ID " + jobId + " is already Present");
 
         }
-        jobtable.save(new JOB(jobId, JOBKeywords.JOB_ID_VALIDATION, jobCategory,
-                JOBKeywords.TASK_SUCCESS, null));
+    }
+
+    public void startJOB(String jobId, String jobCategory) {
+
+        startJOB(jobId, jobCategory, null);
+    }
+
+    public void startJOB(String jobId, String jobCategory, String message) {
+
+        jobtable.save(new JOB(jobId, JOBKeywords.START, jobCategory,
+                JOBKeywords.TASK_SUCCESS, message));
     }
 
     public void saveErrorAndSendErrorEmail(JobProperites properties, String category, String errorMsg) {
@@ -477,9 +498,25 @@ public class JobService {
                 errorMsg);
     }
 
+    public void stopJOB(String jobId, String jobCategory, String message) {
+
+        jobtable.save(new JOB(jobId, JOBKeywords.STOP, jobCategory,
+                JOBKeywords.JOB_SUCCESS, message));
+    }
+    public void stopJOB(String jobId, String jobCategory) {
+
+        jobtable.save(new JOB(jobId, JOBKeywords.STOP, jobCategory,
+                JOBKeywords.JOB_SUCCESS, null));
+    }
+
+    public void failedJOB(String jobId, String jobCategory, String message) {
+
+        jobtable.save(new JOB(jobId, JOBKeywords.STOP, jobCategory,
+                JOBKeywords.JOB_FAILED, message));
+    }
+
     public void saveSucessJobs(JobProperites properties, String category) {
-        jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, category,
-                JOBKeywords.JOB_SUCCESS, "eaam Enjoy JOB Success"));
+        stopJOB(properties.jobId, category, "eaam Enjoy JOB Success");
         emailServer.sendSuccessMail(properties, "[" +
                 ConfigurationUtility.getEnvConfigModel().getEnvironment() + "] JOB Success Id : " + properties.jobId
                 + " jobName : " + category + "");

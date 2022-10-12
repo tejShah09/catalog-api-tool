@@ -5,6 +5,8 @@ public class JOBKeywords {
     // JOB NAMES
     public static String START = "START";
     public static String STOP = "STOP";
+    public static String RECEIVED_FILE_NAME = "RECEIVED_FILE_NAME";
+    public static String SAVED_FILE_NAME = "SAVED_FILE_NAME";
     public static String UPLOAD_FILE = "UPLOAD_FILE";
     public static String JOB_ID_VALIDATION = "JOB_ID_VALIDATION";
     public static String FILE_VALIDATION = "FILE_VALIDATION";
@@ -64,7 +66,6 @@ public class JOBKeywords {
     public static String nonlive = "nonlive";
     public static String failed = "failed";
     public static String waitingToStart = "waitingToStart";
-
 
     public static String Live = "Live";
 }

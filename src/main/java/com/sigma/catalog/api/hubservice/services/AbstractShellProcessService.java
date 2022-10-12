@@ -146,6 +146,8 @@ public abstract class AbstractShellProcessService {
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
         try {
             jobService.jobValidation(properites.jobId, jobCategory);
+            jobService.startJOB(properites.jobId, jobCategory);
+            
             // SaveFile
             String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
             properites.addInputFileNAme(fileName);
@@ -165,28 +167,12 @@ public abstract class AbstractShellProcessService {
         return talend.generateSuccessResponse(properites.jobId);
     }
 
-    public ResponseEntity<Object> processXML(JobProperites properties, MultipartFile[] rateXmls) {
+    public ResponseEntity<Object> processXML(JobProperites properties, List<String> ratefileNames) {
         try {
 
             // SaveFile
-            List<String> ratefileNames = new ArrayList<>();
 
-            if (rateXmls != null) {
-
-                Arrays.asList(rateXmls).stream().forEach((file) -> {
-
-                    String oringalFile = file.getOriginalFilename();
-                    if (StringUtility.contains(oringalFile, ".xml")) {
-                        oringalFile = oringalFile.replace(".xml", "");
-                    }
-                    String fileNAme = jobCategory + "_" + oringalFile + "_"
-                            + properties.jobId
-                            + ".xml";
-                    properties.addInputFileNAme(fileNAme);
-                    talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileNAme);
-                    ratefileNames.add(TalendConstants.INPUT_FILE_LOCATION + fileNAme);
-
-                });
+            if (ratefileNames != null && ratefileNames.size() > 0) {
 
                 for (int i = 0; i < ratefileNames.size(); i++) {
                     HashMap<String, String> config = new HashMap<>();

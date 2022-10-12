@@ -30,8 +30,12 @@ public class UplodUtility {
     @PostMapping("/sendReconciliation")
     public ResponseEntity<Object> sendMail(
             @RequestBody Map<String, String> request) {
+        String jobId = talend.generateUniqJobId();
+        JobProperites properties = new JobProperites(jobId);
+        String jobCategory = "";
+
         try {
-            String jobId = talend.generateUniqJobId();
+
             if (!StringUtility.isEmpty(request.get("jobId"))) {
                 jobId = request.get("jobId");
             }
@@ -42,7 +46,6 @@ public class UplodUtility {
                 return new ResponseEntity<Object>("targetJobId_not_found", HttpStatus.BAD_REQUEST);
             }
 
-            String jobCategory = "";
             if (!StringUtility.isEmpty(request.get("jobCategory"))) {
                 jobCategory = request.get("jobCategory");
             } else {
@@ -54,14 +57,15 @@ public class UplodUtility {
                 inputTable = request.get("inputTable");
             }
 
-            JobProperites properties = new JobProperites(jobId);
             jobservice.sendEntityReportToHUB(properties, jobCategory, inputTable,
                     properties.jobId + "_" + jobCategory + "_Reconciliation");
             HashMap<String, Object> ouptut = new HashMap<String, Object>();
             ouptut.put("jobId", jobId);
+            jobservice.stopJOB(properties.jobId, jobCategory);
             return new ResponseEntity<Object>(ouptut, HttpStatus.OK);
 
         } catch (Exception e) {
+            jobservice.failedJOB(properties.jobId, jobCategory, null);
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -73,6 +77,8 @@ public class UplodUtility {
         if (!StringUtility.isEmpty(request.get("jobId"))) {
             jobId = request.get("jobId");
         }
+        JobProperites properties = new JobProperites(jobId);
+        String jobCategory = "";
         try {
 
             String targetJobId;
@@ -82,7 +88,6 @@ public class UplodUtility {
                 return new ResponseEntity<Object>("targetJobId_not_found", HttpStatus.BAD_REQUEST);
             }
 
-            String jobCategory = "";
             if (!StringUtility.isEmpty(request.get("jobCategory"))) {
                 jobCategory = request.get("jobCategory");
             } else {
@@ -96,17 +101,17 @@ public class UplodUtility {
                 return new ResponseEntity<Object>("targetStatusy_not_found", HttpStatus.BAD_REQUEST);
             }
 
-            JobProperites properties = new JobProperites(jobId);
-
             jobservice.changeWorkFlowWith_103Retry(properties, targetJobId + "_" + jobCategory + "_Entity",
                     properties.jobId + "_" + jobCategory + "_Report",
                     properties.jobId + "_" + jobCategory + "_Entity_Status", targetStatus, jobCategory);
-
+            jobservice.stopJOB(properties.jobId, jobCategory);
             return talend.getSucessResponse(jobId);
 
         } catch (TalendException e) {
+            jobservice.failedJOB(properties.jobId, jobCategory, null);
             return talend.generateFailCountResponse(jobId, e);
         } catch (Exception e) {
+            jobservice.failedJOB(properties.jobId, jobCategory, null);
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -118,6 +123,8 @@ public class UplodUtility {
         if (!StringUtility.isEmpty(request.get("jobId"))) {
             jobId = request.get("jobId");
         }
+        JobProperites properties = new JobProperites(jobId);
+        String jobCategory = "";
         try {
 
             String targetJobId;
@@ -127,22 +134,22 @@ public class UplodUtility {
                 return new ResponseEntity<Object>("targetJobId_not_found", HttpStatus.BAD_REQUEST);
             }
 
-            String jobCategory = "";
             if (!StringUtility.isEmpty(request.get("jobCategory"))) {
                 jobCategory = request.get("jobCategory");
             } else {
                 return new ResponseEntity<Object>("jobCategory_not_found", HttpStatus.BAD_REQUEST);
             }
 
-            JobProperites properties = new JobProperites(jobId);
-
+            jobservice.startJOB(properties.jobId, jobCategory);
             jobservice.liveEntityAndWaitToComplete(properties, targetJobId, jobCategory);
-
+            jobservice.stopJOB(properties.jobId, jobCategory);
             return talend.getSucessResponse(jobId);
 
         } catch (TalendException e) {
+            jobservice.failedJOB(properties.jobId, jobCategory, null);
             return talend.generateFailCountResponse(jobId, e);
         } catch (Exception e) {
+            jobservice.failedJOB(properties.jobId, jobCategory, null);
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
