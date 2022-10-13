@@ -14,9 +14,15 @@ public class QueryRepository {
 
     public String query(String queryString) {
         Query query = entityManager.createNativeQuery(queryString);
-        String data = (String) query.getSingleResult();
+        String data = "[]";
+        try {
+            data = (String) query.getSingleResult();
+        } catch (Exception e) {
+           // e.printStackTrace();
+           System.out.println("errror "+queryString);
+        }
 
-       // System.out.println(data);
+        // System.out.println(data);
 
         return data;
 
