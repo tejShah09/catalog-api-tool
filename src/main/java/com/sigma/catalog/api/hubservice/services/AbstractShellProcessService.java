@@ -1,8 +1,5 @@
 package com.sigma.catalog.api.hubservice.services;
 
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -20,9 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
-import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
-import com.sigma.catalog.api.utility.StringUtility;
 
 @Configuration
 @EnableAsync
@@ -88,13 +83,13 @@ public abstract class AbstractShellProcessService {
     public void changeWorkFlowStatus(JobProperites properties, String targeState) throws TalendException {
         jobService.changeWorkFlowWith_103Retry(properties, properties.jobId + "_" + jobCategory + "_Entity",
                 properties.jobId + "_" + jobCategory + "_Report",
-                properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory);
+                properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory,properties.jobId);
 
     }
 
     public void liveEntityAndWaitToComplete(JobProperites properites)
             throws TalendException {
-        jobService.liveEntityAndWaitToComplete(properites, properites.jobId, jobCategory);
+        jobService.liveEntityAndWaitToComplete(properites, properites.jobId, jobCategory,properites.jobId);
     }
 
     public void changeStrategy(JobProperites properites, boolean isHubIntegration) throws TalendException {

@@ -72,4 +72,12 @@ public class JobProperites {
         this.onlySync = onlySync;
     }
 
+    public void setChangeStretegy(boolean changeStrategy) {
+        this.changeStrategy = changeStrategy;
+    }
+
+    public void setChangeStretegy(String changeStrategy) {
+        this.changeStrategy = !StringUtility.equalsIgnoreCase(changeStrategy, "false");
+    }
+
 }

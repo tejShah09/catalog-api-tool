@@ -28,17 +28,19 @@ public class UplodUtility {
     private JobService jobservice;
 
     @PostMapping("/sendReconciliation")
-    public ResponseEntity<Object> sendMail(
+    public ResponseEntity<Object> sendReconciliation(
             @RequestBody Map<String, String> request) {
+
         String jobId = talend.generateUniqJobId();
+        if (!StringUtility.isEmpty(request.get("jobId"))) {
+            jobId = request.get("jobId");
+        }
         JobProperites properties = new JobProperites(jobId);
         String jobCategory = "";
 
         try {
 
-            if (!StringUtility.isEmpty(request.get("jobId"))) {
-                jobId = request.get("jobId");
-            }
+           
             String targetJobId;
             if (!StringUtility.isEmpty(request.get("targetJobId"))) {
                 targetJobId = request.get("targetJobId");
@@ -101,9 +103,14 @@ public class UplodUtility {
                 return new ResponseEntity<Object>("targetStatusy_not_found", HttpStatus.BAD_REQUEST);
             }
 
+            String transactionId = "NA";
+            if (!StringUtility.isEmpty(request.get("transactionId"))) {
+                transactionId = request.get("transactionId");
+            } 
+
             jobservice.changeWorkFlowWith_103Retry(properties, targetJobId + "_" + jobCategory + "_Entity",
                     properties.jobId + "_" + jobCategory + "_Report",
-                    properties.jobId + "_" + jobCategory + "_Entity_Status", targetStatus, jobCategory);
+                    properties.jobId + "_" + jobCategory + "_Entity_Status", targetStatus, jobCategory,transactionId);
             jobservice.stopJOB(properties.jobId, jobCategory);
             return talend.getSucessResponse(jobId);
 
@@ -139,9 +146,12 @@ public class UplodUtility {
             } else {
                 return new ResponseEntity<Object>("jobCategory_not_found", HttpStatus.BAD_REQUEST);
             }
-
+            String transactionId = "NA";
+            if (!StringUtility.isEmpty(request.get("transactionId"))) {
+                transactionId = request.get("transactionId");
+            } 
             jobservice.startJOB(properties.jobId, jobCategory);
-            jobservice.liveEntityAndWaitToComplete(properties, targetJobId, jobCategory);
+            jobservice.liveEntityAndWaitToComplete(properties, targetJobId, jobCategory,transactionId);
             jobservice.stopJOB(properties.jobId, jobCategory);
             return talend.getSucessResponse(jobId);
 

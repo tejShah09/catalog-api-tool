@@ -4,6 +4,7 @@ public class JOBKeywords {
 
     // JOB NAMES
     public static String START = "START";
+    public static String START_TRANSACTION = "START_TRANSACTION";
     public static String STOP = "STOP";
     public static String RECEIVED_FILE_NAME = "RECEIVED_FILE_NAME";
     public static String SAVED_FILE_NAME = "SAVED_FILE_NAME";

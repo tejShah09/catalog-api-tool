@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,17 +45,17 @@ public class JobService {
     }
 
     public void liveEntity(JobProperites properties, String inpuTable, String entityTable, String statusTable,
-            String jobCategory)
+            String jobCategory, String transactionId)
             throws TalendException {
         if (properties.isLaunchEntity()) {
             try {
-                changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory);
+                changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory, transactionId);
             } catch (TalendException e) {
                 if (isStatusCheckErrorPresent(properties.jobId, JOBKeywords.Live,
                         jobCategory, "failure,103")) {
 
                     restartIIS(properties, jobCategory);
-                    changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory);
+                    changeWorkFlow(properties, inpuTable, entityTable, statusTable, "Live", jobCategory, transactionId);
 
                 } else {
                     throw e;
@@ -67,17 +68,19 @@ public class JobService {
 
     public void changeWorkFlowWith_103Retry(JobProperites properties, String inpuTable, String entityTable,
             String statusTable, String targetState,
-            String jobCategory)
+            String jobCategory, String transactionId)
             throws TalendException {
         if (properties.isLaunchEntity()) {
             try {
-                changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory);
+                changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory,
+                        transactionId);
             } catch (TalendException e) {
                 if (isStatusCheckErrorPresent(properties.jobId, targetState,
                         jobCategory, "failure,103")) {
 
                     restartIIS(properties, jobCategory);
-                    changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory);
+                    changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory,
+                            transactionId);
 
                 } else {
                     throw e;
@@ -86,6 +89,24 @@ public class JobService {
             }
 
         }
+    }
+
+    @Async("asyncExecutor")
+    public void changeWorkFlowAsync(JobProperites properties, String inpuTable, String entityTable,
+            String statusTable, String targetState,
+            String jobCategory, String transactionId) throws TalendException {
+
+        changeWorkFlowWith_103Retry(properties, inpuTable, entityTable, statusTable, targetState, jobCategory,
+                transactionId);
+
+    }
+
+    @Async("asyncExecutor")
+    public void LiveAsync(JobProperites properites, String targeJobId, String jobCategory, String transactionId)
+            throws TalendException {
+
+        liveEntityWithStretegy(properites, targeJobId, jobCategory, transactionId);
+
     }
 
     public void restartIIS(JobProperites properties, String jobCategory) {
@@ -125,7 +146,8 @@ public class JobService {
         }
     }
 
-    public void liveEntityAndWaitToComplete(JobProperites properites, String targeJobId, String jobCategory)
+    public void liveEntityAndWaitToComplete(JobProperites properites, String targeJobId, String jobCategory,
+            String transactionId)
             throws TalendException {
 
         String entityTable = targeJobId + "_" + jobCategory + "_Entity";
@@ -135,16 +157,35 @@ public class JobService {
         try {
 
             changeStrategy(properites, false);
-            liveEntity(properites, entityTable, reportTable, statusTable, jobCategory);
+            liveEntity(properites, entityTable, reportTable, statusTable, jobCategory, transactionId);
             String response = waitLiveTobeCompleted(properites, entityTable, jobCategory);
 
             if (StringUtility.equalsIgnoreCase(response, JOBKeywords.failed)) {
-                liveEntity(properites, entityTable, reportTable, statusTable, jobCategory);
+                liveEntity(properites, entityTable, reportTable, statusTable, jobCategory, transactionId);
                 response = waitLiveTobeCompleted(properites, entityTable, jobCategory);
             }
             if (!StringUtility.equalsIgnoreCase(response, JOBKeywords.live)) {
                 throw new TalendException("Launced failed " + response);
             }
+        } catch (TalendException e) {
+            throw e;
+        } finally {
+            changeStrategy(properites, true);
+        }
+    }
+
+    public void liveEntityWithStretegy(JobProperites properites, String targeJobId, String jobCategory,
+            String transactionId)
+            throws TalendException {
+
+        String entityTable = targeJobId + "_" + jobCategory + "_Entity";
+        String reportTable = properites.jobId + "_" + jobCategory + "_Report";
+        String statusTable = properites.jobId + "_" + jobCategory + "_Entity_Status";
+
+        try {
+
+            changeStrategy(properites, false);
+            liveEntity(properites, entityTable, reportTable, statusTable, jobCategory, transactionId);
         } catch (TalendException e) {
             throw e;
         } finally {
@@ -233,13 +274,14 @@ public class JobService {
 
     public void changeWorkFlow(JobProperites properties, String inputTable, String entityTable, String statusTable,
             String targetState,
-            String jobCategory) throws TalendException {
+            String jobCategory, String transactionId) throws TalendException {
         createEntityReport(properties, inputTable, entityTable);
 
         HashMap<String, String> config = new HashMap<>();
         config.put("entityTable", entityTable);
         config.put("targetStatus", targetState);
         config.put("statusTable", statusTable);
+        config.put("transactionId", transactionId);
         talend.executeJob(properties.jobId, "ChangeWorkFlow", config);
 
         config = new HashMap<>();
@@ -484,6 +526,12 @@ public class JobService {
                 JOBKeywords.TASK_SUCCESS, message));
     }
 
+    public void startTrascation(String jobId, String jobCategory, String message) {
+
+        jobtable.save(new JOB(jobId, JOBKeywords.START, jobCategory,
+                JOBKeywords.TASK_SUCCESS, message));
+    }
+
     public void saveErrorAndSendErrorEmail(JobProperites properties, String category, String errorMsg) {
         jobtable.save(new JOB(properties.jobId, JOBKeywords.STOP, category,
                 JOBKeywords.JOB_FAILED, errorMsg));
@@ -503,6 +551,7 @@ public class JobService {
         jobtable.save(new JOB(jobId, JOBKeywords.STOP, jobCategory,
                 JOBKeywords.JOB_SUCCESS, message));
     }
+
     public void stopJOB(String jobId, String jobCategory) {
 
         jobtable.save(new JOB(jobId, JOBKeywords.STOP, jobCategory,
