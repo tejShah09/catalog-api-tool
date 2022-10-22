@@ -70,7 +70,7 @@ public class JobService {
             String statusTable, String targetState,
             String jobCategory, String transactionId)
             throws TalendException {
-        if (properties.isLaunchEntity()) {
+        if ( !"Live".equalsIgnoreCase(targetState) || ("Live".equalsIgnoreCase(targetState) && properties.isLaunchEntity())) {
             try {
                 changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory,
                         transactionId);
