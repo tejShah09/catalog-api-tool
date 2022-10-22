@@ -360,7 +360,7 @@ public class JobService {
 
         // generate Report
         config = new HashMap<>();
-        config.put("tableName", properties.jobId + "_" + group + "_Entity");
+        config.put("tableName", properties.jobId + "_" + group + "_RateEntity");
         config.put("jobType", JOBKeywords.CATALOG_RATE_SUBMITION);
         config.put("jobCategory", jobCategory);
         config.put("keyName", "id");

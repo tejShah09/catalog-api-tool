@@ -140,13 +140,19 @@ public abstract class AbstractShellProcessService {
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
         try {
+
+            // JOB ID Validation
             jobService.jobValidation(properites.jobId, jobCategory);
+
+            // Loging START event in the JOB table 
             jobService.startJOB(properites.jobId, jobCategory);
             
-            // SaveFile
+            // SaveFile into local dir
             String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
             properites.addInputFileNAme(fileName);
-            // Generic Process
+
+
+            // Generic Sync Process
             this.startGenericSyncProcessing(properites, fileName);
 
             // Overrided sync process
