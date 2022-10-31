@@ -83,13 +83,13 @@ public abstract class AbstractShellProcessService {
     public void changeWorkFlowStatus(JobProperites properties, String targeState) throws TalendException {
         jobService.changeWorkFlowWith_103Retry(properties, properties.jobId + "_" + jobCategory + "_Entity",
                 properties.jobId + "_" + jobCategory + "_Report",
-                properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory,properties.jobId);
+                properties.jobId + "_" + jobCategory + "_Entity_Status", targeState, jobCategory, properties.jobId);
 
     }
 
     public void liveEntityAndWaitToComplete(JobProperites properites)
             throws TalendException {
-        jobService.liveEntityAndWaitToComplete(properites, properites.jobId, jobCategory,properites.jobId);
+        jobService.liveEntityAndWaitToComplete(properites, properites.jobId, jobCategory, properites.jobId);
     }
 
     public void changeStrategy(JobProperites properites, boolean isHubIntegration) throws TalendException {
@@ -101,7 +101,18 @@ public abstract class AbstractShellProcessService {
         // Step 1 SaveFile
         jobService.readFileJob(properties, fileName, jobCategory);
 
-        this.validateInputSheetRowCount(properties);
+        try {
+            this.validateInputSheetRowCount(properties, properties.jobId + "_" + jobCategory + "_InputSheet");
+        } catch (TalendException e) {
+            if (jobCategory.equalsIgnoreCase(JOBKeywords.BUNDLE)
+                    || jobCategory.equalsIgnoreCase(JOBKeywords.RATEPLANDETAIL)) {
+                this.validateInputSheetRowCount(properties,
+                        properties.jobId + "_" + jobCategory + "_Enddate" + "_InputSheet");
+            } else {
+                throw e;
+            }
+        }
+
         // Step 2 ValidateFile
         jobService.validateFileJob(properties, jobCategory);
 
@@ -144,13 +155,12 @@ public abstract class AbstractShellProcessService {
             // JOB ID Validation
             jobService.jobValidation(properites.jobId, jobCategory);
 
-            // Loging START event in the JOB table 
+            // Loging START event in the JOB table
             jobService.startJOB(properites.jobId, jobCategory);
-            
+
             // SaveFile into local dir
             String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
             properites.addInputFileNAme(fileName);
-
 
             // Generic Sync Process
             this.startGenericSyncProcessing(properites, fileName);

@@ -330,7 +330,6 @@ public class ToolUI {
         return new ResponseEntity<Object>(count, HttpStatus.OK);
     }
 
-
     @CrossOrigin
     @PostMapping("/sendReconciliation")
     public ResponseEntity<Object> sendReconciliation(
@@ -345,7 +344,6 @@ public class ToolUI {
 
         try {
 
-           
             String targetJobId;
             if (!StringUtility.isEmpty(request.get("targetJobId"))) {
                 targetJobId = request.get("targetJobId");
@@ -375,6 +373,23 @@ public class ToolUI {
             return new ResponseEntity<Object>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @CrossOrigin
+    @PostMapping("/executeQuery")
+    public ResponseEntity<Object> executeQuery(@RequestBody Map<String, String> request) {
+        String query;
+        if (!StringUtility.isEmpty(request.get("query"))) {
+            query = request.get("query");
+        } else {
+            return new ResponseEntity<Object>("query_not_found", HttpStatus.BAD_REQUEST);
+        }
+
+        query = StringUtility.replace(query, "'", "''");
+        String result = tables.query("select executeQuery('" + query + "')");
+
+        return new ResponseEntity<Object>(result, HttpStatus.OK);
+    }
+
     @CrossOrigin
     @PostMapping("/Live")
     public ResponseEntity<Object> Live(
