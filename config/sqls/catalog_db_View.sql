@@ -150,6 +150,20 @@ Cast((select ElementValue from InstanceElementValues where InstanceClassGUID= as
  from UV_InstanceElementValues asoc inner join CAPI_Bundle cb on asoc.InstanceClassGUID=cb.GUID where asoc.SchemaElement = 'Product Associations'
  GO
 
+DROP VIEW  IF EXISTS CAPI_Bundle_Reference
+GO
+create VIEW CAPI_Bundle_Reference as
+select UPPER(i.InstanceClassGUID) as BUNDLE_GUID,e.Name as BUNDLE_NAME ,UPPER(i.ElementValue) as REF_GUID , 
+(select ElementValue from UV_InstanceElementValues where InstanceClassGUID =i.ElementValue and SchemaElement='Rating Plan Reference' ) as Rating_Plan_Reference,
+(select e.Name from UV_InstanceElementValues u inner join Entity e on e.BusinessID = u.ElementValue  where e.IsLive = 1 and u.InstanceClassGUID =i.ElementValue and u.SchemaElement='Rating Plan Reference' ) as Rating_Plan_Name,
+(select ElementValue from UV_InstanceElementValues where InstanceClassGUID =i.ElementValue and SchemaElement='Base Product Reference' ) as Base_Product_Reference,
+(select e.Name from UV_InstanceElementValues u inner join Entity e on e.BusinessID = u.ElementValue  where e.IsLive = 1 and u.InstanceClassGUID =i.ElementValue and u.SchemaElement='Base Product Reference' ) as Base_Product_Name,
+cast((select ElementValue from UV_InstanceElementValues where InstanceClassGUID =i.ElementValue and SchemaElement='Start Date' ) as DATE) as Start_Date,
+cast((select ElementValue from UV_InstanceElementValues where InstanceClassGUID =i.ElementValue and SchemaElement='End Date' ) as DATE) as End_Date
+from UV_InstanceElementValues i,Entity e
+where e.isLive = 1 and e.GUID = i.InstanceClassGUID and SchemaClass in ( 'Product Bundle Property Set') and i.SchemaElement = 'Reference' 
+ GO
+
 
 
 DROP VIEW  IF EXISTS CAPI_Entity_AllStatus

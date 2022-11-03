@@ -89,7 +89,7 @@ public class ToolUI {
             return new ResponseEntity<Object>("jobId_not_found", HttpStatus.BAD_REQUEST);
         }
 
-        String query = "select * from jobs where job_id=''" + jobId + "'' order by done_at desc";
+        String query = "select * from jobs where job_id=''" + jobId + "'' order by id desc";
         String result = tables.query("select executeQuery('" + query + "')");
 
         return new ResponseEntity<Object>(result, HttpStatus.OK);
