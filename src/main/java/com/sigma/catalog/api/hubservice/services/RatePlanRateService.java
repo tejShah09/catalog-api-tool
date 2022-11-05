@@ -24,7 +24,10 @@ public class RatePlanRateService extends AbstractShellProcessService {
                 }
 
                 // Associate Charge
-                createAssoc(properites);
+                if (!checkIfTableEmpty(properites, properites.jobId + "_RatePlanRate_Associations",
+                                JOBKeywords.TABLE_FILE_ROW_COUNT)) {
+                        createAssoc(properites);
+                }
 
                 // create Rate
                 createRates(properites);

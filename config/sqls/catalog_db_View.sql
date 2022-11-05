@@ -73,13 +73,14 @@ from CAPI_RatePlanDetail c
 GO
 
 
+
 DROP VIEW  IF EXISTS CAPI_RatePlanDetail_TimeBand
 GO
 create  view CAPI_RatePlanDetail_TimeBand as
 select  st.SchemaClass as 'ClassType', 
 e.Name as 'Name',
  UPPER(e.GUID) as 'GUID' 
-,UPPER(tb.InstanceClassGUID) as 'TimeBand'
+,tb.TimeBand as 'TimeBand'
 from  Entity e INNER JOIN
 (select s.GUID as SchemaGuid,s.OmniformName as SchemaClass, t.TemplateID from SchemaClass s,Template t where t.TemplateGUID=s.GUID and  s.OmniformName in ('Rating_Energy_Usage','Rating_Plan_Property_Set_for_Gas_Usage_Units','Rating_Plan_Property_Set_for_Gas_Usage','Rating_Plan_Property_Set_for_Graduated_Quantity','Rating_Plan_Property_Set_for_Spot_Price','Rating_Demand','Rating_Plan_Property_Set_for_Agreed_Capacity')) as st
 on st.TemplateID = e.TemplateID 
@@ -89,6 +90,36 @@ on  e.GUID = tb.InstanceClassGUID
 where  e.IsLive = 1 
 GO
 
+DROP VIEW  IF EXISTS CAPI_RatePlanDetail_Rates
+GO
+create  view CAPI_RatePlanDetail_Rates as
+select REPLACE(t.Name,' ','_') as 'Parent_Entity_ClassType', 
+e.Name as 'Parent_Entity_Name',
+e.GUID as 'Parent_Entity_GUID',
+(select ElementValue from InstanceElementValues where SchemaElementGUID = '19AEC7BC-B015-47CA-9EA8-F28DB65D50E7' and InstanceClassGUID=( select ElementValue from InstanceElementValues where InstanceClassGUID=re.InstanceClassGUID and SchemaElementGUID = 'F7D4BE48-8A80-4C59-8F39-E5C662763956' )) as 'Charge_Entity_GUID',
+(select REPLACE(Name,' ','_') from Entity where GUID =  (select ElementValue from InstanceElementValues where SchemaElementGUID = '19AEC7BC-B015-47CA-9EA8-F28DB65D50E7' and InstanceClassGUID=( select ElementValue from InstanceElementValues where InstanceClassGUID=re.InstanceClassGUID and SchemaElementGUID = 'F7D4BE48-8A80-4C59-8F39-E5C662763956' ))) as 'Rate_Class',
+ri.InstanceClassGUID as 'Rate_Row_GUID',
+Cast((select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = '524CBE72-B71D-4F9A-8222-06A00A96A842' )as date) as 'Start_Date',
+Cast((select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = 'F0443619-DD01-43A6-9FF1-32C3B71773F4')as date) as 'End_Date',
+(select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = 'C65D7A60-AB4A-4A3F-B06E-42C2E226373D')  as 'PerUnit',
+(select ElementValue from InstanceElementValues where SchemaElementGUID = 'C62958F5-36D9-421C-A552-5349C30EE2D1' and InstanceClassGUID = (select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = '363C2ACA-F7C6-4D97-AD75-6BF18AADD2DE') ) as 'Time_Band',
+(select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = '2F029B20-8A8E-47D7-B58B-CB76F42D9527')  as 'Change_ID',
+Cast((select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = '6999C3DB-F1E1-4FC4-81EA-B6EA0802DDED')as date)  as 'Submit_Date',
+(select ElementValue from InstanceElementValues where SchemaElementGUID = 'C62958F5-36D9-421C-A552-5349C30EE2D1' and InstanceClassGUID = (select ElementValue from InstanceElementValues where InstanceClassGUID=ri.InstanceClassGUID and SchemaElementGUID = '12552B7C-2BE8-4F51-B907-F40F9FB7417F') ) as 'Rating_Period',
+e.Name 'Rating_Plan_ID',
+ri.ElementValue as 'Rate_Attribute_Guid',
+(select ElementValue from InstanceElementValues where InstanceClassGUID=ri.ElementValue and SchemaElementGUID = '7DC046DB-87BF-4D19-A779-DD575C51F7C5' ) as 'Step',
+ISNULL((select ElementValue from InstanceElementValues where InstanceClassGUID=ri.ElementValue and SchemaElementGUID = '7C23F6A9-3A1D-4C85-A444-1D7BDA94A178' ),'') as 'UnitsLessOrEqualTo',
+(select ElementValue from InstanceElementValues where InstanceClassGUID=ri.ElementValue and SchemaElementGUID = 'D738BE96-E773-4F42-BD6B-EB94D1A22587' ) as 'UnitRate',
+Cast((select ElementValue from InstanceElementValues where InstanceClassGUID=ri.ElementValue and SchemaElementGUID = 'FE25B002-5A3F-4BE1-82BE-2A20870FC01C' )as date) as 'Rate_Submit_Date',
+(select ElementValue from InstanceElementValues where InstanceClassGUID=ri.ElementValue and SchemaElementGUID = 'EF7160DA-6CBC-437E-9EB2-76B885138653' ) as 'Rate_Change_ID'
+from InstanceElementValues ri,InstanceElementValues rr, InstanceElementValues re ,Entity e, Template t
+where e.IsLive = 1 and e.TemplateID =t.TemplateID and  rr.InstanceClassGUID = re.ElementValue and ri.InstanceClassGUID = rr.ElementValue and re.InstanceClassGUID = e.GUID
+and t.Name in ('Rating Energy Usage','Rating Demand','Rating Plan Property Set for Agreed Capacity','Rating Plan Property Set for Gas Usage','Rating Plan Property Set for Gas Usage Units','Rating Plan Property Set for Graduated Quantity','Rating Plan Property Set for Spot Price')
+and ri.SchemaElementGUID = '335C7019-17D4-4B1F-8888-5A8326AEF092'
+and rr.SchemaElementGUID = '576AEF89-1C17-49A8-87A7-CBF24DAD4DDB'
+and re.SchemaElementGUID = '9EFF8CC4-9318-463B-96DA-AEC0EDE039CA'
+GO
 
 
 DROP VIEW  IF EXISTS CAPI_Bundle
@@ -165,6 +196,28 @@ where e.isLive = 1 and e.GUID = i.InstanceClassGUID and SchemaClass in ( 'Produc
  GO
 
 
+DROP VIEW  IF EXISTS CAPI_Bundle_Rate
+GO
+CREATE   VIEW CAPI_Bundle_Rate AS
+select t.Parent_Entity_Name,t.Parent_Entity_GUID,
+(select e.Name from Entity e, Template t1 where  t1.TemplateID=e.TemplateID and t1.Name like '%Charge%' and e.GUID = RIGHT(t.Rate_Path,36)) as 'Charge_Entity_Name',RIGHT(t.Rate_Path,36) as 'Charge_Entity_GUID',
+null as 'Rate_Class',
+UPPER(CONCAT('{', LEFT(t.Rate_Path,36),'}{',SUBSTRING(t.Rate_Path,CHARINDEX(',',t.Rate_Path)+1,36),'}{',RIGHT(t.Rate_Path,36),'}')) as Rate_Path
+, t.Rate_Row_GUID,Start_Date,t.End_Date,t.Activation_Stat_Date,t.Activation_End_Date,t.Rate_Period,t.Rate from (
+select 
+ e.Name as 'Parent_Entity_Name',e.guid as 'Parent_Entity_GUID',i2.ElementValue as 'Rate_Row_GUID',i2.SchemaClassGUID,
+(select ElementValue from InstanceElementValues where InstanceClassGUID = i1.ElementValue and SchemaElementGUID = '2C36AAA2-F1EE-40C2-A530-A85EE70C3480')  as 'Rate_Path',
+CAST ((select ElementValue from InstanceElementValues where InstanceClassGUID = i2.ElementValue and SchemaElementGUID = '114CBE72-B71D-4F9A-8222-06A00A96A842') as Date) as 'Activation_Stat_Date',
+CAST ((select ElementValue from InstanceElementValues where InstanceClassGUID = i2.ElementValue and SchemaElementGUID = '224CBE72-B71D-4F9A-8222-06A00A96A842') as Date) as 'Activation_End_Date',
+CAST ((select ElementValue from InstanceElementValues where InstanceClassGUID = i2.ElementValue and SchemaElementGUID = '524CBE72-B71D-4F9A-8222-06A00A96A842') as Date) as 'Start_Date',
+CAST ((select ElementValue from InstanceElementValues where InstanceClassGUID = i2.ElementValue and SchemaElementGUID = 'F0443619-DD01-43A6-9FF1-32C3B71773F4') as Date) as 'End_Date',
+(select ii2.ElementValue from InstanceElementValues ii1 ,InstanceElementValues ii2 where ii2.SchemaElementGUID = 'C62958F5-36D9-421C-A552-5349C30EE2D1' and ii2.InstanceClassGUID= ii1.ElementValue and ii1.InstanceClassGUID = i2.ElementValue and ii1.SchemaElementGUID = '9C09D8D1-9CDB-4E56-B513-8CB3320886CF')  as 'Rate_Period',
+(select ElementValue from InstanceElementValues where InstanceClassGUID = i2.ElementValue and SchemaElementGUID = '79246545-DE3C-400E-88E1-A6BACA6268F2')  as 'Rate'
+from InstanceElementValues i1 , InstanceElementValues i2,  Entity e
+where i2.InstanceClassGUID=i1.ElementValue and i2.SchemaElementGUID = '576AEF89-1C17-49A8-87A7-CBF24DAD4DDB' and i1.InstanceClassGUID = e.GUID and i1.SchemaElementGUID = '9EFF8CC4-9318-463B-96DA-AEC0EDE039CA'
+and e.TemplateID in( select TemplateID from Template where Name in ('Product Bundle Property Set')) and e.IsLive = 1 
+) as t  
+GO
 
 DROP VIEW  IF EXISTS CAPI_Entity_AllStatus
 GO
