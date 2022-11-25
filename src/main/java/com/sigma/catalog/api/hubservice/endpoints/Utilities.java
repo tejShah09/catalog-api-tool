@@ -93,6 +93,43 @@ public class Utilities {
 
     }
 
+    @PostMapping("/covertToCAPISheet")
+    public ResponseEntity<Object> covertToCAPISheet(
+            @RequestBody Map<String, String> request) {
+
+        HashMap<String, String> config = new HashMap<>();
+        String jobId = talend.generateUniqJobId();
+        if (StringUtility.isEmpty(config.get("jobId"))) {
+            config.put("jobId", jobId);
+        } else {
+            jobId = config.get("jobId");
+        }
+
+        String targetJobId;
+        if (!StringUtility.isEmpty(request.get("targetJobId"))) {
+            targetJobId = request.get("targetJobId");
+        } else {
+            return new ResponseEntity<Object>("targetJobId_not_found", HttpStatus.BAD_REQUEST);
+        }
+        String jobCategory;
+        if (!StringUtility.isEmpty(request.get("jobCategory"))) {
+            jobCategory = request.get("jobCategory");
+        } else {
+            return new ResponseEntity<Object>("jobCategory_not_found", HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+
+            
+            talend.executeJob(targetJobId, "ConvertExcel"+jobCategory+"Sheet", config);
+            return talend.getSucessResponse(targetJobId);
+
+        } catch (TalendException e) {
+            return talend.generateFailResponse(targetJobId, e);
+        }
+
+    }
+
     @PostMapping("/executeJob")
     public ResponseEntity<Object> ExecuteJob(@RequestBody Map<String, String> request) {
         HashMap<String, String> config = new HashMap<String, String>(request);
@@ -110,7 +147,7 @@ public class Utilities {
             return talend.getSucessResponse(jobId);
 
         } catch (TalendException e) {
-            jobservice.failedJOB(jobId, JOBKeywords.ADD_HOOK,String.valueOf(e.getCustomException(jobId)));
+            jobservice.failedJOB(jobId, JOBKeywords.ADD_HOOK, String.valueOf(e.getCustomException(jobId)));
             return talend.generateFailResponse(jobId, e);
         }
 
@@ -154,7 +191,6 @@ public class Utilities {
         return talend.getSucessResponse(jobId);
     }
 
-    
     @PostMapping("/callCSAPI")
     public ResponseEntity<Object> callCSAPI(@RequestBody Map<String, String> request) {
 

@@ -277,3 +277,22 @@ where e.GUID=i.InstanceClassGUID and e.IsLive =1 and s.GUID=i.SchemaElementGUID 
 GO
 
 
+DROP VIEW  IF EXISTS CAPI_Offer_SalesChannel
+GO
+CREATE VIEW CAPI_Offer_SalesChannel As
+select 'Export' as'Intent','1' as 'Sales_Channel_To_Offer_Id',t.OmniformName as 'Sales_Channel_To_Offer_Attribute_Class', t.Sales_Channel_To_Offer_Attribute_Guid,t.Sales_Channel,REPLACE(tp.Name,' ','_') 'Class_Type', CONCAT(e.Name,'|', ISNULL((select Name from SchemaElement where GUID = t.Offer_Entity_Char),'Name') ) as 'Offer_Entity_Reference',
+t.Partner_Portal_Sales_Partner, null as 'Do_Not_Sell',t.Start_Date,t.End_Date
+from 
+(select  s.OmniformName, i.ElementValue as 'Sales_Channel_To_Offer_Attribute_Guid'
+, CAST((select ElementValue from InstanceElementValues where InstanceClassGUID = i.ElementValue and SchemaElementGUID = 'B518B3E3-E024-4D95-84E5-DA041DDBB885') as Date) as 'Start_Date'
+, CAST((select ElementValue from InstanceElementValues where InstanceClassGUID = i.ElementValue and SchemaElementGUID = 'A7FE6C80-2D3C-4C24-ADA5-FBAC7754CB9B')as Date) as 'End_Date'
+, SUBSTRING((select ElementValue from InstanceElementValues where InstanceClassGUID = i.ElementValue and SchemaElementGUID = '50B93194-5E67-4A09-91FB-04215D5CC556'),1,36) as 'Offer_Entity_GUID'
+, SUBSTRING((select ElementValue from InstanceElementValues where InstanceClassGUID = i.ElementValue and SchemaElementGUID = '50B93194-5E67-4A09-91FB-04215D5CC556'),40,36) as 'Offer_Entity_Char'
+, (select ElementValue from InstanceElementValues where InstanceClassGUID = i.ElementValue and SchemaElementGUID = '50B93194-5E67-4A09-91FB-04215D5CC556') as 'Offer_Entity_Ref_GUID'
+, (select i2.ElementValue from InstanceElementValues i1, InstanceElementValues i2 where i2.InstanceClassGUID=i1.ElementValue and i1.InstanceClassGUID = i.ElementValue and i2.SchemaElementGUID = '0DEF7BBD-8471-4574-97BA-B4EE2CFB0091' and i1.SchemaElementGUID = '811324C3-BA31-468D-97FA-8DA7CFB3D21A') as 'Sales_Channel'
+, (select i2.ElementValue from InstanceElementValues i1, InstanceElementValues i2 where i2.InstanceClassGUID=i1.ElementValue and i1.InstanceClassGUID = i.ElementValue and i2.SchemaElementGUID = 'C62958F5-36D9-421C-A552-5349C30EE2D1' and i1.SchemaElementGUID = '7870F042-1FCF-4834-969B-4E98E15FE7C9') as 'Partner_Portal_Sales_Partner'
+from  InstanceElementValues i, SchemaElement s where s.GUID=i.SchemaElementGUID and  i.InstanceClassGUID = '04885bfa-e770-11ea-9644-fb287483b619' and s.OmniformName = 'Sales_Channel_to_Offer_Mapping' ) as t , Entity e, Template tp
+where e.GUID = t.Offer_Entity_GUID and tp.TemplateID = e.TemplateID
+GO
+
+
