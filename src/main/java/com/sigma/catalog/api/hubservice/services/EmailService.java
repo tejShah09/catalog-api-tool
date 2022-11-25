@@ -21,6 +21,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
@@ -33,7 +35,7 @@ import javax.activation.FileDataSource;
 @Service
 public class EmailService {
    private static Properties emailProperties;
-
+	private static final Logger LOG = LoggerFactory.getLogger(EmailService.class);
    EmailService() {
 
       try (InputStream input = new FileInputStream(
@@ -48,8 +50,8 @@ public class EmailService {
    public void sendSuccessMail(JobProperites jobrprops, String subject) {
       try {
          if (!jobrprops.isSendEmail()) {
-            System.out.println("Email is stubed");
-            System.out.println("Subject:: " + subject);
+            LOG.info("Email is stubed");
+            LOG.info("Subject:: " + subject);
             return;
          }
          // Recipient's email ID needs to be mentioned.
@@ -69,8 +71,7 @@ public class EmailService {
          props.put("mail.smtp.ssl.protocols", "TLSv1.2");
          props.put("mail.smtp.port", emailProperties.getProperty("port", "25"));
 
-         System.out.println(props);
-         System.out.println(username + "___" + password);
+         LOG.info(username + "___" + password);
          // Get the Session object.
          Session session = Session.getInstance(props,
                new javax.mail.Authenticator() {
@@ -104,11 +105,11 @@ public class EmailService {
          // Send message
          Transport.send(message);
 
-         System.out.println("Sent message successfully....");
+         LOG.info("Sent message successfully....");
 
       } catch (Exception e) {
          e.printStackTrace();
-         System.out.println("Cant Send Email...............");
+         LOG.info("Cant Send Email...............");
       }
    }
 
@@ -124,9 +125,9 @@ public class EmailService {
    public void sendMail(JobProperites jobrprops, String subject, String emailBody) {
       try {
          if (!jobrprops.isSendEmail()) {
-            System.out.println("Email is stubed");
-            System.out.println("Subject:: " + subject);
-            System.out.println("Email :: " + emailBody);
+            LOG.info("Email is stubed");
+            LOG.info("Subject:: " + subject);
+            LOG.info("Email :: " + emailBody);
             return;
          }
          // Recipient's email ID needs to be mentioned.
@@ -145,9 +146,7 @@ public class EmailService {
          props.put("mail.smtp.host", host);
          props.put("mail.smtp.ssl.protocols", "TLSv1.2");
          props.put("mail.smtp.port", emailProperties.getProperty("port", "25"));
-
-         System.out.println(props);
-         System.out.println(username + "___" + password);
+         LOG.info(username + "___" + password);
          // Get the Session object.
          Session session = Session.getInstance(props,
                new javax.mail.Authenticator() {
@@ -189,11 +188,11 @@ public class EmailService {
          // Send message
          Transport.send(message);
 
-         System.out.println("Sent message successfully....");
+         LOG.info("Sent message successfully....");
 
       } catch (Exception e) {
          e.printStackTrace();
-         System.out.println("Cant Send Email...............");
+         LOG.info("Cant Send Email...............");
       }
    }
 
@@ -230,7 +229,7 @@ public class EmailService {
          }
          myReader.close();
       } catch (FileNotFoundException e) {
-         System.out.println("An error occurred.");
+         LOG.info("An error occurred.");
          e.printStackTrace();
       }
       return data;

@@ -43,6 +43,8 @@ public class JOBKeywords {
     public static String PRODUCTXMLRATES = "ProductXMLRates";
     public static String RATEPLANXMLRATES = "RatePlanXMLRates";
     public static String IMPORTPRICECHANGE = "ImportPriceChange";
+    public static String OFFERDISCOUNT = "OfferDiscount";
+    public static String OFFERASSOC = "OfferAssociation";
 
     // STATUS
     public static String JOB_FAILED = "JOB_FAILED";

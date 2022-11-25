@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class JobService {
 
     @Autowired
     private EmailService emailServer;
+    private static final Logger LOG = LoggerFactory.getLogger(JobService.class);
 
     public void changeStrategy(JobProperites properties, boolean hubIntegration) throws TalendException {
         HashMap<String, String> config = new HashMap<>();
@@ -70,7 +73,8 @@ public class JobService {
             String statusTable, String targetState,
             String jobCategory, String transactionId)
             throws TalendException {
-        if ( !"Live".equalsIgnoreCase(targetState) || ("Live".equalsIgnoreCase(targetState) && properties.isLaunchEntity())) {
+        if (!"Live".equalsIgnoreCase(targetState)
+                || ("Live".equalsIgnoreCase(targetState) && properties.isLaunchEntity())) {
             try {
                 changeWorkFlow(properties, inpuTable, entityTable, statusTable, targetState, jobCategory,
                         transactionId);
@@ -116,18 +120,18 @@ public class JobService {
                         ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
 
         try {
-            System.out.println("Stoping WebSite "
+            LOG.info("Stoping WebSite "
                     + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
             routines.WindowService
                     .stopWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
             Thread.sleep(2000);
-            System.out.println("Starting WebSite "
+            LOG.info("Starting WebSite "
                     + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
             routines.WindowService
                     .startWebSite(ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
 
             Thread.sleep(2000);
-            System.out.println("restarting  application  pools "
+            LOG.info("restarting  application  pools "
                     + ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance());
             routines.WindowService
                     .runCommand("powershell.exe Restart-WebAppPool "
@@ -142,7 +146,7 @@ public class JobService {
                     new JOB(properties.jobId, JOBKeywords.RESTART_IIS, jobCategory,
                             JOBKeywords.TASK_FAILED,
                             ConfigurationUtility.getEnvConfigModel().getCatalogDataAPIInstance()));
-            System.out.println("Unable to restart webservice");
+            LOG.info("Unable to restart webservice");
         }
     }
 
@@ -207,7 +211,7 @@ public class JobService {
                 itteration++;
                 secondpreviosCount = previosCount;
                 previosCount = currentCount;
-                System.out.println(properites.jobId + " Waiting for Launches to complete try " + itteration);
+                LOG.info(properites.jobId + " Waiting for Launches to complete try " + itteration);
                 HashMap<String, String> config = new HashMap<>();
                 config.put("inputTable", inputLiveTable);
 
@@ -218,7 +222,7 @@ public class JobService {
                 Map<String, Integer> status = getCountFromJobs(properites.jobId,
                         JOBKeywords.ENTITY_LIVE_CHECK_TRY_ + String.valueOf(itteration), jobCategory);
                 currentCount = status.get(JOBKeywords.nonlive);
-                System.out.println(
+                LOG.info(
                         properites.jobId + " Waiting for Launches to complete. Launch pending " + currentCount);
                 failedCount = status.get(JOBKeywords.failed);
                 waitingToStart = status.get(JOBKeywords.waitingToStart);
@@ -228,13 +232,13 @@ public class JobService {
 
             } while (currentCount > 0 && !(previosCount == currentCount && secondpreviosCount == previosCount));
             if (currentCount != 0 && failedCount == currentCount && waitingToStart == 0) {
-                System.out.println("Launch failed " + failedCount);
+                LOG.info("Launch failed " + failedCount);
                 reponse = JOBKeywords.failed;
             } else if (currentCount != 0 && currentCount == waitingToStart) {
-                System.out.println("Launch stuck " + waitingToStart);
+                LOG.info("Launch stuck " + waitingToStart);
                 reponse = JOBKeywords.waitingToStart;
             } else if (currentCount != 0) {
-                System.out.println("Launch nonlive " + currentCount);
+                LOG.info("Launch nonlive " + currentCount);
                 reponse = JOBKeywords.nonlive;
             }
         }
@@ -313,7 +317,7 @@ public class JobService {
             throws TalendException {
         createEntityReport(properties, inputTable, reportTable);
         if (!properties.isSendReconSheet() || !properties.isLaunchEntity()) {
-            System.out.println("Recon file is skipped");
+            LOG.info("Recon file is skipped");
             return;
         }
         HashMap<String, String> config = new HashMap<>();
@@ -396,6 +400,31 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
     }
 
+
+    public void createDiscount(JobProperites properties, String group, String jobCategory) throws TalendException {
+        jobtable.save(
+                new JOB(properties.jobId, JOBKeywords.CATALOG_ASSOC_CREATION, jobCategory,
+                        JOBKeywords.TASK_STARTED,
+                        properties.jobId + "_" + group + "_Associations"));
+        HashMap<String, String> config = new HashMap<>();
+        config.put("group", group);
+        config.put("catalogStub", "false");
+        talend.executeJob(properties.jobId, "eCAPICreateDiscount", config);
+
+        // generate Report
+        config = new HashMap<>();
+        config.put("tableName", properties.jobId + "_" + group + "_Associations");
+        config.put("jobType", JOBKeywords.CATALOG_ASSOC_SUBMITION);
+        config.put("jobCategory", jobCategory);
+        config.put("keyName", "Parent_Entity_Name");
+        config.put("jobStatus", JOBKeywords.TASK_END);
+        talend.executeJob(properties.jobId, "getStatusCount", config);
+
+        // Check And ReportAny Error
+        checkForStatusError(properties.jobId, JOBKeywords.CATALOG_ASSOC_SUBMITION, jobCategory,
+                "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Discount Creation");
+    }
+
     public void createEntity(JobProperites properties, String group, String jobCategory, String sheetList)
             throws TalendException {
         jobtable.save(
@@ -459,6 +488,15 @@ public class JobService {
 
     public String saveCSVFile(String jobId, String jobCategory, MultipartFile file) {
         String fileName = "" + jobCategory + "UploadFile_" + jobId + ".csv";
+        talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
+        jobtable.save(new JOB(jobId, JOBKeywords.RECEIVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS,
+                file.getOriginalFilename()));
+        jobtable.save(new JOB(jobId, JOBKeywords.SAVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS, fileName));
+        return fileName;
+    }
+
+    public String saveExcelFile(String jobId, String jobCategory, MultipartFile file) {
+        String fileName = "" + jobCategory + "_" + jobId + ".xlsx";
         talend.writeFile(file, Paths.get(TalendConstants.INPUT_FILE_LOCATION), fileName);
         jobtable.save(new JOB(jobId, JOBKeywords.RECEIVED_FILE_NAME, jobCategory, JOBKeywords.TASK_SUCCESS,
                 file.getOriginalFilename()));

@@ -18,6 +18,7 @@ import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.talendService.TalendHelperService;
+import com.sigma.catalog.api.utility.StringUtility;
 
 @Configuration
 @EnableAsync
@@ -56,7 +57,9 @@ public abstract class AbstractShellProcessService {
     public void createAssoc(JobProperites properties) throws TalendException {
         jobService.createAssoc(properties, jobCategory, jobCategory);
     }
-
+    public void createDiscount(JobProperites properties) throws TalendException {
+        jobService.createDiscount(properties, jobCategory, jobCategory);
+    }
     public void createRates(JobProperites properties) throws TalendException {
         jobService.createRates(properties, jobCategory, jobCategory);
     }
@@ -96,13 +99,14 @@ public abstract class AbstractShellProcessService {
         jobService.changeStrategy(properites, isHubIntegration);
     }
 
-    public void startGenericSyncProcessing(JobProperites properties, String fileName) throws TalendException {
-
-        // Step 1 SaveFile
-        jobService.readFileJob(properties, fileName, jobCategory);
+    public void validateForEmptyInput(JobProperites properties, String fileName) throws TalendException {
 
         try {
-            this.validateInputSheetRowCount(properties, properties.jobId + "_" + jobCategory + "_InputSheet");
+            if (!StringUtility.isEmpty(properties.getJobInputTable())) {
+                this.validateInputSheetRowCount(properties, properties.getJobInputTable());
+            } else {
+                this.validateInputSheetRowCount(properties, properties.jobId + "_" + jobCategory + "_InputSheet");
+            }
         } catch (TalendException e) {
             if (jobCategory.equalsIgnoreCase(JOBKeywords.BUNDLE)
                     || jobCategory.equalsIgnoreCase(JOBKeywords.RATEPLANDETAIL)) {
@@ -113,6 +117,15 @@ public abstract class AbstractShellProcessService {
             }
         }
 
+    }
+
+    public void startGenericSyncProcessing(JobProperites properties, String fileName) throws TalendException {
+
+        // Step 1 SaveFile
+        jobService.readFileJob(properties, fileName, jobCategory);
+
+        // Step 1.a Validate that file is not Emprty
+        validateForEmptyInput(properties, fileName);
         // Step 2 ValidateFile
         jobService.validateFileJob(properties, jobCategory);
 
@@ -150,6 +163,10 @@ public abstract class AbstractShellProcessService {
     }
 
     public ResponseEntity<Object> process(JobProperites properites, MultipartFile file) {
+        return process(properites, file, false);
+    }
+
+    public ResponseEntity<Object> process(JobProperites properites, MultipartFile file, boolean processExcel) {
         try {
 
             // JOB ID Validation
@@ -159,9 +176,13 @@ public abstract class AbstractShellProcessService {
             jobService.startJOB(properites.jobId, jobCategory);
 
             // SaveFile into local dir
-            String fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
+            String fileName = "NA";
+            if (!processExcel) {
+                fileName = jobService.saveCSVFile(properites.jobId, jobCategory, file);
+            } else {
+                fileName = jobService.saveExcelFile(properites.jobId, jobCategory, file);
+            }
             properites.addInputFileNAme(fileName);
-
             // Generic Sync Process
             this.startGenericSyncProcessing(properites, fileName);
 
@@ -212,7 +233,6 @@ public abstract class AbstractShellProcessService {
     @Async("asyncExecutorService")
     public void processAsync(JobProperites properties) {
         if (properties.isOnlySync()) {
-            System.out.println("Async process is stubed");
             return;
         }
         try {

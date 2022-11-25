@@ -37,7 +37,7 @@ public class ImportPriceChageService extends AbstractShellProcessService {
     @Async("asyncExecutorService")
     public void processAsyncXML(JobProperites properties) {
         if (properties.isOnlySync()) {
-            System.out.println("Async process is stubed");
+    
             return;
         }
 

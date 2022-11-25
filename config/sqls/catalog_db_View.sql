@@ -243,6 +243,7 @@ GO
 
 
 
+
 DROP VIEW  IF EXISTS CAPI_TTREE
 GO
 CREATE   VIEW CAPI_TTREE AS
@@ -257,4 +258,22 @@ from InstanceElementValues   e1 INNER JOIN InstanceElementValues   e2 on  e1.Ins
  --and e1.InstanceClassGUID in ( '46605c47-10a5-4fda-bd20-6da6dfed5926','eff62c93-9533-11ea-aa3a-3f31cdbdd854','cdb456d8-5b2a-99fe-18a2-db940b16493c','33fcd8fb-08dc-6455-d1a5-e67f1776313c','7a2dec4e-8cc3-5a20-8553-b44e8b3341b7')
 --and s1.OmniformName  in ('TProduct_Subclass')
 GO
+
+
+DROP VIEW  IF EXISTS CAPI_Discount
+GO
+CREATE   VIEW CAPI_Discount AS
+select e.Name, e.GUID as publicid,REPLACE( t.Name, ' ', '_' ) as Class_Type from Entity e inner join Template t on t.TemplateID = e.TemplateID
+where  e.isLive = 1 and  t.Name in ('Discount Plan Fixed','Discount Plan Pending Prompt Payment') 
+GO
+
+
+DROP VIEW  IF EXISTS CAPI_Offer_Code
+GO
+CREATE   VIEW CAPI_Offer_Code AS
+select OfferSchema.Class_Type, i.InstanceClassGUID as PublicID,e.Name,i.ElementValue as Offer_Id 
+from InstanceElementValues i, SchemaElement s , (select OmniformName as Class_Type, GUID as Class_GUID from SchemaClass where OmniformName in ( 'Offer_Commercial', 'Offer_Residential')) as OfferSchema, Entity e
+where e.GUID=i.InstanceClassGUID and e.IsLive =1 and s.GUID=i.SchemaElementGUID and OfferSchema.Class_GUID = i.SchemaClassGUID and s.OmniformName = 'Offer_Code' 
+GO
+
 

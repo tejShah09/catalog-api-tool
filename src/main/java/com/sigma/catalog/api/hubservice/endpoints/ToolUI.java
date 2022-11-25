@@ -67,7 +67,7 @@ public class ToolUI {
             jobservice.createEntityReport(properties, jobId + "_" + jobCategory + "_Entity",
                     jobId + "_" + jobCategory + "_Report");
         } catch (Exception e) {
-            System.out.println("unable to create rport " + targetJobId);
+
         }
 
         HashMap<String, Object> ouptut = new HashMap<String, Object>();

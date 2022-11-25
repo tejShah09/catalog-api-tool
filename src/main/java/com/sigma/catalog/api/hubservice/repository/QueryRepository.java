@@ -4,7 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.hibernate.boot.spi.MetadataImplementor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -13,19 +14,20 @@ public class QueryRepository {
     @PersistenceContext
     EntityManager entityManager;
 
+    private static final Logger LOG = LoggerFactory.getLogger(QueryRepository.class);
     public String query(String queryString) {
         Query query = entityManager.createNativeQuery(queryString);
         String data = "[]";
         try {
-            System.out.println("query ::  " + queryString);
+            LOG.info("CAPI UI :: query ::  " + queryString);
             data = (String) query.getSingleResult();
         } catch (Exception e) {
             // e.printStackTrace();
            
-            System.out.println(e.getMessage());
+            LOG.info("CAPI UI :: query error :: "+e.getMessage());
         }
 
-        // System.out.println(data);
+        // LOG.info(data);
 
         return data;
 

@@ -11,6 +11,7 @@ public class JobProperites {
     private boolean sendEmail;
     private boolean changeStrategy;
     private boolean onlySync;
+    private String jobInputTable;
 
     public String jobId;
     private List<String> inputFiles;
@@ -23,6 +24,14 @@ public class JobProperites {
         onlySync = false;
         this.jobId = jobId;
         inputFiles = new ArrayList<>();
+    }
+
+    public String getJobInputTable() {
+        return jobInputTable;
+    }
+
+    public void setJobInputTable(String jobInputTable) {
+        this.jobInputTable = jobInputTable;
     }
 
     public void addInputFileNAme(String fileName) {

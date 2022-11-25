@@ -29,7 +29,7 @@ public class CatalogApiTool extends SpringBootServletInitializer implements Appl
 	TalendHelperService talendservice;
 
 	public static void main(String[] args) {
-		
+		LOG.info("Eam Starting aplication");
 		SpringApplication.run(CatalogApiTool.class, args);
 
 	}
@@ -37,6 +37,7 @@ public class CatalogApiTool extends SpringBootServletInitializer implements Appl
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		// TODO Auto-generated method stub
+		LOG.info("Generating first tokent");
 		CatalogAuthentication.getTokenAuthorized();
 		FileUtility.createCatalogAPIFilesAndFolders();
 		talendservice.createJobsFolders();

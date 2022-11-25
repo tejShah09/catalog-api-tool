@@ -65,7 +65,7 @@ public class TalendHelperService {
             talendProperties = new Properties();
             talendProperties.load(input);
         } catch (IOException ex) {
-            System.out.println(ex);
+            LOG.error(ex.getMessage());
         }
     }
 
@@ -99,6 +99,7 @@ public class TalendHelperService {
         String[][] result = null;
         try {
             T newObj = jobClass.getDeclaredConstructor().newInstance();
+           LOG.info("JOB ID::"+jobId+" Job Name::"+ jobName+"--- Param ------------------------------- " );
             result = jobClass.getDeclaredConstructor().newInstance().runJob(buildContext(config));
 
         } catch (Exception e) {
@@ -107,14 +108,13 @@ public class TalendHelperService {
         long endTime = System.nanoTime();
 
         if (result != null && result[0] != null && result[0][0] != null && "0".equals(result[0][0])) {
-            LOG.info(" JOB Execution Completed ID " + jobId + "_" + jobName + ", Timings "
-                    + ((endTime - startTime) / 1000000));
+            LOG.info("JOB ID::"+jobId+" Job Name::"+ jobName+" Execution Completed ID " + jobId + "_" + jobName + ", Timings "
+                    + ((endTime - startTime) / 1000000)+"--------------------------");
 
         } else {
-            LOG.info(" JOB Execution Failed ID " + jobId + "_" + jobName + ", Timings "
-                    + ((endTime - startTime) / 1000000));
-            throw new TalendException("JOB FAILED jobId : " + jobId + " jobName : " + jobName + " configuration "
-                    + ((inputConfig != null) ? inputConfig.toString() : ""));
+            LOG.error("JOB ID::"+jobId+" Job Name::"+ jobName+" Execution Failed ID " + jobId + "_" + jobName + ", Timings "
+            + ((endTime - startTime) / 1000000)+"--------------------------");
+            throw new TalendException("JOB FAILED jobId : " + jobId + " jobName : " + jobName );
         }
 
         return "eaam";
@@ -132,7 +132,7 @@ public class TalendHelperService {
         while (hmIterator.hasNext()) {
 
             Map.Entry mapElement = (Map.Entry) hmIterator.next();
-            System.out.println(mapElement.getKey() + "::" + mapElement.getValue());
+            LOG.info(mapElement.getKey() + "::" + mapElement.getValue());
             contextString.add("--context_param " + mapElement.getKey() + "=" + mapElement.getValue());
         }
 
