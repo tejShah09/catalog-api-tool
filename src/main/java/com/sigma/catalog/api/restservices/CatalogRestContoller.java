@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,6 +53,7 @@ public class CatalogRestContoller {
 	 *            the entity names
 	 * @return the response entity
 	 */
+	@CrossOrigin
 	@GetMapping(value = "/export")
 	public ResponseEntity<Resource> exportExcel(@RequestParam String templateName,
 			@RequestParam String catalogOperation,
@@ -117,6 +119,7 @@ public class CatalogRestContoller {
 	 *            the changeset name
 	 * @return the response entity
 	 */
+	@CrossOrigin
 	@PostMapping("/import")
 	public ResponseEntity<Resource> importExcel(@RequestParam(value ="file", required = false) MultipartFile inputExcelsheet,
 			@RequestParam(value = "changesetFile", required = false) MultipartFile changesetFile,
