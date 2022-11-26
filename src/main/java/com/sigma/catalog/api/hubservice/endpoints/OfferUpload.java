@@ -44,7 +44,7 @@ public class OfferUpload {
             @RequestParam(value = "OfferDiscountFile", required = true) MultipartFile OfferDiscountFile,
             @RequestParam(value = "launchEntity", required = false, defaultValue = "true") String launchEntity,
             @RequestParam(value = "sendReconSheet", required = false, defaultValue = "false") String sendReconSheet,
-            @RequestParam(value = "sendEmail", required = false, defaultValue = "true") String sendEmail,
+            @RequestParam(value = "sendEmail", required = false, defaultValue = "false") String sendEmail,
             @RequestParam(value = "changeStrategy", required = false, defaultValue = "false") String changeStrategy,
             @RequestParam(value = "onlySync", required = false, defaultValue = "false") String onlySync) {
         if (StringUtility.isEmpty(jobId)) {
