@@ -312,6 +312,15 @@ public class JobService {
 
     }
 
+    public void uplaodCustomEntityReprot(JobProperites properties, String fileName)
+            throws TalendException {
+
+        HashMap<String, String> config = new HashMap<>();
+        config.put("fileName", fileName);
+        talend.executeJob(properties.jobId, "CustomEntityReport", config);
+
+    }
+
     public void sendEntityReportToHUB(JobProperites properties, String jobCategory, String inputTable,
             String reportTable)
             throws TalendException {
@@ -400,7 +409,7 @@ public class JobService {
                 "" + jobCategory + " Upload Failed JobId : " + properties.jobId + " Task : Association Creation");
     }
 
-
+    
     public void createDiscount(JobProperites properties, String group, String jobCategory) throws TalendException {
         jobtable.save(
                 new JOB(properties.jobId, JOBKeywords.CATALOG_ASSOC_CREATION, jobCategory,
@@ -563,6 +572,7 @@ public class JobService {
         jobtable.save(new JOB(jobId, JOBKeywords.START, jobCategory,
                 JOBKeywords.TASK_SUCCESS, message));
     }
+    
 
     public void startTrascation(String jobId, String jobCategory, String message) {
 

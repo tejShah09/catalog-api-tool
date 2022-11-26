@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sigma.catalog.api.hubservice.constnats.JOBKeywords;
 import com.sigma.catalog.api.hubservice.dbmodel.JobProperites;
 import com.sigma.catalog.api.hubservice.exception.TalendException;
 import com.sigma.catalog.api.hubservice.repository.QueryRepository;
 import com.sigma.catalog.api.hubservice.services.JobService;
+import com.sigma.catalog.api.talendService.TalendConstants;
 import com.sigma.catalog.api.talendService.TalendHelperService;
 import com.sigma.catalog.api.utility.StringUtility;
 
@@ -74,6 +77,35 @@ public class ToolUI {
         ouptut.put("jobId", jobId);
         ouptut.put("targetJobId", targetJobId);
         ouptut.put("jobCategory", jobCategory);
+        return new ResponseEntity<Object>(ouptut, HttpStatus.OK);
+
+    }
+
+    @CrossOrigin
+    @PostMapping("/UploadWorkflowList")
+    public ResponseEntity<Object> UploadWorkflowList(
+            @RequestParam(value = "WorkFlowFile", required = true) MultipartFile WorkFlowFile) {
+        String jobId = talend.generateUniqJobId();
+
+        JobProperites properties = new JobProperites(jobId);
+
+        String jobCategory = "Workflow";
+
+        jobservice.startJOB(properties.jobId, jobCategory, WorkFlowFile.getOriginalFilename());
+       
+        String fileName = TalendConstants.INPUT_FILE_LOCATION +jobservice.saveCSVFile(jobId, jobCategory, WorkFlowFile);
+        try {
+            jobservice.uplaodCustomEntityReprot(properties, fileName);
+            jobservice.createEntityReport(properties, jobId + "_" + jobCategory + "_Entity",
+                    jobId + "_" + jobCategory + "_Report");
+        } catch (Exception e) {
+
+        }
+
+        HashMap<String, Object> ouptut = new HashMap<String, Object>();
+        ouptut.put("jobId", jobId);
+        jobservice.stopJOB(properties.jobId, jobCategory);
+
         return new ResponseEntity<Object>(ouptut, HttpStatus.OK);
 
     }
